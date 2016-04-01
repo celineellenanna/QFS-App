@@ -1,2 +1,0 @@
-# QFS
-Quiz for Students
