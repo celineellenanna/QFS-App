@@ -11,13 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.pewpew.qfs.service.AppController;
-
-import org.json.JSONObject;
+import com.example.pewpew.qfs.service.AuthService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getUsers();
+                AuthService auth = new AuthService();
+                auth.login("user0", "pass0");
             }
         });
     }
@@ -57,27 +52,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void getUsers() {
-        String tag_json_obj = "json_obj_req";
-        String url = "http://10.0.2.2:3000/api/users";
-
-        JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("QFS", response.toString());
-                    }
-                }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("QFS", error.toString());
-                    }
-                });
-
-        AppController.getInstance().addToRequestQueue(jsObjRequest, tag_json_obj);
     }
 }
