@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">QFS</string>
     <string name="action_settings">Settings</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <string-array
+        name="drawer_items_array">
+        <item>Login</item>
+        <item>Registrieren</item>
+    </string-array>
+
 </resources>
