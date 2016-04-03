@@ -3,6 +3,7 @@ package com.example.pewpew.qfs;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pewpew.qfs.service.ApiCallback;
+import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
-
 
 public class AuthRegisterFragment extends Fragment {
 
@@ -37,8 +39,22 @@ public class AuthRegisterFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (tfPassword.equals(tfPasswordRepeat)) {
-                    AuthService as = new AuthService(getContext(), view);
-                    as.register(tfFirstname.getText().toString(), tfLastname.getText().toString(), tfEmail.getText().toString(), tfUsername.getText().toString(), tfPassword.getText().toString());
+                    AuthService authService = AuthService.getInstance();
+                    authService.register(tfFirstname.getText().toString(), tfLastname.getText().toString(), tfEmail.getText().toString(), tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiCallback<ApiHttpResponse>() {
+                        @Override
+                        public void onCompletion(ApiHttpResponse response) {
+                            if(response.getStatus()) {
+                                ((MainActivity) getActivity()).changeFragment(new AuthLoginFragment());
+                            } else {
+                                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            Log.d("QFS - Error", message);
+                        }
+                    });
                 } else {
                     Toast.makeText(getContext(), "Passwort stimmt nicht überein", Toast.LENGTH_LONG).show();
                 }

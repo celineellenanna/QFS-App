@@ -1,52 +1,56 @@
 package com.example.pewpew.qfs.service;
 
-import android.content.Context;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.pewpew.qfs.HomeFragment;
-import com.example.pewpew.qfs.MainActivity;
-import com.example.pewpew.qfs.UserFragment;
-import com.example.pewpew.qfs.domain.DefaultResponse;
+
+import com.example.pewpew.qfs.domain.User;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AuthService {
 
+    private static AuthService authService;
     private String tagJsonObj = "json_obj_req";
     private String authUrl = "http://10.0.2.2:3000/api/auth";
-    private Context context;
-    private View view;
+    private static User currUser;
 
-    public AuthService(Context context, View view) {
-        this.context = context;
-        this.view = view;
+    private AuthService() {
     }
 
-    public void login(final String username, final String password) {
+    public static AuthService getInstance()
+    {
+        if (authService == null)
+        {
+            authService = new AuthService();
+        }
+        return authService;
+    }
+
+    public void login(final String username, final String password, final ApiCallback<ApiHttpResponse> callback) {
         String url = authUrl + "/login";
 
-        GsonRequest<DefaultResponse> loginRequest = new GsonRequest<DefaultResponse>( Request.Method.POST, url, DefaultResponse.class,
-                new Response.Listener<DefaultResponse>()
+        GsonRequest<ApiHttpResponse> loginRequest = new GsonRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class,
+                new Response.Listener<ApiHttpResponse>()
                 {
-                    public void onResponse(DefaultResponse defaultResponse) {
-                        if(!defaultResponse.getStatus()) {
-                            Toast.makeText(context, defaultResponse.getMessage(), Toast.LENGTH_LONG).show();
-                        } else {
-                            ((MainActivity) context).changeFragment(new UserFragment());
+                    public void onResponse(ApiHttpResponse response) {
+                        if(response.getStatus()) {
+                            currUser = response.getUser();
                         }
+
+                        callback.onCompletion(response);
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("QFS - Error", "Auth Login Error");
+                        callback.onError(error.toString());
                     }
                 }
         ) {
@@ -64,25 +68,21 @@ public class AuthService {
         AppController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
     }
 
-    public void register(final String firstname, final String lastname, final String email, final String username, final String password) {
+    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiCallback<ApiHttpResponse> callback) {
         String url = authUrl + "/register";
 
-        GsonRequest<DefaultResponse> loginRequest = new GsonRequest<DefaultResponse>( Request.Method.POST, url, DefaultResponse.class,
-                new Response.Listener<DefaultResponse>()
+        GsonRequest<ApiHttpResponse> registerRequest = new GsonRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class,
+                new Response.Listener<ApiHttpResponse>()
                 {
-                    public void onResponse(DefaultResponse response) {
-                        if(!response.getStatus()) {
-                            Toast.makeText(context, response.getMessage(), Toast.LENGTH_LONG).show();
-                        } else {
-                            ((MainActivity) context).changeFragment(new HomeFragment());
-                        }
+                    public void onResponse(ApiHttpResponse response) {
+                        callback.onCompletion(response);
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("QFS - Error", "Auth Register Error");
+                        callback.onError(error.toString());
                     }
                 }
         ) {
@@ -100,28 +100,30 @@ public class AuthService {
             }
         };
 
-        AppController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
+        AppController.getInstance().addToRequestQueue(registerRequest, tagJsonObj);
     }
 
-    public void isLoggedIn() {
-        String url = authUrl + "/isLoggedIn";
+    public Boolean isLoggedIn() {
+        return this.currUser != null;
+    }
 
-        GsonRequest<DefaultResponse> loginRequest = new GsonRequest<DefaultResponse>( Request.Method.GET, url, DefaultResponse.class,
-                new Response.Listener<DefaultResponse>()
+    public void logout(final ApiCallback<ApiHttpResponse> callback) {
+
+        String url = authUrl + "/logout";
+
+        GsonRequest<ApiHttpResponse> logoutRequest = new GsonRequest<ApiHttpResponse>(Request.Method.GET, url, ApiHttpResponse.class,
+                new Response.Listener<ApiHttpResponse>()
                 {
-                    public void onResponse(DefaultResponse response) {
-                        if(!response.getStatus()) {
-                            Toast.makeText(context, response.getMessage(), Toast.LENGTH_LONG).show();
-                        } else {
-                            ((MainActivity) context).changeFragment(new HomeFragment());
-                        }
+                    public void onResponse(ApiHttpResponse response) {
+                        currUser = null;
+                        callback.onCompletion(response);
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("QFS - Error", "Auth Register Error");
+                        callback.onError(error.toString());
                     }
                 }
         ) {
@@ -134,6 +136,6 @@ public class AuthService {
             }
         };
 
-        AppController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
+        AppController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
     }
 }

@@ -2,8 +2,9 @@ package com.example.pewpew.qfs.domain;
 
 public class User {
 
-    private enum Role {Administrator, Moderator, Player};
-    private enum Status {registered, activated, deleted};
+    private enum Role {Administrator, Moderator, Player}
+
+    private enum Status {registered, activated, deleted}
 
     private String _id;
     private String firstname;

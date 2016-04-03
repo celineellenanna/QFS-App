@@ -22,7 +22,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
     public UserViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.row_layout_user, parent, false);
+        View v = layoutInflater.inflate(R.layout.user_row_layout, parent, false);
 
         TextView _id = (TextView) v.findViewById(R.id._id);
         TextView firstname = (TextView) v.findViewById(R.id.tvFirstname);
@@ -49,13 +49,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         holder.password.setText(user.getPassword());
         holder.role.setText(user.getRole());
         holder.status.setText(user.getStatus());
-
-        /*holder.bDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((MainActivity) v.getContext()).deleteReservation(reservation);
-            }
-        });*/
     }
 
     @Override

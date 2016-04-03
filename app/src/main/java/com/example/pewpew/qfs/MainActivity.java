@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.pewpew.qfs.service.ApiCallback;
+import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.AuthService;
+
 public class MainActivity extends AppCompatActivity {
 
     private String[] drawerListViewItems;
@@ -22,30 +27,17 @@ public class MainActivity extends AppCompatActivity {
     private ListView drawerListView;
     private ActionBarDrawerToggle drawerToggle;
 
+    private AuthService authService = AuthService.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
-
-        drawerListView = (ListView) findViewById(R.id.left_drawer);
-
-        updateDrawerList();
-
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
-
-        drawerLayout.setDrawerListener(drawerToggle);
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+        createDrawer();
 
         changeFragment(new AuthLoginFragment());
     }
@@ -82,54 +74,84 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
+    public void createDrawer() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
+
+        drawerListView = (ListView) findViewById(R.id.left_drawer);
+
+        updateDrawerList();
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+
+        drawerLayout.setDrawerListener(drawerToggle);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+    }
+
+    public void updateDrawerList() {
+        if(authService.isLoggedIn()) {
+            drawerListViewItems = getResources().getStringArray(R.array.drawer_auth_items_array);
+            drawerListView.setAdapter(new ArrayAdapter<String>(this,
+                    R.layout.drawer_row_layout, drawerListViewItems));
+        } else {
+            drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
+            drawerListView.setAdapter(new ArrayAdapter<String>(this,
+                    R.layout.drawer_row_layout, drawerListViewItems));
+        }
+    }
+
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-            if(false == false) {
+            if(authService.isLoggedIn()) {
                 switch (((TextView)view).getText().toString()) {
-                    case "Login":
-                        changeFragment(new AuthLoginFragment());
+                    case "Home":
+                        changeFragment(new HomeFragment());
                         break;
-                    case "Registrieren":
-                        changeFragment(new AuthRegisterFragment());
+                    case "User":
+                        changeFragment(new UserFragment());
                         break;
                     case "Logout":
+                        authService.logout(new ApiCallback<ApiHttpResponse>() {
+                            @Override
+                            public void onCompletion(ApiHttpResponse response) {
+                                changeFragment(new AuthLoginFragment());
+                                updateDrawerList();
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                Log.d("QFS - Error", message);
+                            }
+                        });
                         break;
                 }
             } else {
                 switch (((TextView)view).getText().toString()) {
-                    case "Login":
+                    case "Einloggen":
                         changeFragment(new AuthLoginFragment());
                         break;
                     case "Registrieren":
                         changeFragment(new AuthRegisterFragment());
-                        break;
-                    case "Logout":
                         break;
                 }
             }
 
             drawerLayout.closeDrawer(drawerListView);
-
         }
     }
-
 
     public void changeFragment(Fragment f) {
         getFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
-    }
-
-    public void updateDrawerList() {
-        if(false == false) {
-            drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
-            drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                    R.layout.drawer_list_item, drawerListViewItems));
-        } else {
-            drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
-            drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                    R.layout.drawer_list_item, drawerListViewItems));
-        }
     }
 
 }
