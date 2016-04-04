@@ -1,16 +1,16 @@
 package com.example.pewpew.qfs.service;
 
-import com.example.pewpew.qfs.domain.User;
+import com.android.volley.Response;
 
-public class ApiHttpResponse {
+public class ApiHttpGenericResponse<T> extends Response {
     private Boolean status;
     private String message;
-    private User user;
+    private T data;
 
-    public ApiHttpResponse(Boolean status, String message, User user) {
+    public ApiHttpGenericResponse(Boolean status, String message, T data) {
         this.status = status;
         this.message = message;
-        this.user = user;
+        this.data = data;
     }
 
     public Boolean getStatus() {
@@ -21,7 +21,7 @@ public class ApiHttpResponse {
         return this.message;
     }
 
-    public User getUser() {
-        return this.user;
+    public T getData() {
+        return this.data;
     }
 }

@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.pewpew.qfs.service.AuthService;
+
 public class HomeFragment extends Fragment {
 
 
@@ -22,11 +24,12 @@ public class HomeFragment extends Fragment {
         View viewRoot = inflater.inflate(R.layout.fragment_home, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) viewRoot.findViewById(R.id.fab);
+        fab.show();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                AuthService.getInstance().getUser();
             }
         });
 

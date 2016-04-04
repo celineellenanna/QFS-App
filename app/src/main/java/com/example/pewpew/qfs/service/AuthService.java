@@ -138,4 +138,36 @@ public class AuthService {
 
         AppController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
     }
+
+    public void getUser() {
+
+        String url = authUrl + "/logout";
+
+        GsonRequest<ApiHttpGenericResponse<String>> logoutRequest = new GsonRequest<ApiHttpGenericResponse<String>>(Request.Method.GET, url, ApiHttpGenericResponse.class,
+                new Response.Listener<ApiHttpGenericResponse<String>>()
+                {
+                    public void onResponse(ApiHttpGenericResponse<String> response) {
+                        Log.d("QFS - Status ", response.getStatus().toString());
+                        Log.d("QFS - Message ", response.getMessage());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("QFS - Error", error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        AppController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
+    }
 }

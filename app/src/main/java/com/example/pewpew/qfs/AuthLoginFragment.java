@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pewpew.qfs.domain.User;
 import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
 import com.example.pewpew.qfs.service.ApiCallback;
