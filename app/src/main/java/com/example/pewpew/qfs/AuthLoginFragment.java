@@ -11,9 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.ApiHttpCallback;
 import com.example.pewpew.qfs.service.AuthService;
-import com.example.pewpew.qfs.service.ApiCallback;
 
 public class AuthLoginFragment extends Fragment {
 
@@ -35,21 +34,23 @@ public class AuthLoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 AuthService authService = AuthService.getInstance();
-                authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiCallback<ApiHttpResponse>() {
+                authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<User>() {
                     @Override
-                    public void onCompletion(ApiHttpResponse response) {
-                        if(response.getStatus()) {
+                    public void onCompletion(User user) {
+                        if(user != null) {
                             ((MainActivity) getActivity()).changeFragment(new HomeFragment());
                             ((MainActivity) getActivity()).updateDrawerList();
                         } else {
-                            Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Username oder Passwort ist falsch", Toast.LENGTH_LONG).show();
                         }
                     }
 
                     @Override
                     public void onError(String message) {
                         Log.d("QFS - Error", message);
+
                     }
                 });
             }

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.pewpew.qfs.service.ApiCallback;
+import com.example.pewpew.qfs.service.ApiHttpCallback;
 import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
 
@@ -40,7 +40,7 @@ public class AuthRegisterFragment extends Fragment {
             public void onClick(View view) {
                 if (tfPassword.equals(tfPasswordRepeat)) {
                     AuthService authService = AuthService.getInstance();
-                    authService.register(tfFirstname.getText().toString(), tfLastname.getText().toString(), tfEmail.getText().toString(), tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiCallback<ApiHttpResponse>() {
+                    authService.register(tfFirstname.getText().toString(), tfLastname.getText().toString(), tfEmail.getText().toString(), tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse>() {
                         @Override
                         public void onCompletion(ApiHttpResponse response) {
                             if(response.getStatus()) {

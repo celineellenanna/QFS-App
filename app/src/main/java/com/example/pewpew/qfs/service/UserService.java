@@ -1,8 +1,5 @@
 package com.example.pewpew.qfs.service;
 
-import android.content.Context;
-import android.view.View;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -11,29 +8,37 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserService {
 
+    private static UserService userService;
     private String tagJsonObj = "json_obj_req";
-    private String authUrl = "http://10.0.2.2:3000/api/users";
-    private Context context;
-    private View view;
+    private String userUrl = "http://10.0.2.2:3000/api/users";
 
-    public UserService(Context context, View view) {
-        this.context = context;
-        this.view = view;
+    public UserService() {
     }
 
-    public void index(final ApiCallback<ArrayList<User>> callback) {
-        String url = authUrl + "/";
+    public static UserService getInstance()
+    {
+        if (userService == null)
+        {
+            userService = new UserService();
+        }
+        return userService;
+    }
+
+    public void index(final ApiHttpCallback<ArrayList<User>> callback) {
+        String url = userUrl + "/";
 
         Type type = new TypeToken<ArrayList<User>>() {}.getType();
 
-        GsonRequest<ArrayList<User>> loginRequest = new GsonRequest<ArrayList<User>>(Request.Method.GET, url, type,
+        ApiHttpRequest<ArrayList<User>> indexRequest = new ApiHttpRequest<ArrayList<User>>(Request.Method.GET, url, type, null,
                 new Response.Listener<ArrayList<User>>()
                 {
-                    public void onResponse(ArrayList<User> users) {
-                        callback.onCompletion(users);
+                    public void onResponse(ArrayList<User> response) {
+                        callback.onCompletion(response);
                     }
                 },
                 new Response.ErrorListener()
@@ -43,8 +48,17 @@ public class UserService {
                         callback.onError(error.toString());
                     }
                 }
-        );
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
 
-        AppController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
+                return params;
+            }
+        };
+
+
+        ApiHttpController.getInstance().addToRequestQueue(indexRequest, tagJsonObj);
     }
 }

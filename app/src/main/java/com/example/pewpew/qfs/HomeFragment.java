@@ -29,7 +29,6 @@ public class HomeFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AuthService.getInstance().getUser();
             }
         });
 

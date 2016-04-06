@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiCallback;
+import com.example.pewpew.qfs.service.ApiHttpCallback;
 import com.example.pewpew.qfs.service.UserService;
 
 import java.util.ArrayList;
@@ -30,8 +30,8 @@ public class UserFragment extends Fragment {
 
         final View viewRoot = inflater.inflate(R.layout.fragment_user, container, false);
 
-        UserService us = new UserService(getContext(), viewRoot);
-        us.index(new ApiCallback<ArrayList<User>>() {
+        UserService us = new UserService().getInstance();
+        us.index(new ApiHttpCallback<ArrayList<User>>() {
             @Override
             public void onCompletion(ArrayList<User> users) {
                 UserAdapter userAdapter = new UserAdapter(users);

@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.pewpew.qfs.service.ApiCallback;
+import com.example.pewpew.qfs.service.ApiHttpCallback;
 import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
 
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(new UserFragment());
                         break;
                     case "Logout":
-                        authService.logout(new ApiCallback<ApiHttpResponse>() {
+                        authService.logout(new ApiHttpCallback<ApiHttpResponse>() {
                             @Override
                             public void onCompletion(ApiHttpResponse response) {
                                 changeFragment(new AuthLoginFragment());

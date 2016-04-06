@@ -1,14 +1,10 @@
 package com.example.pewpew.qfs.service;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import com.example.pewpew.qfs.domain.User;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,18 +28,21 @@ public class AuthService {
         return authService;
     }
 
-    public void login(final String username, final String password, final ApiCallback<ApiHttpResponse> callback) {
+    public void login(final String username, final String password, final ApiHttpCallback<User> callback) {
         String url = authUrl + "/login";
 
-        GsonRequest<ApiHttpResponse> loginRequest = new GsonRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class,
-                new Response.Listener<ApiHttpResponse>()
+        ApiHttpRequest<User> loginRequest = new ApiHttpRequest<User>(Request.Method.POST, url, User.class, null,
+                new Response.Listener<User>()
                 {
-                    public void onResponse(ApiHttpResponse response) {
-                        if(response.getStatus()) {
-                            currUser = response.getUser();
+                    public void onResponse(User user) {
+
+                        if(user.getStatus() != "activated") {
+                            currUser = null;
+                        } else {
+                            currUser = user;
                         }
 
-                        callback.onCompletion(response);
+                        callback.onCompletion(currUser);
                     }
                 },
                 new Response.ErrorListener()
@@ -65,13 +64,13 @@ public class AuthService {
             }
         };
 
-        AppController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
     }
 
-    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiCallback<ApiHttpResponse> callback) {
+    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = authUrl + "/register";
 
-        GsonRequest<ApiHttpResponse> registerRequest = new GsonRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class,
+        ApiHttpRequest<ApiHttpResponse> registerRequest = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class, null,
                 new Response.Listener<ApiHttpResponse>()
                 {
                     public void onResponse(ApiHttpResponse response) {
@@ -100,18 +99,18 @@ public class AuthService {
             }
         };
 
-        AppController.getInstance().addToRequestQueue(registerRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(registerRequest, tagJsonObj);
     }
 
     public Boolean isLoggedIn() {
         return this.currUser != null;
     }
 
-    public void logout(final ApiCallback<ApiHttpResponse> callback) {
+    public void logout(final ApiHttpCallback<ApiHttpResponse> callback) {
 
         String url = authUrl + "/logout";
 
-        GsonRequest<ApiHttpResponse> logoutRequest = new GsonRequest<ApiHttpResponse>(Request.Method.GET, url, ApiHttpResponse.class,
+        ApiHttpRequest<ApiHttpResponse> logoutRequest = new ApiHttpRequest<ApiHttpResponse>(Request.Method.GET, url, ApiHttpResponse.class, null,
                 new Response.Listener<ApiHttpResponse>()
                 {
                     public void onResponse(ApiHttpResponse response) {
@@ -136,38 +135,6 @@ public class AuthService {
             }
         };
 
-        AppController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
-    }
-
-    public void getUser() {
-
-        String url = authUrl + "/logout";
-
-        GsonRequest<ApiHttpGenericResponse<String>> logoutRequest = new GsonRequest<ApiHttpGenericResponse<String>>(Request.Method.GET, url, ApiHttpGenericResponse.class,
-                new Response.Listener<ApiHttpGenericResponse<String>>()
-                {
-                    public void onResponse(ApiHttpGenericResponse<String> response) {
-                        Log.d("QFS - Status ", response.getStatus().toString());
-                        Log.d("QFS - Message ", response.getMessage());
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("QFS - Error", error.toString());
-                    }
-                }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-
-                return params;
-            }
-        };
-
-        AppController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
     }
 }

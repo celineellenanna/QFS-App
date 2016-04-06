@@ -8,15 +8,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
-public class AppController extends Application {
+public class ApiHttpController extends Application {
 
-    public static final String TAG = AppController.class
+    public static final String TAG = ApiHttpController.class
             .getSimpleName();
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
-    private static AppController mInstance;
+    private static ApiHttpController mInstance;
 
     @Override
     public void onCreate() {
@@ -24,7 +24,7 @@ public class AppController extends Application {
         mInstance = this;
     }
 
-    public static synchronized AppController getInstance() {
+    public static synchronized ApiHttpController getInstance() {
         return mInstance;
     }
 
