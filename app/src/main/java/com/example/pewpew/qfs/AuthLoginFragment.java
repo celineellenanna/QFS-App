@@ -38,31 +38,27 @@ public class AuthLoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                AuthService authService = AuthService.getInstance();
+            AuthService authService = AuthService.getInstance();
 
-                String username = tfUsername.getText().toString();
-                String password = tfPassword.getText().toString();
+            String username = tfUsername.getText().toString();
+            String password = tfPassword.getText().toString();
 
-                if(username.length() > 0 && password.length() > 0) {
-                    authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse<User>>() {
-                        @Override
-                        public void onCompletion(ApiHttpResponse<User> response) {
-                            if (response.getSuccess()) {
-                                ((MainActivity) getActivity()).changeFragment(new HomeFragment());
-                                ((MainActivity) getActivity()).updateDrawerList();
-                            } else {
-                                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
-                            }
+                authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse<User>>() {
+                    @Override
+                    public void onCompletion(ApiHttpResponse<User> response) {
+                        if (response.getSuccess()) {
+                            ((MainActivity) getActivity()).changeFragment(new HomeFragment());
+                            ((MainActivity) getActivity()).updateDrawerList();
+                        } else {
+                            Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
                         }
+                    }
 
-                        @Override
-                        public void onError(String message) {
+                    @Override
+                    public void onError(String message) {
 
-                        }
-                    });
-                } else {
-                    Toast.makeText(getContext(), "Benutzername oder Passwort nicht eingegeben", Toast.LENGTH_LONG).show();
-                }
+                    }
+                });
             }
         });
 
