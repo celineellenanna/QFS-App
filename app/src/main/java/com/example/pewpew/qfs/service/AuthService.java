@@ -1,11 +1,15 @@
 package com.example.pewpew.qfs.service;
 
+import android.util.Log;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import com.example.pewpew.qfs.domain.User;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,21 +32,19 @@ public class AuthService {
         return authService;
     }
 
-    public void login(final String username, final String password, final ApiHttpCallback<User> callback) {
+    public void login(final String username, final String password, final ApiHttpCallback<ApiHttpResponse<User>> callback) {
         String url = authUrl + "/login";
 
-        ApiHttpRequest<User> loginRequest = new ApiHttpRequest<User>(Request.Method.POST, url, User.class, null,
-                new Response.Listener<User>()
+        Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<User>> loginRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<User>>()
                 {
-                    public void onResponse(User user) {
-
-                        if(user.getStatus() != "activated") {
-                            currUser = null;
-                        } else {
-                            currUser = user;
+                    public void onResponse(ApiHttpResponse<User> response) {
+                        if(response.getSuccess()) {
+                            currUser = response.getData();
                         }
-
-                        callback.onCompletion(currUser);
+                        callback.onCompletion(response);
                     }
                 },
                 new Response.ErrorListener()
@@ -67,13 +69,15 @@ public class AuthService {
         ApiHttpController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
     }
 
-    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiHttpCallback<ApiHttpResponse<User>> callback) {
         String url = authUrl + "/register";
 
-        ApiHttpRequest<ApiHttpResponse> registerRequest = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, ApiHttpResponse.class, null,
-                new Response.Listener<ApiHttpResponse>()
+        Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<User>> registerRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<User>>()
                 {
-                    public void onResponse(ApiHttpResponse response) {
+                    public void onResponse(ApiHttpResponse<User> response) {
                         callback.onCompletion(response);
                     }
                 },
@@ -102,18 +106,19 @@ public class AuthService {
         ApiHttpController.getInstance().addToRequestQueue(registerRequest, tagJsonObj);
     }
 
-    public Boolean isLoggedIn() {
+    public Boolean isAuthenticated() {
         return this.currUser != null;
     }
 
-    public void logout(final ApiHttpCallback<ApiHttpResponse> callback) {
-
+    public void logout(final ApiHttpCallback<ApiHttpResponse<User>> callback) {
         String url = authUrl + "/logout";
 
-        ApiHttpRequest<ApiHttpResponse> logoutRequest = new ApiHttpRequest<ApiHttpResponse>(Request.Method.GET, url, ApiHttpResponse.class, null,
-                new Response.Listener<ApiHttpResponse>()
+        Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<User>> logoutRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<User>>()
                 {
-                    public void onResponse(ApiHttpResponse response) {
+                    public void onResponse(ApiHttpResponse<User> response) {
                         currUser = null;
                         callback.onCompletion(response);
                     }

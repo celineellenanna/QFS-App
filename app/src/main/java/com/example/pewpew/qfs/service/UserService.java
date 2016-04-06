@@ -29,15 +29,15 @@ public class UserService {
         return userService;
     }
 
-    public void index(final ApiHttpCallback<ArrayList<User>> callback) {
+    public void index(final ApiHttpCallback<ApiHttpResponse<ArrayList<User>>> callback) {
         String url = userUrl + "/";
 
-        Type type = new TypeToken<ArrayList<User>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<User>>>() {}.getType();
 
-        ApiHttpRequest<ArrayList<User>> indexRequest = new ApiHttpRequest<ArrayList<User>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ArrayList<User>>()
+        ApiHttpRequest<ApiHttpResponse<ArrayList<User>>> indexRequest = new ApiHttpRequest<ApiHttpResponse<ArrayList<User>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<User>>>()
                 {
-                    public void onResponse(ArrayList<User> response) {
+                    public void onResponse(ApiHttpResponse<ArrayList<User>> response) {
                         callback.onCompletion(response);
                     }
                 },

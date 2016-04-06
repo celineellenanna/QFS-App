@@ -1,5 +1,7 @@
 package com.example.pewpew.qfs.service;
 
+import android.util.Log;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
@@ -7,6 +9,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.UnsupportedEncodingException;
@@ -14,7 +17,7 @@ import java.lang.reflect.Type;
 import java.util.Map;
 
 public class ApiHttpRequest<T>  extends Request<T> {
-    private final Gson gson = new Gson();
+    private final Gson gson = new GsonBuilder().serializeNulls().create();
     private final Type type;
     private final Map<String, String> headers;
     private final Response.Listener<T> listener;

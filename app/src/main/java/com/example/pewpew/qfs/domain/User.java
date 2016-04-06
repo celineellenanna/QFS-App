@@ -6,14 +6,14 @@ public class User {
 
     private enum Status {registered, activated, deleted}
 
-    private String _id;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String username;
-    private String password;
-    private Role role;
-    private Status status;
+    private String _id = null;
+    private String firstname = null;
+    private String lastname = null;
+    private String email = null;
+    private String username = null;
+    private String password = null;
+    private Role role = null;
+    private Status status = null;
 
     public String getId() {
         return this._id;

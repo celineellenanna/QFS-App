@@ -12,7 +12,10 @@ import android.widget.Toast;
 
 import com.example.pewpew.qfs.domain.User;
 import com.example.pewpew.qfs.service.ApiHttpCallback;
+import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
+
+import java.util.ArrayList;
 
 public class AuthLoginFragment extends Fragment {
 
@@ -36,23 +39,30 @@ public class AuthLoginFragment extends Fragment {
             public void onClick(View view) {
 
                 AuthService authService = AuthService.getInstance();
-                authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<User>() {
-                    @Override
-                    public void onCompletion(User user) {
-                        if(user != null) {
-                            ((MainActivity) getActivity()).changeFragment(new HomeFragment());
-                            ((MainActivity) getActivity()).updateDrawerList();
-                        } else {
-                            Toast.makeText(getContext(), "Username oder Passwort ist falsch", Toast.LENGTH_LONG).show();
+
+                String username = tfUsername.getText().toString();
+                String password = tfPassword.getText().toString();
+
+                if(username.length() > 0 && password.length() > 0) {
+                    authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse<User>>() {
+                        @Override
+                        public void onCompletion(ApiHttpResponse<User> response) {
+                            if (response.getSuccess()) {
+                                ((MainActivity) getActivity()).changeFragment(new HomeFragment());
+                                ((MainActivity) getActivity()).updateDrawerList();
+                            } else {
+                                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(String message) {
-                        Log.d("QFS - Error", message);
+                        @Override
+                        public void onError(String message) {
 
-                    }
-                });
+                        }
+                    });
+                } else {
+                    Toast.makeText(getContext(), "Benutzername oder Passwort nicht eingegeben", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

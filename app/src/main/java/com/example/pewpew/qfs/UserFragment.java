@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.pewpew.qfs.domain.User;
 import com.example.pewpew.qfs.service.ApiHttpCallback;
+import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.UserService;
 
 import java.util.ArrayList;
@@ -31,14 +33,18 @@ public class UserFragment extends Fragment {
         final View viewRoot = inflater.inflate(R.layout.fragment_user, container, false);
 
         UserService us = new UserService().getInstance();
-        us.index(new ApiHttpCallback<ArrayList<User>>() {
+        us.index(new ApiHttpCallback<ApiHttpResponse<ArrayList<User>>>() {
             @Override
-            public void onCompletion(ArrayList<User> users) {
-                UserAdapter userAdapter = new UserAdapter(users);
-                RecyclerView userRecycleView = (RecyclerView) viewRoot.findViewById(R.id.userRecyclerView);
-                LinearLayoutManager linearLayoutManagerUser = new LinearLayoutManager(getContext());
-                userRecycleView.setLayoutManager(linearLayoutManagerUser);
-                userRecycleView.setAdapter(userAdapter);
+            public void onCompletion(ApiHttpResponse<ArrayList<User>> response) {
+                if (response.getSuccess()) {
+                    UserAdapter userAdapter = new UserAdapter(response.getData());
+                    RecyclerView userRecycleView = (RecyclerView) viewRoot.findViewById(R.id.userRecyclerView);
+                    LinearLayoutManager linearLayoutManagerUser = new LinearLayoutManager(getContext());
+                    userRecycleView.setLayoutManager(linearLayoutManagerUser);
+                    userRecycleView.setAdapter(userAdapter);
+                } else {
+
+                }
             }
 
             @Override

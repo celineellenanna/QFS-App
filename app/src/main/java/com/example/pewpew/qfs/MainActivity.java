@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.pewpew.qfs.domain.User;
 import com.example.pewpew.qfs.service.ApiHttpCallback;
 import com.example.pewpew.qfs.service.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateDrawerList() {
-        if(authService.isLoggedIn()) {
+        if(authService.isAuthenticated()) {
             drawerListViewItems = getResources().getStringArray(R.array.drawer_auth_items_array);
             drawerListView.setAdapter(new ArrayAdapter<String>(this,
                     R.layout.drawer_row_layout, drawerListViewItems));
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView parent, View view, int position, long id) {
 
-            if(authService.isLoggedIn()) {
+            if(authService.isAuthenticated()) {
                 switch (((TextView)view).getText().toString()) {
                     case "Home":
                         changeFragment(new HomeFragment());
@@ -121,9 +122,9 @@ public class MainActivity extends AppCompatActivity {
                         changeFragment(new UserFragment());
                         break;
                     case "Logout":
-                        authService.logout(new ApiHttpCallback<ApiHttpResponse>() {
+                        authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {
                             @Override
-                            public void onCompletion(ApiHttpResponse response) {
+                            public void onCompletion(ApiHttpResponse<User> response) {
                                 changeFragment(new AuthLoginFragment());
                                 updateDrawerList();
                             }
