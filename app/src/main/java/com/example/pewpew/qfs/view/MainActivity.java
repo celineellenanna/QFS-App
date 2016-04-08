@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 import android.app.Fragment;
 import android.content.res.Configuration;
@@ -16,9 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.pewpew.qfs.R;
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiHttpCallback;
-import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpCallback;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
 
 public class MainActivity extends AppCompatActivity {
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
             if(authService.isAuthenticated()) {
                 switch (((TextView)view).getText().toString()) {
                     case "Home":
-                        changeFragment(new HomeFragment());
+                        changeFragment(new QuizHomeFragment());
                         break;
                     case "User":
                         changeFragment(new UserFragment());

@@ -1,8 +1,7 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pewpew.qfs.R;
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiHttpCallback;
-import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpCallback;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
-
-import java.util.ArrayList;
 
 public class AuthLoginFragment extends Fragment {
 
@@ -47,7 +45,7 @@ public class AuthLoginFragment extends Fragment {
                     @Override
                     public void onCompletion(ApiHttpResponse<User> response) {
                         if (response.getSuccess()) {
-                            ((MainActivity) getActivity()).changeFragment(new HomeFragment());
+                            ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
                             ((MainActivity) getActivity()).updateDrawerList();
                         } else {
                             Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();

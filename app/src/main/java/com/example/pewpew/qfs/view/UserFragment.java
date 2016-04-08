@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 
 import android.os.Bundle;
@@ -9,11 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.example.pewpew.qfs.R;
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiHttpCallback;
-import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpCallback;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpResponse;
 import com.example.pewpew.qfs.service.UserService;
 
 import java.util.ArrayList;

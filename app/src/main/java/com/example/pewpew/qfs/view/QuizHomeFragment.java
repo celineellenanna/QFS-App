@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 
 import android.os.Bundle;
@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.pewpew.qfs.service.AuthService;
+import com.example.pewpew.qfs.R;
 
-public class HomeFragment extends Fragment {
+public class QuizHomeFragment extends Fragment {
 
 
-    public HomeFragment() {
+    public QuizHomeFragment() {
     }
 
 
@@ -21,7 +21,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewRoot = inflater.inflate(R.layout.fragment_home, container, false);
+        View viewRoot = inflater.inflate(R.layout.fragment_quiz_home, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) viewRoot.findViewById(R.id.fab);
         fab.show();

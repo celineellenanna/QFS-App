@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 
 import android.os.Bundle;
@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pewpew.qfs.R;
 import com.example.pewpew.qfs.domain.User;
-import com.example.pewpew.qfs.service.ApiHttpCallback;
-import com.example.pewpew.qfs.service.ApiHttpResponse;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpCallback;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpResponse;
 import com.example.pewpew.qfs.service.AuthService;
 
 public class AuthRegisterFragment extends Fragment {

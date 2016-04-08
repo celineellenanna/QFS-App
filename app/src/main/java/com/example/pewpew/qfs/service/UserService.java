@@ -4,6 +4,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.pewpew.qfs.domain.User;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpCallback;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpController;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpRequest;
+import com.example.pewpew.qfs.service.apiclient.ApiHttpResponse;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;

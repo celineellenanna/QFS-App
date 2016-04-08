@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs.service;
+package com.example.pewpew.qfs.service.apiclient;
 
 import android.util.Log;
 

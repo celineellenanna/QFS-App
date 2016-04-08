@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.example.pewpew.qfs.view;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.pewpew.qfs.R;
 import com.example.pewpew.qfs.domain.User;
 
 import java.util.ArrayList;
