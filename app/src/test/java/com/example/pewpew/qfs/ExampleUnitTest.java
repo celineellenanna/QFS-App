@@ -1,4 +1,4 @@
-package com.example.pewpew.qfs;
+package com.hsr.pewpew.qfs;
 
 import org.junit.Test;
 
