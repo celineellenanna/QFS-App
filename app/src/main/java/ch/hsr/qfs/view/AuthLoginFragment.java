@@ -2,6 +2,7 @@ package ch.hsr.qfs.view;
 
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,10 +37,10 @@ public class AuthLoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-            AuthService authService = AuthService.getInstance();
+                AuthService authService = AuthService.getInstance();
 
-            String username = tfUsername.getText().toString();
-            String password = tfPassword.getText().toString();
+                String username = tfUsername.getText().toString();
+                String password = tfPassword.getText().toString();
 
                 authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse<User>>() {
                     @Override
