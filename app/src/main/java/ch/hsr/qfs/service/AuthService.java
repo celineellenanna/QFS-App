@@ -19,7 +19,7 @@ public class AuthService {
 
     private static AuthService authService;
     private String tagJsonObj = "json_obj_req";
-    private String authUrl = "http://10.0.2.2:3000/api/auth";
+    private String authUrl = "http://sinv-56084.edu.hsr.ch:443/api/auth";
     private static User currUser;
 
     private AuthService() {
@@ -39,7 +39,7 @@ public class AuthService {
 
         Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<User>> loginRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
+        ApiHttpRequest<ApiHttpResponse<User>> request = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
                 new Response.Listener<ApiHttpResponse<User>>()
                 {
                     public void onResponse(ApiHttpResponse<User> response) {
@@ -68,7 +68,7 @@ public class AuthService {
             }
         };
 
-        ApiHttpController.getInstance().addToRequestQueue(loginRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
     public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiHttpCallback<ApiHttpResponse<User>> callback) {
@@ -76,7 +76,7 @@ public class AuthService {
 
         Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<User>> registerRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
+        ApiHttpRequest<ApiHttpResponse<User>> request = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.POST, url, type, null,
                 new Response.Listener<ApiHttpResponse<User>>()
                 {
                     public void onResponse(ApiHttpResponse<User> response) {
@@ -105,7 +105,7 @@ public class AuthService {
             }
         };
 
-        ApiHttpController.getInstance().addToRequestQueue(registerRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
     public Boolean isAuthenticated() {
@@ -117,7 +117,7 @@ public class AuthService {
 
         Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<User>> logoutRequest = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.GET, url, type, null,
+        ApiHttpRequest<ApiHttpResponse<User>> request = new ApiHttpRequest<ApiHttpResponse<User>>(Request.Method.GET, url, type, null,
                 new Response.Listener<ApiHttpResponse<User>>()
                 {
                     public void onResponse(ApiHttpResponse<User> response) {
@@ -142,6 +142,10 @@ public class AuthService {
             }
         };
 
-        ApiHttpController.getInstance().addToRequestQueue(logoutRequest, tagJsonObj);
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public User getUser() {
+        return currUser;
     }
 }

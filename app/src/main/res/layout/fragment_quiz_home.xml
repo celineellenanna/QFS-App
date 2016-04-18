@@ -10,6 +10,11 @@
         android:layout_height="wrap_content"
         android:text="QuizHomeFragment" />
 
+    <Button
+        android:id="@+id/btnExecute"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
