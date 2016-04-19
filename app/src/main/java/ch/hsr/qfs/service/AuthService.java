@@ -19,10 +19,10 @@ public class AuthService {
 
     private static AuthService authService;
     private String tagJsonObj = "json_obj_req";
-    private String authUrl = "http://sinv-56084.edu.hsr.ch:443/api/auth";
+    private String authUrl = "http://10.0.2.2:3000/api/auth";
     private static User currUser;
 
-    private AuthService() {
+    public AuthService() {
     }
 
     public static AuthService getInstance()

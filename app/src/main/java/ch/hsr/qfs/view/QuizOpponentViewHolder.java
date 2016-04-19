@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-public class UserViewHolder extends RecyclerView.ViewHolder {
+public class QuizOpponentViewHolder extends RecyclerView.ViewHolder {
 
     public View parent;
     public TextView _id;
@@ -16,7 +16,7 @@ public class UserViewHolder extends RecyclerView.ViewHolder {
     public TextView role;
     public TextView status;
 
-    public UserViewHolder(View parent, TextView _id, TextView firstname, TextView lastname, TextView email
+    public QuizOpponentViewHolder(View parent, TextView _id, TextView firstname, TextView lastname, TextView email
             ,TextView username, TextView password, TextView role, TextView status) {
         super(parent);
         this.parent = parent;

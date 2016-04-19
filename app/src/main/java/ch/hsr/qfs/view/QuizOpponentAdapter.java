@@ -6,24 +6,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.hsr.pewpew.qfs.R;
-import ch.hsr.qfs.domain.User;
+import com.hsr.qfs.R;
 
 import java.util.ArrayList;
 
-public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
+import ch.hsr.qfs.domain.User;
+
+public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHolder> {
 
     private ArrayList<User> users;
 
-    public UserAdapter(ArrayList<User> users) {
+    public QuizOpponentAdapter(ArrayList<User> users) {
         this.users = users;
     }
 
     @Override
-    public UserViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public QuizOpponentViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.user_row_layout, parent, false);
+        View v = layoutInflater.inflate(R.layout.quiz_opponent_row_layout, parent, false);
 
         TextView _id = (TextView) v.findViewById(R.id._id);
         TextView firstname = (TextView) v.findViewById(R.id.tvFirstname);
@@ -34,12 +35,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserViewHolder> {
         TextView role = (TextView) v.findViewById(R.id.tvRole);
         TextView status = (TextView) v.findViewById(R.id.tvStatus);
 
-        UserViewHolder userViewHolder = new UserViewHolder(v, _id, firstname, lastname, email, username, password, role, status);
+        QuizOpponentViewHolder userViewHolder = new QuizOpponentViewHolder(v, _id, firstname, lastname, email, username, password, role, status);
 
         return userViewHolder;
     }
 
-    public void onBindViewHolder(UserViewHolder holder, int position) {
+    public void onBindViewHolder(QuizOpponentViewHolder holder, int position) {
 
         final User user = users.get(position);
         holder._id.setText(user.getId());

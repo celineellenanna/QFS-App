@@ -19,7 +19,7 @@ public class QuizService {
 
     private static QuizService quizService;
     private String tagJsonObj = "json_obj_req";
-    private String quizUrl = "http://sinv-56084.edu.hsr.ch:443/api/quiz";
+    private String quizUrl = "http://10.0.2.2:3000/api/quiz";
 
     private QuizService() {
     }

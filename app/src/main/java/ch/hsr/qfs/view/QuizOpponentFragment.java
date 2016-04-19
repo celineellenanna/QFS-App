@@ -10,40 +10,43 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hsr.pewpew.qfs.R;
-import ch.hsr.qfs.domain.User;
-import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
-import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
-import ch.hsr.qfs.service.UserService;
+import com.hsr.qfs.R;
 
 import java.util.ArrayList;
 
+import ch.hsr.qfs.domain.User;
+import ch.hsr.qfs.service.AuthService;
+import ch.hsr.qfs.service.UserService;
+import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
+import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-public class UserFragment extends Fragment {
+public class QuizOpponentFragment extends Fragment {
 
 
-    public UserFragment() {
+    public QuizOpponentFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        final View viewRoot = inflater.inflate(R.layout.fragment_user, container, false);
+        final View viewRoot = inflater.inflate(R.layout.fragment_quiz_opponent, container, false);
 
         UserService us = new UserService().getInstance();
-        us.index(new ApiHttpCallback<ApiHttpResponse<ArrayList<User>>>() {
+        AuthService as = new AuthService().getInstance();
+
+        us.findOpponent(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<User>>>() {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<User>> response) {
                 if (response.getSuccess()) {
-                    UserAdapter userAdapter = new UserAdapter(response.getData());
-                    RecyclerView userRecycleView = (RecyclerView) viewRoot.findViewById(R.id.userRecyclerView);
+                    Log.d("QFS", "TRUE");
+                    QuizOpponentAdapter userAdapter = new QuizOpponentAdapter(response.getData());
+                    RecyclerView userRecycleView = (RecyclerView) viewRoot.findViewById(R.id.recyclerView);
                     LinearLayoutManager linearLayoutManagerUser = new LinearLayoutManager(getContext());
                     userRecycleView.setLayoutManager(linearLayoutManagerUser);
                     userRecycleView.setAdapter(userAdapter);
                 } else {
-
+                    Log.d("QFS", "FALSE");
                 }
             }
 

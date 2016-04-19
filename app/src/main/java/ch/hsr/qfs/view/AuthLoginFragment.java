@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.hsr.pewpew.qfs.R;
+import com.hsr.qfs.R;
 import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -42,7 +42,7 @@ public class AuthLoginFragment extends Fragment {
                 String username = tfUsername.getText().toString();
                 String password = tfPassword.getText().toString();
 
-                authService.login(tfUsername.getText().toString(), tfPassword.getText().toString(), new ApiHttpCallback<ApiHttpResponse<User>>() {
+                authService.login(username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<User> response) {
                         if (response.getSuccess()) {
