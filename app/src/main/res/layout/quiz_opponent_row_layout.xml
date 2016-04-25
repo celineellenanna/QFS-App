@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:minHeight="56dp"
@@ -15,198 +15,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/lblId"
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="ID:"
-                android:minWidth="100dp" />
-
-            <TextView
-                android:id="@+id/_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="_id"
-                android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/bDelete" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblFirstname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Firstname:"
-                android:layout_below="@+id/lblId"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/tvFirstname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="firstname"
-                android:layout_below="@+id/id"
-                android:layout_alignStart="@+id/id" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblLastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Lastname:"
-                android:layout_alignBaseline="@+id/reservationWaitingPosition"
-                android:layout_alignBottom="@+id/reservationWaitingPosition"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/tvLastname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="lastname"
-                android:layout_below="@+id/reservationDate"
-                android:layout_alignStart="@+id/reservationDate" />
-
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Email:"
-                android:layout_alignBottom="@+id/reservationFinished"
-                android:layout_alignEnd="@+id/labelReservationIsReady" />
-
-            <TextView
-                android:id="@+id/tvEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="email"
-                android:enabled="true"
-                android:layout_below="@+id/reservationIsReady"
-                android:layout_alignStart="@+id/reservationIsReady" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Username:"
-                android:layout_below="@+id/labelReservationWaitingPosition"
-                android:layout_alignParentStart="true" />
+                android:src="@drawable/ic_person"
+                android:id="@+id/ivUserIcon" />
 
             <TextView
                 android:id="@+id/tvUsername"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
                 android:text="username"
-                android:enabled="true"
-                android:layout_gravity="center_horizontal|left"
-                android:layout_alignTop="@+id/labelReservationIsReady"
-                android:layout_alignStart="@+id/reservationWaitingPosition" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Password:"
-                android:layout_below="@+id/labelReservationWaitingPosition"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/tvPassword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="password"
-                android:enabled="true"
-                android:layout_gravity="center_horizontal|left"
-                android:layout_alignTop="@+id/labelReservationIsReady"
-                android:layout_alignStart="@+id/reservationWaitingPosition" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/lblRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Role:"
-                android:layout_below="@+id/labelReservationWaitingPosition"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/tvRole"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="role"
-                android:enabled="true"
-                android:layout_gravity="center_horizontal|left"
-                android:layout_alignTop="@+id/labelReservationIsReady"
-                android:layout_alignStart="@+id/reservationWaitingPosition" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="10dp">
-
-            <TextView
-                android:id="@+id/lblStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="Status:"
-                android:layout_below="@+id/labelReservationWaitingPosition"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:id="@+id/tvStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="status"
-                android:enabled="true"
-                android:layout_gravity="center_horizontal|left"
-                android:layout_alignTop="@+id/labelReservationIsReady"
-                android:layout_alignStart="@+id/reservationWaitingPosition" />
+                android:layout_alignParentTop="true" />
         </TableRow>
 
         <TableRow android:layout_height="1px" android:background="#BDBDBD">

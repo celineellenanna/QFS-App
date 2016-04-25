@@ -1,6 +1,7 @@
 package ch.hsr.qfs.view;
 
 
+import android.app.LauncherActivity;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -39,14 +40,11 @@ public class QuizOpponentFragment extends Fragment {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<User>> response) {
                 if (response.getSuccess()) {
-                    Log.d("QFS", "TRUE");
                     QuizOpponentAdapter userAdapter = new QuizOpponentAdapter(response.getData());
                     RecyclerView userRecycleView = (RecyclerView) viewRoot.findViewById(R.id.recyclerView);
                     LinearLayoutManager linearLayoutManagerUser = new LinearLayoutManager(getContext());
                     userRecycleView.setLayoutManager(linearLayoutManagerUser);
                     userRecycleView.setAdapter(userAdapter);
-                } else {
-                    Log.d("QFS", "FALSE");
                 }
             }
 
