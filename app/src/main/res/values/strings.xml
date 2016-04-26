@@ -9,8 +9,8 @@
 
     <string-array name="drawer_auth_items_array">
         <item>Home</item>
-        <item>Opponent</item>
-        <item>Logout</item>
+        <item>Quiz starten</item>
+        <item>Abmelden</item>
     </string-array>
 
     <string-array name="drawer_items_array">
@@ -18,5 +18,4 @@
         <item>Registrieren</item>
     </string-array>
     <string name="title_activity_home">HomeActivity</string>
-
 </resources>
