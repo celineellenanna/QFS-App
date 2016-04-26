@@ -1,9 +1,13 @@
 package ch.hsr.qfs.view;
 
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +16,86 @@ import com.hsr.qfs.R;
 
 public class QuizHomeFragment extends Fragment {
 
+    public static TabLayout tabLayout;
+    public static ViewPager viewPager;
+    public static int int_items = 3 ;
 
-    public QuizHomeFragment() {
-    }
-
-
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        /**
+         *Inflate tab_layout and setup Views.
+         */
+        View x =  inflater.inflate(R.layout.quiz_tab_layout,null);
+        tabLayout = (TabLayout) x.findViewById(R.id.tabs);
+        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
 
-        View viewRoot = inflater.inflate(R.layout.fragment_quiz_home, container, false);
+        /**
+         *Set an Apater for the View Pager
+         */
+        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
 
-        FloatingActionButton fab = (FloatingActionButton) viewRoot.findViewById(R.id.fab);
-        fab.show();
+        /**
+         * Now , this is a workaround ,
+         * The setupWithViewPager dose't works without the runnable .
+         * Maybe a Support Library Bug .
+         */
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        tabLayout.post(new Runnable() {
             @Override
-            public void onClick(View view) {
-                ((MainActivity) getActivity()).changeFragment(new QuizOpponentFragment());
+            public void run() {
+                tabLayout.setupWithViewPager(viewPager);
             }
         });
 
-        return viewRoot;
+        return x;
+
     }
 
+    class MyAdapter extends FragmentPagerAdapter {
+
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        /**
+         * Return fragment with respect to Position .
+         */
+
+        @Override
+        public Fragment getItem(int position)
+        {
+            switch (position){
+                case 0 : return new ClosedFragment();
+                case 1 : return new ClosedFragment();
+                case 2 : return new ClosedFragment();
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+
+            return int_items;
+
+        }
+
+        /**
+         * This method returns the title of the tab according to the position.
+         */
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            switch (position){
+                case 0 :
+                    return "Laufend";
+                case 1 :
+                    return "Offen";
+                case 2 :
+                    return "Abgeschlossen";
+            }
+            return null;
+        }
+    }
 }

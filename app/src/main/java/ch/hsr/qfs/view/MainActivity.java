@@ -1,8 +1,8 @@
 package ch.hsr.qfs.view;
 
-import android.app.Fragment;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+
 import com.hsr.qfs.R;
-
-import org.w3c.dom.Text;
-
 import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -122,13 +120,10 @@ public class MainActivity extends AppCompatActivity {
                     case "Home":
                         changeFragment(new QuizHomeFragment());
                         break;
-                    case "QuizOpponents":
+                    case "Quiz starten":
                         changeFragment(new QuizOpponentFragment());
                         break;
-                    case "QuizHomeRequests":
-                        changeFragment(new QuizHomeRequestFragment());
-                        break;
-                    case "Logout":
+                    case "Abmelden":
                         authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {
                             @Override
                             public void onCompletion(ApiHttpResponse<User> response) {
@@ -159,7 +154,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeFragment(Fragment f) {
-        getFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
+        //getFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
     }
 
 }
