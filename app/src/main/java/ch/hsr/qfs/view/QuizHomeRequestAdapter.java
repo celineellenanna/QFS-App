@@ -1,16 +1,11 @@
 package ch.hsr.qfs.view;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.hsr.qfs.R;
@@ -18,45 +13,50 @@ import com.hsr.qfs.R;
 import java.util.ArrayList;
 
 import ch.hsr.qfs.domain.Quiz;
-import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHolder> {
+public class QuizHomeRequestAdapter extends RecyclerView.Adapter<QuizHomeRequestViewHolder> {
 
-    private ArrayList<User> users;
+    private ArrayList<Quiz> quizzes;
 
-    public QuizOpponentAdapter(ArrayList<User> users) {
-        this.users = users;
+    public QuizHomeRequestAdapter(ArrayList<Quiz> quizzes) {
+        this.quizzes = quizzes;
     }
 
     @Override
-    public QuizOpponentViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public QuizHomeRequestViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.quiz_opponent_row_layout, parent, false);
+        View v = layoutInflater.inflate(R.layout.quiz_home_request_row_layout, parent, false);
 
-        TextView username = (TextView) v.findViewById(R.id.tvUsername);
+        TextView id = (TextView) v.findViewById(R.id.tvId);
+        TextView challengerId = (TextView) v.findViewById(R.id.tvChallengerId);
+        TextView opponentId = (TextView) v.findViewById(R.id.tvOpponentId);
+        TextView status = (TextView) v.findViewById(R.id.tvStatus);
         RelativeLayout listItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
 
-        QuizOpponentViewHolder viewHolder = new QuizOpponentViewHolder(v, username, listItem);
+        QuizHomeRequestViewHolder viewHolder = new QuizHomeRequestViewHolder(v, id, challengerId, opponentId, status, listItem);
 
         return viewHolder;
     }
 
-    public void onBindViewHolder(final QuizOpponentViewHolder holder, final int position) {
+    public void onBindViewHolder(final QuizHomeRequestViewHolder holder, final int position) {
 
-        final User user = users.get(position);
-        holder.username.setText(user.getUsername());
+        final Quiz quiz = quizzes.get(position);
+        holder.id.setText(quiz.getId());
+        holder.challengerId.setText(quiz.get_challengerId());
+        holder.opponentId.setText(quiz.get_opponentId());
+        holder.status.setText(quiz.getStatus());
         holder.listItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AuthService as = AuthService.getInstance();
                 QuizService qs = QuizService.getInstance();
 
-                qs.create(as.getUser().getId(), user.getId(), new ApiHttpCallback<ApiHttpResponse<Quiz>> ()
+                qs.create(as.getUser().getId(), quiz.getId(), new ApiHttpCallback<ApiHttpResponse<Quiz>> ()
                 {
                     @Override
                     public void onCompletion(ApiHttpResponse<Quiz> response) {
@@ -76,12 +76,12 @@ public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHo
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return quizzes.size();
     }
 
     public void removeItem(int position) {
-        users.remove(position);
+        quizzes.remove(position);
         notifyItemRemoved(position);
-        notifyItemRangeChanged(position, users.size());
+        notifyItemRangeChanged(position, quizzes.size());
     }
 }

@@ -17,6 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hsr.qfs.R;
+
+import org.w3c.dom.Text;
+
 import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -119,8 +122,11 @@ public class MainActivity extends AppCompatActivity {
                     case "Home":
                         changeFragment(new QuizHomeFragment());
                         break;
-                    case "Opponent":
+                    case "QuizOpponents":
                         changeFragment(new QuizOpponentFragment());
+                        break;
+                    case "QuizHomeRequests":
+                        changeFragment(new QuizHomeRequestFragment());
                         break;
                     case "Logout":
                         authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {

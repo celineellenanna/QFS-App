@@ -9,7 +9,8 @@
 
     <string-array name="drawer_auth_items_array">
         <item>Home</item>
-        <item>Opponent</item>
+        <item>QuizOpponents</item>
+        <item>QuizHomeRequests</item>
         <item>Logout</item>
     </string-array>
 
