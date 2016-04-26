@@ -15,24 +15,22 @@ import com.hsr.qfs.R;
 import java.util.ArrayList;
 
 import ch.hsr.qfs.domain.Quiz;
-import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
-import ch.hsr.qfs.service.UserService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-public class QuizHomeRequestFragment extends Fragment {
+public class QuizHomeOpenFragment extends Fragment {
 
 
-    public QuizHomeRequestFragment() {
+    public QuizHomeOpenFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View viewRoot = inflater.inflate(R.layout.fragment_quiz_home_request, container, false);
+        final View viewRoot = inflater.inflate(R.layout.fragment_quiz_home_open, container, false);
 
         QuizService qs = QuizService.getInstance();
         AuthService as = AuthService.getInstance();
@@ -41,7 +39,7 @@ public class QuizHomeRequestFragment extends Fragment {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<Quiz>> response) {
                 if (response.getSuccess()) {
-                    QuizHomeRequestAdapter adapter = new QuizHomeRequestAdapter(response.getData());
+                    QuizHomeOpenAdapter adapter = new QuizHomeOpenAdapter(response.getData());
                     RecyclerView recyclerView = (RecyclerView) viewRoot.findViewById(R.id.recyclerView);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(linearLayoutManager);

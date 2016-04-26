@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class QuizHomeRequestViewHolder extends RecyclerView.ViewHolder {
+public class QuizHomeOpenViewHolder extends RecyclerView.ViewHolder {
 
     public View parent;
     public TextView id;
@@ -14,7 +14,7 @@ public class QuizHomeRequestViewHolder extends RecyclerView.ViewHolder {
     public TextView status;
     public RelativeLayout listItem;
 
-    public QuizHomeRequestViewHolder(View parent, TextView id, TextView challengerId, TextView opponentId, TextView status, RelativeLayout listItem) {
+    public QuizHomeOpenViewHolder(View parent, TextView id, TextView challengerId, TextView opponentId, TextView status, RelativeLayout listItem) {
         super(parent);
         this.parent = parent;
         this.id = id;

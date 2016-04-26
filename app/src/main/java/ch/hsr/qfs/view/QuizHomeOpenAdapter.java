@@ -18,19 +18,19 @@ import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-public class QuizHomeRequestAdapter extends RecyclerView.Adapter<QuizHomeRequestViewHolder> {
+public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHolder> {
 
     private ArrayList<Quiz> quizzes;
 
-    public QuizHomeRequestAdapter(ArrayList<Quiz> quizzes) {
+    public QuizHomeOpenAdapter(ArrayList<Quiz> quizzes) {
         this.quizzes = quizzes;
     }
 
     @Override
-    public QuizHomeRequestViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public QuizHomeOpenViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.quiz_home_request_row_layout, parent, false);
+        View v = layoutInflater.inflate(R.layout.quiz_home_open_row_layout, parent, false);
 
         TextView id = (TextView) v.findViewById(R.id.tvId);
         TextView challengerId = (TextView) v.findViewById(R.id.tvChallengerId);
@@ -38,12 +38,12 @@ public class QuizHomeRequestAdapter extends RecyclerView.Adapter<QuizHomeRequest
         TextView status = (TextView) v.findViewById(R.id.tvStatus);
         RelativeLayout listItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
 
-        QuizHomeRequestViewHolder viewHolder = new QuizHomeRequestViewHolder(v, id, challengerId, opponentId, status, listItem);
+        QuizHomeOpenViewHolder viewHolder = new QuizHomeOpenViewHolder(v, id, challengerId, opponentId, status, listItem);
 
         return viewHolder;
     }
 
-    public void onBindViewHolder(final QuizHomeRequestViewHolder holder, final int position) {
+    public void onBindViewHolder(final QuizHomeOpenViewHolder holder, final int position) {
 
         final Quiz quiz = quizzes.get(position);
         holder.id.setText(quiz.getId());
