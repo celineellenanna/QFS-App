@@ -7,38 +7,31 @@
     android:padding="10dp"
     android:weightSum="1">
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rlListItem">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_person"/>
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_person"
-                android:id="@+id/ivUserIcon" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:id="@+id/tvUsername"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginStart="25dp" />
 
-            <TextView
-                android:id="@+id/tvUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:focusable="false"
-                android:focusableInTouchMode="false"
-                android:text="username"
-                android:layout_alignParentTop="true" />
-        </TableRow>
+    </RelativeLayout>
 
-        <TableRow android:layout_height="1px" android:background="#BDBDBD">
-            <TextView android:layout_span="2" android:layout_height="1.5dp"
-                android:layout_width="fill_parent" android:text=""
-                android:background="#7b7b7b"
-                android:layout_weight="1">
-            </TextView>
-        </TableRow>
-
-    </TableLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
 
 </LinearLayout>

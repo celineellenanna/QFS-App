@@ -5,7 +5,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +61,38 @@ public class QuizService {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("challengerId", challengerId);
                 params.put("opponentId", opponentId);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getRequests(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
+        String url = quizUrl + "/requests/" + userId;
+
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<Quiz>>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<Quiz>>>()
+                {
+                    public void onResponse(ApiHttpResponse<ArrayList<Quiz>> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
 
                 return params;
             }
