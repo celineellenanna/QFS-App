@@ -10,13 +10,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rlListItem">
+        android:id="@+id/rlListItem"
+        android:layout_margin="5dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:src="@drawable/ic_person"/>
+            android:src="@drawable/ic_person"
+            android:layout_marginRight="15dp" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -24,8 +26,7 @@
             android:text="Username"
             android:id="@+id/tvUsername"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_marginStart="25dp" />
+            android:layout_toEndOf="@+id/imageView" />
 
     </RelativeLayout>
 

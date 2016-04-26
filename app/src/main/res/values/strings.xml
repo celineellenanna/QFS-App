@@ -7,15 +7,5 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
-    <string-array name="drawer_auth_items_array">
-        <item>Home</item>
-        <item>Quiz starten</item>
-        <item>Abmelden</item>
-    </string-array>
-
-    <string-array name="drawer_items_array">
-        <item>Einloggen</item>
-        <item>Registrieren</item>
-    </string-array>
     <string name="title_activity_home">HomeActivity</string>
 </resources>

@@ -47,8 +47,8 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
 
         final Quiz quiz = quizzes.get(position);
         holder.id.setText(quiz.getId());
-        holder.challengerId.setText(quiz.get_challengerId());
-        holder.opponentId.setText(quiz.get_opponentId());
+        holder.challengerId.setText(quiz.get_challengerId().getUsername());
+        holder.opponentId.setText(quiz.get_opponentId().getUsername());
         holder.status.setText(quiz.getStatus());
         holder.listItem.setOnClickListener(new View.OnClickListener() {
             @Override

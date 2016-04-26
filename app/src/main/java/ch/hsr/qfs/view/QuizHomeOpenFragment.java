@@ -2,7 +2,7 @@ package ch.hsr.qfs.view;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -35,7 +35,7 @@ public class QuizHomeOpenFragment extends Fragment {
         QuizService qs = QuizService.getInstance();
         AuthService as = AuthService.getInstance();
 
-        qs.getRequests(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
+        qs.getOpen(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<Quiz>> response) {
                 if (response.getSuccess()) {

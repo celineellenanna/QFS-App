@@ -2,6 +2,7 @@ package ch.hsr.qfs.view;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,10 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.hsr.qfs.R;
@@ -25,10 +23,9 @@ import ch.hsr.qfs.service.AuthService;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String[] drawerListViewItems;
+    private Toolbar toolbar;
+    private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private ListView drawerListView;
-    private ActionBarDrawerToggle drawerToggle;
 
     private AuthService authService = AuthService.getInstance();
 
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         createDrawer();
@@ -47,17 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        if (drawerToggle.onOptionsItemSelected(item)) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -67,94 +62,98 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        drawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        drawerToggle.onConfigurationChanged(newConfig);
     }
 
     public void createDrawer() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        navigationView = (NavigationView) findViewById(R.id.left_drawer);
 
-        drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
-
-        drawerListView = (ListView) findViewById(R.id.left_drawer);
-
-        updateDrawerList();
+        navigationView.setNavigationItemSelectedListener(new NavigationItemListener());
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open, R.string.drawer_close){
 
-        drawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
 
-        drawerLayout.setDrawerListener(drawerToggle);
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
 
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
-        drawerListView.setOnItemClickListener(new DrawerItemClickListener());
+        updateNavigationList();
     }
 
-    public void updateDrawerList() {
-        if(authService.isAuthenticated()) {
-            drawerListViewItems = getResources().getStringArray(R.array.drawer_auth_items_array);
-            drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                    R.layout.drawer_row_layout, drawerListViewItems));
-        } else {
-            drawerListViewItems = getResources().getStringArray(R.array.drawer_items_array);
-            drawerListView.setAdapter(new ArrayAdapter<String>(this,
-                    R.layout.drawer_row_layout, drawerListViewItems));
+    private class NavigationItemListener implements NavigationView.OnNavigationItemSelectedListener {
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            if(item.isChecked()) item.setChecked(false);
+            else item.setChecked(true);
+
+            drawerLayout.closeDrawers();
+
+            switch (item.getItemId()) {
+                case R.id.nav_login:
+                    changeFragment(new AuthLoginFragment());
+                    return true;
+                case R.id.nav_register:
+                    changeFragment(new AuthRegisterFragment());
+                    return true;
+                case R.id.nav_home:
+                    changeFragment(new QuizHomeFragment());
+                    return true;
+                case R.id.nav_logout:
+                    authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {
+                        @Override
+                        public void onCompletion(ApiHttpResponse<User> response) {
+                            changeFragment(new AuthLoginFragment());
+                            updateNavigationList();
+                        }
+
+                        @Override
+                        public void onError(String message) {
+                            Log.d("QFS - Error", message);
+                        }
+                    });
+                    return true;
+                default:
+                    Toast.makeText(getApplicationContext(),"Somethings Wrong",Toast.LENGTH_SHORT).show();
+                    return true;
+
+            }
         }
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView parent, View view, int position, long id) {
+    public void updateNavigationList() {
+        if(authService.isAuthenticated()) {
+            navigationView.getMenu().findItem(R.id.nav_home).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
-            if(authService.isAuthenticated()) {
-                switch (((TextView)view).getText().toString()) {
-                    case "Home":
-                        changeFragment(new QuizHomeFragment());
-                        break;
-                    case "Quiz starten":
-                        changeFragment(new QuizOpponentFragment());
-                        break;
-                    case "Abmelden":
-                        authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {
-                            @Override
-                            public void onCompletion(ApiHttpResponse<User> response) {
-                                changeFragment(new AuthLoginFragment());
-                                updateDrawerList();
-                            }
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
 
-                            @Override
-                            public void onError(String message) {
-                                Log.d("QFS - Error", message);
-                            }
-                        });
-                        break;
-                }
-            } else {
-                switch (((TextView)view).getText().toString()) {
-                    case "Einloggen":
-                        changeFragment(new AuthLoginFragment());
-                        break;
-                    case "Registrieren":
-                        changeFragment(new AuthRegisterFragment());
-                        break;
-                }
-            }
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_register).setVisible(false);
+        } else {
+            navigationView.getMenu().findItem(R.id.nav_home).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
 
-            drawerLayout.closeDrawer(drawerListView);
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_login).setChecked(true);
+            navigationView.getMenu().findItem(R.id.nav_register).setVisible(true);
         }
     }
 
     public void changeFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
     }
-
 }

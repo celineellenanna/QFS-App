@@ -67,7 +67,7 @@ public class QuizHomeFragment extends Fragment {
         {
             switch (position){
                 case 0 : return new ClosedFragment();
-                case 1 : return new ClosedFragment();
+                case 1 : return new QuizHomeOpenFragment();
                 case 2 : return new ClosedFragment();
             }
             return null;
@@ -93,7 +93,7 @@ public class QuizHomeFragment extends Fragment {
                 case 1 :
                     return "Offen";
                 case 2 :
-                    return "Abgeschlossen";
+                    return "Beendet";
             }
             return null;
         }

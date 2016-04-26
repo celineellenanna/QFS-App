@@ -47,7 +47,7 @@ public class AuthLoginFragment extends Fragment {
                     public void onCompletion(ApiHttpResponse<User> response) {
                         if (response.getSuccess()) {
                             ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
-                            ((MainActivity) getActivity()).updateDrawerList();
+                            ((MainActivity) getActivity()).updateNavigationList();
                         } else {
                             Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
                         }

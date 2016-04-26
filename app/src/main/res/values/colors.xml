@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorDrawerText">#000000</color>
+    <color name="colorDrawerTextSelected">#ffffff</color>
+    <color name="colorTabText">#ffffff</color>
 </resources>

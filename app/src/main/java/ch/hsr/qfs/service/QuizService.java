@@ -69,8 +69,8 @@ public class QuizService {
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void getRequests(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
-        String url = quizUrl + "/requests/" + userId;
+    public void getOpen(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
+        String url = quizUrl + "/open/" + userId;
 
         Type type = new TypeToken<ApiHttpResponse<ArrayList<Quiz>>>() {}.getType();
 
