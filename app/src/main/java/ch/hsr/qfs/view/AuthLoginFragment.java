@@ -30,8 +30,8 @@ public class AuthLoginFragment extends Fragment {
 
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
-        final EditText tfUsername = (EditText) viewRoot.findViewById(R.id.tfUsername);
-        final EditText tfPassword = (EditText) viewRoot.findViewById(R.id.tfPassword);
+        final EditText etUsername = (EditText) viewRoot.findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) viewRoot.findViewById(R.id.etPassword);
         final Button btnLogin = (Button) viewRoot.findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -40,8 +40,15 @@ public class AuthLoginFragment extends Fragment {
 
                 AuthService authService = AuthService.getInstance();
 
-                String username = tfUsername.getText().toString();
-                String password = tfPassword.getText().toString();
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+
+                if (username.matches("")) {
+                    etUsername.setError("Bitte Username eingeben");
+                }
+                if (password.matches("")) {
+                    etPassword.setError("Bitte Passwort eingeben");
+                }
 
                 authService.login(username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
                     @Override
@@ -64,5 +71,4 @@ public class AuthLoginFragment extends Fragment {
 
         return viewRoot;
     }
-
 }

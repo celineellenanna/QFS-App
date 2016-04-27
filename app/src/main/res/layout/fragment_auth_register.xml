@@ -9,14 +9,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tfFirstname"
+        android:id="@+id/etFirstname"
         android:layout_weight="0"
         android:hint="Vorname" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tfLastname"
+        android:id="@+id/etLastname"
         android:layout_weight="0"
         android:hint="Nachname" />
 
@@ -24,14 +24,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:id="@+id/tfEmail"
+        android:id="@+id/etEmail"
         android:layout_weight="0"
         android:hint="Email" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tfUsername"
+        android:id="@+id/etUsername"
         android:layout_weight="0"
         android:hint="Benutzername" />
 
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/tfPassword"
+        android:id="@+id/etPassword"
         android:layout_weight="0"
         android:hint="Passwort" />
 
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/tfPasswordRepeat"
+        android:id="@+id/etPasswordRepeat"
         android:layout_weight="0"
         android:hint="Passwort wiederholen" />
 
