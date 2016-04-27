@@ -29,6 +29,8 @@ public class AuthRegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_auth_register, container, false);
 
+        ((MainActivity) getActivity()).hideFloatingActionButton(true);
+
         final EditText tfFirstname = (EditText) viewRoot.findViewById(R.id.tfFirstname);
         final EditText tfLastname = (EditText) viewRoot.findViewById(R.id.tfLastname);
         final EditText tfEmail = (EditText) viewRoot.findViewById(R.id.tfEmail);

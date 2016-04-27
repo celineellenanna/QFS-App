@@ -2,6 +2,7 @@ package ch.hsr.qfs.view;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
+    private FloatingActionButton fab;
+
     private AuthService authService = AuthService.getInstance();
 
     @Override
@@ -36,6 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeFragment(new QuizOpponentFragment());
+            }
+        });
 
         createDrawer();
 
@@ -138,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
         if(authService.isAuthenticated()) {
             navigationView.getMenu().findItem(R.id.nav_home).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
-
             navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
 
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
@@ -155,5 +165,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
+    }
+
+    public void hideFloatingActionButton(Boolean hide) {
+        if(hide) {
+            fab.hide();
+        } else {
+            fab.show();
+        }
     }
 }

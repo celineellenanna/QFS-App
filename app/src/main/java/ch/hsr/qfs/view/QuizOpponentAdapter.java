@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hsr.qfs.R;
 
@@ -53,23 +54,25 @@ public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHo
         holder.listItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AuthService as = AuthService.getInstance();
-                QuizService qs = QuizService.getInstance();
+            AuthService as = AuthService.getInstance();
+            QuizService qs = QuizService.getInstance();
 
-                qs.create(as.getUser().getId(), user.getId(), new ApiHttpCallback<ApiHttpResponse<Quiz>> ()
-                {
-                    @Override
-                    public void onCompletion(ApiHttpResponse<Quiz> response) {
-                        if (response.getSuccess()) {
-                            removeItem(position);
-                        }
+            qs.create(as.getUser().getId(), user.getId(), new ApiHttpCallback<ApiHttpResponse<Quiz>> ()
+            {
+                @Override
+                public void onCompletion(ApiHttpResponse<Quiz> response) {
+                    if (response.getSuccess()) {
+                        removeItem(position);
                     }
+                    Toast.makeText(holder.parent.getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                    ((MainActivity) holder.parent.getContext()).changeFragment(new QuizHomeFragment());
+                }
 
-                    @Override
-                    public void onError(String message) {
-                        Log.d("QFS - Error", message);
-                    }
-                });
+                @Override
+                public void onError(String message) {
+                    Log.d("QFS - Error", message);
+                }
+            });
             }
         });
     }

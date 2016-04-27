@@ -23,23 +23,14 @@ public class QuizHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        /**
-         *Inflate tab_layout and setup Views.
-         */
-        View x =  inflater.inflate(R.layout.quiz_tab_layout,null);
-        tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+        View viewRoot =  inflater.inflate(R.layout.quiz_tab_layout,null);
 
-        /**
-         *Set an Apater for the View Pager
-         */
+        ((MainActivity) getActivity()).hideFloatingActionButton(false);
+
+        tabLayout = (TabLayout) viewRoot.findViewById(R.id.tabs);
+        viewPager = (ViewPager) viewRoot.findViewById(R.id.viewpager);
+
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-
-        /**
-         * Now , this is a workaround ,
-         * The setupWithViewPager dose't works without the runnable .
-         * Maybe a Support Library Bug .
-         */
 
         tabLayout.post(new Runnable() {
             @Override
@@ -48,7 +39,7 @@ public class QuizHomeFragment extends Fragment {
             }
         });
 
-        return x;
+        return viewRoot;
 
     }
 
@@ -57,10 +48,6 @@ public class QuizHomeFragment extends Fragment {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
-
-        /**
-         * Return fragment with respect to Position .
-         */
 
         @Override
         public Fragment getItem(int position)
@@ -79,10 +66,6 @@ public class QuizHomeFragment extends Fragment {
             return int_items;
 
         }
-
-        /**
-         * This method returns the title of the tab according to the position.
-         */
 
         @Override
         public CharSequence getPageTitle(int position) {

@@ -2,7 +2,7 @@ package ch.hsr.qfs.domain;
 
 public class Quiz {
 
-    private enum Status {Started, Finished, Canceled, Waiting}
+    private enum Status {Offen, Beendet, Abgebrochen, Warten}
 
     private String _id;
     private User _challengerId;

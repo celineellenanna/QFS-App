@@ -2,7 +2,6 @@ package ch.hsr.qfs.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,8 @@ public class AuthLoginFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View viewRoot = inflater.inflate(R.layout.fragment_auth_login, container, false);
+
+        ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         final EditText tfUsername = (EditText) viewRoot.findViewById(R.id.tfUsername);
         final EditText tfPassword = (EditText) viewRoot.findViewById(R.id.tfPassword);

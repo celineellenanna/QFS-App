@@ -32,6 +32,8 @@ public class QuizOpponentFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View viewRoot = inflater.inflate(R.layout.fragment_quiz_opponent, container, false);
 
+        ((MainActivity) getActivity()).hideFloatingActionButton(true);
+
         UserService us = UserService.getInstance();
         AuthService as = AuthService.getInstance();
 
