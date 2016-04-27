@@ -8,13 +8,13 @@ import android.widget.TextView;
 public class QuizOpponentViewHolder extends RecyclerView.ViewHolder {
 
     public View parent;
-    public TextView username;
-    public RelativeLayout listItem;
+    public TextView tvUsername;
+    public RelativeLayout rlListItem;
 
-    public QuizOpponentViewHolder(View parent, TextView username, RelativeLayout listItem) {
+    public QuizOpponentViewHolder(View parent, TextView tvUsername, RelativeLayout rlListItem) {
         super(parent);
         this.parent = parent;
-        this.username = username;
-        this.listItem = listItem;
+        this.tvUsername = tvUsername;
+        this.rlListItem = rlListItem;
     }
 }

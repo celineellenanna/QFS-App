@@ -8,4 +8,7 @@
     <string name="drawer_close">Close</string>
 
     <string name="title_activity_home">HomeActivity</string>
+
+    <string name="quiz_open_diaglog_title">Quiz annehmen</string>
+    <string name="quiz_open_diaglog_message">Wollen Sie das Quiz annehmen?</string>
 </resources>
