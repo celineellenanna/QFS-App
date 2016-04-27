@@ -53,7 +53,7 @@ public class QuizHomeFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new ClosedFragment();
+                case 0 : return new QuizHomeRunningFragment();
                 case 1 : return new QuizHomeOpenFragment();
                 case 2 : return new ClosedFragment();
             }
