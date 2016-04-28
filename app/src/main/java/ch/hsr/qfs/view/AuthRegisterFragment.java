@@ -35,6 +35,7 @@ public class AuthRegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_auth_register, container, false);
 
+        ((MainActivity) getActivity()).changeToolbarTitle("Registrieren");
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         final EditText etFirstname = (EditText) viewRoot.findViewById(R.id.etFirstname);
@@ -73,6 +74,8 @@ public class AuthRegisterFragment extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Boolean valid = true;
+
                 String firstname = etFirstname.getText().toString();
                 String lastname = etLastname.getText().toString();
                 String email = etEmail.getText().toString();
@@ -82,21 +85,26 @@ public class AuthRegisterFragment extends Fragment {
 
                 if (firstname.matches("")) {
                     etFirstname.setError("Bitte Vorname eingeben");
+                    valid = false;
                 }
                 if (lastname.matches("")) {
                     etLastname.setError("Bitte Nachname eingeben");
+                    valid = false;
                 }
                 if (email.matches("")) {
                     etEmail.setError("Bitte E-Mail eingeben");
+                    valid = false;
                 }
                 if (username.matches("")) {
-                    etUsername.setError("Bitte Username eingeben");
+                    etUsername.setError("Bitte Benutzername eingeben");
+                    valid = false;
                 }
                 if (password.matches("")) {
                     etPassword.setError("Bitte Passwort eingeben");
+                    valid = false;
                 }
 
-                if (password.equals(passwordRepeat)) {
+                if (password.equals(passwordRepeat) && valid) {
                     AuthService authService = AuthService.getInstance();
                     authService.register(firstname, lastname, email, username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
                         @Override

@@ -16,64 +16,49 @@ import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 
-public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunningViewHolder> {
+public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinishedViewHolder> {
 
     private ArrayList<Quiz> quizzes;
 
     private AuthService as = AuthService.getInstance();
     private QuizService qs = QuizService.getInstance();
 
-    public QuizHomeRunningAdapter(ArrayList<Quiz> quizzes) {
+    public QuizHomeFinishedAdapter(ArrayList<Quiz> quizzes) {
         this.quizzes = quizzes;
     }
 
     @Override
-    public QuizHomeRunningViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
+    public QuizHomeFinishedViewHolder onCreateViewHolder(final ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View v = layoutInflater.inflate(R.layout.quiz_home_running_row_layout, parent, false);
+        View v = layoutInflater.inflate(R.layout.quiz_home_finished_row_layout, parent, false);
 
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
         TextView tvUsername = (TextView) v.findViewById(R.id.tvUsername);
         TextView tvStatus = (TextView) v.findViewById(R.id.tvStatus);
         RelativeLayout rlListItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
-        ImageView ivAccept = (ImageView) v.findViewById(R.id.ivAccept);
-        ImageView ivReject = (ImageView) v.findViewById(R.id.ivReject);
 
-        QuizHomeRunningViewHolder viewHolder = new QuizHomeRunningViewHolder(v, ivIcon, tvUsername, tvStatus, rlListItem, ivAccept, ivReject);
+        QuizHomeFinishedViewHolder viewHolder = new QuizHomeFinishedViewHolder(v, ivIcon, tvUsername, tvStatus, rlListItem);
 
         return viewHolder;
     }
 
-    public void onBindViewHolder(final QuizHomeRunningViewHolder holder, final int position) {
+    public void onBindViewHolder(final QuizHomeFinishedViewHolder holder, final int position) {
 
         final Quiz quiz = quizzes.get(position);
 
         if(quiz.get_challengerId().getId().equals(as.getUser().getId())) {
-            holder.ivIcon.setImageResource(R.drawable.ic_history);
             holder.tvUsername.setText(quiz.get_opponentId().getUsername());
-            holder.tvStatus.setText("Warten");
         } else {
-            holder.ivIcon.setImageResource(R.drawable.ic_start);
             holder.tvUsername.setText(quiz.get_challengerId().getUsername());
-            holder.tvStatus.setText("Spielbereit");
-            holder.rlListItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ((MainActivity) holder.parent.getContext()).changeFragment(new ClosedFragment());
-                }
-            });
         }
+
+        holder.ivIcon.setImageResource(R.drawable.ic_reject);
+        holder.tvStatus.setText(quiz.getStatus());
     }
 
     @Override
     public int getItemCount() {
         return quizzes.size();
-    }
-
-    public void removeItem(int position) {
-        quizzes.remove(position);
-        notifyItemRemoved(position);
-        notifyItemRangeChanged(position, quizzes.size());
     }
 }

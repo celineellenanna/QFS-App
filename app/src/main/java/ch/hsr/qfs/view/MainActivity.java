@@ -163,6 +163,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void changeToolbarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
+
     public void changeFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
     }

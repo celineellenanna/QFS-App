@@ -17,6 +17,7 @@ import ch.hsr.qfs.service.AuthService;
 
 public class AuthLoginFragment extends Fragment {
 
+    private AuthService authService = AuthService.getInstance();
 
     public AuthLoginFragment() {
     }
@@ -28,6 +29,7 @@ public class AuthLoginFragment extends Fragment {
 
         View viewRoot = inflater.inflate(R.layout.fragment_auth_login, container, false);
 
+        ((MainActivity) getActivity()).changeToolbarTitle("Anmelden");
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         final EditText etUsername = (EditText) viewRoot.findViewById(R.id.etUsername);
@@ -37,35 +39,38 @@ public class AuthLoginFragment extends Fragment {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                AuthService authService = AuthService.getInstance();
+                Boolean valid = true;
 
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
                 if (username.matches("")) {
-                    etUsername.setError("Bitte Username eingeben");
+                    etUsername.setError("Bitte Benutzername eingeben");
+                    valid = false;
                 }
                 if (password.matches("")) {
                     etPassword.setError("Bitte Passwort eingeben");
+                    valid = false;
                 }
 
-                authService.login(username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
-                    @Override
-                    public void onCompletion(ApiHttpResponse<User> response) {
-                        if (response.getSuccess()) {
-                            ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
-                            ((MainActivity) getActivity()).updateNavigationList();
-                        } else {
-                            Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                if (valid) {
+                    authService.login(username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
+                        @Override
+                        public void onCompletion(ApiHttpResponse<User> response) {
+                            if (response.getSuccess()) {
+                                ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
+                                ((MainActivity) getActivity()).updateNavigationList();
+                            } else {
+                                Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onError(String message) {
+                        @Override
+                        public void onError(String message) {
 
-                    }
-                });
+                        }
+                    });
+                }
             }
         });
 

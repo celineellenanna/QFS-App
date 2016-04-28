@@ -66,7 +66,7 @@ public class Quiz {
     public String getTimeElapsed() {
         DateTimeFormatter parser = ISODateTimeFormat.dateTime();
         LocalDateTime dtUpdateAt = parser.parseLocalDateTime(updatedAt);
-        LocalDateTime dtNow = new LocalDateTime().minusHours(1).minusMinutes(22).minusSeconds(29);
+        LocalDateTime dtNow = new LocalDateTime().minusHours(2);
 
         Period period = new Period(dtUpdateAt, dtNow);
 

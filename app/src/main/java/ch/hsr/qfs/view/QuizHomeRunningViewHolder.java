@@ -10,19 +10,17 @@ public class QuizHomeRunningViewHolder extends RecyclerView.ViewHolder {
 
     public View parent;
     public ImageView ivIcon;
-    public TextView tvChallengerId;
-    public TextView tvOpponentId;
+    public TextView tvUsername;
     public TextView tvStatus;
     public RelativeLayout rlListItem;
     public ImageView ivAccept;
     public ImageView ivReject;
 
-    public QuizHomeRunningViewHolder(View parent, ImageView ivIcon, TextView tvChallengerId, TextView tvOpponentId, TextView tvStatus, RelativeLayout rlListItem, ImageView ivAccept, ImageView ivReject) {
+    public QuizHomeRunningViewHolder(View parent, ImageView ivIcon, TextView tvUsername, TextView tvStatus, RelativeLayout rlListItem, ImageView ivAccept, ImageView ivReject) {
         super(parent);
         this.parent = parent;
         this.ivIcon = ivIcon;
-        this.tvChallengerId = tvChallengerId;
-        this.tvOpponentId = tvOpponentId;
+        this.tvUsername = tvUsername;
         this.tvStatus = tvStatus;
         this.rlListItem = rlListItem;
         this.ivAccept = ivAccept;

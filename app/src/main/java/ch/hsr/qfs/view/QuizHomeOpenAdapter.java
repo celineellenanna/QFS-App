@@ -40,15 +40,14 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
         View v = layoutInflater.inflate(R.layout.quiz_home_open_row_layout, parent, false);
 
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
-        TextView tvChallengerId = (TextView) v.findViewById(R.id.tvChallengerId);
-        TextView tvOpponentId = (TextView) v.findViewById(R.id.tvOpponentId);
+        TextView tvUsername = (TextView) v.findViewById(R.id.tvUsername);
         TextView tvStatus = (TextView) v.findViewById(R.id.tvStatus);
         TextView tvTime = (TextView) v.findViewById(R.id.tvTime);
         RelativeLayout rlListItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
         ImageView ivAccept = (ImageView) v.findViewById(R.id.ivAccept);
         ImageView ivReject = (ImageView) v.findViewById(R.id.ivReject);
 
-        QuizHomeOpenViewHolder viewHolder = new QuizHomeOpenViewHolder(v, ivIcon, tvChallengerId, tvOpponentId, tvStatus, tvTime, rlListItem, ivAccept, ivReject);
+        QuizHomeOpenViewHolder viewHolder = new QuizHomeOpenViewHolder(v, ivIcon, tvUsername, tvStatus, tvTime, rlListItem, ivAccept, ivReject);
 
         return viewHolder;
     }
@@ -59,15 +58,16 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
 
         if(quiz.get_challengerId().getId().equals(as.getUser().getId())) {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
+            holder.tvUsername.setText(quiz.get_opponentId().getUsername());
+            holder.tvStatus.setText("Gesendet");
             holder.ivAccept.setVisibility(View.INVISIBLE);
         } else {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
+            holder.tvUsername.setText(quiz.get_challengerId().getUsername());
+            holder.tvStatus.setText("Offen");
             holder.ivAccept.setVisibility(View.VISIBLE);
         }
 
-        holder.tvChallengerId.setText(quiz.get_challengerId().getUsername());
-        holder.tvOpponentId.setText(quiz.get_opponentId().getUsername());
-        holder.tvStatus.setText(quiz.getStatus());
         holder.tvTime.setText("" + quiz.getTimeElapsed() + "");
 
         holder.ivAccept.setOnClickListener(new View.OnClickListener() {

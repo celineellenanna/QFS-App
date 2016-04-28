@@ -35,14 +35,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="challenger"
-                    android:id="@+id/tvChallengerId" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="opponent"
-                    android:id="@+id/tvOpponentId" />
+                    android:text="username"
+                    android:id="@+id/tvUsername" />
 
                 <TextView
                     android:layout_width="match_parent"

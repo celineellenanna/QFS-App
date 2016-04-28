@@ -37,44 +37,13 @@
                     android:layout_height="wrap_content"
                     android:text="username"
                     android:id="@+id/tvUsername" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="status"
                     android:id="@+id/tvStatus"
                     android:singleLine="false" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="time"
-                    android:id="@+id/tvTime"
-                    android:singleLine="false" />
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:layout_weight="3">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ivAccept"
-                    android:src="@drawable/ic_accept"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/ivReject"
-                    android:src="@drawable/ic_reject"
-                    android:layout_weight="1" />
-            </LinearLayout>
-
         </LinearLayout>
 
     </RelativeLayout>
