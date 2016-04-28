@@ -20,7 +20,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 import android.test.suitebuilder.annotation.LargeTest;
 
-import com.hsr.pewpew.qfs.R;
+import com.hsr.qfs.R;
 import ch.hsr.qfs.view.MainActivity;
 
 @RunWith(AndroidJUnit4.class)
@@ -31,24 +31,35 @@ public class MainActivityTest {
 
     @Test
     public void fragmentLoginIsLoaded() {
-        onView(withId(R.id.tfUsername)).check(matches(isDisplayed()));
+        onView(withId(R.id.etUsername)).check(matches(isDisplayed()));
     }
 
     @Test
     public void LoginIsSuccessfully() {
-        onView(withId(R.id.tfUsername)).perform(click());
-        onView(withId(R.id.tfUsername)).perform(typeText("user0"));
-        onView(withId(R.id.tfPassword)).perform(typeText("pass0"));
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user0"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass0"));
         onView(withId(R.id.btnLogin)).perform(click());
-        onView(withText("QuizHomeFragment")).check(matches(isDisplayed()));
+        onView(withText("Laufend")).check(matches(isDisplayed()));
+        onView(withText("Offen")).check(matches(isDisplayed()));
+        onView(withText("Beendet")).check(matches(isDisplayed()));
     }
 
     @Test
     public void LoginIsFails() {
-        onView(withId(R.id.tfUsername)).perform(click());
-        onView(withId(R.id.tfUsername)).perform(typeText("user0"));
-        onView(withId(R.id.tfPassword)).perform(typeText("pass1"));
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user0"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass1"));
         onView(withId(R.id.btnLogin)).perform(click());
-        onView(withText("QuizHomeFragment")).check(doesNotExist());
+        onView(withText("Laufend")).check(doesNotExist());
+        onView(withText("Offen")).check(doesNotExist());
+        onView(withText("Beendet")).check(doesNotExist());
     }
+/*
+    @Test
+    public void fragmentRegisterIsLoaded() {
+        onView(withId(R.id.nav_register)).perform(click());
+        onView(withText("Registrieren")).check(matches(isDisplayed()));
+    }
+*/
 }
