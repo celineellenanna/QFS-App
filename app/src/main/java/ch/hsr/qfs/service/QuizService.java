@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import ch.hsr.qfs.domain.Quiz;
+import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpController;
 import ch.hsr.qfs.service.apiclient.ApiHttpRequest;
@@ -228,5 +229,41 @@ public class QuizService {
         };
 
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getCategories(final ApiHttpCallback<ApiHttpResponse<ArrayList<Category>>> callback){
+        String url = quizUrl + "/category";
+
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<Category>>>() {}.getType();
+
+
+        ApiHttpRequest<ApiHttpResponse<ArrayList<Category>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Category>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<Category>>>()
+                {
+                    public void onResponse(ApiHttpResponse<ArrayList<Category>> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+
+
+
     }
 }
