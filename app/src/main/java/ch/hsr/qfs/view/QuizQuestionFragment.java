@@ -2,7 +2,7 @@ package ch.hsr.qfs.view;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +21,6 @@ public class QuizQuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View viewRoot = inflater.inflate(R.layout.fragment_quiz_question, container, false);
-
-
 
         return viewRoot;
     }
