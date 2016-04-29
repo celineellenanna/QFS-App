@@ -1,5 +1,6 @@
 package ch.hsr.qfs.view;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,11 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
             holder.rlListItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((MainActivity) holder.parent.getContext()).changeFragment(new ClosedFragment());
+                    Bundle bundle = new Bundle();
+                    bundle.putString("quizId", quiz.getId());
+                    QuizCategoryFragment f = new QuizCategoryFragment();
+                    f.setArguments(bundle);
+                    ((MainActivity) holder.parent.getContext()).changeFragment(f);
                 }
             });
         }
