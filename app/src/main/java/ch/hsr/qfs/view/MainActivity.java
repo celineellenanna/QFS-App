@@ -135,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.nav_category:
                     changeFragment(new QuizCategoryFragment());
                     return true;
+                case R.id.nav_statistic:
+                    changeFragment(new QuizStatisticFragment());
+                    return true;
                 case R.id.nav_question:
                     changeFragment(new QuizQuestionFragment());
                     return true;
