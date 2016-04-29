@@ -266,4 +266,38 @@ public class QuizService {
 
 
     }
+
+    public void createRound(final String quizId, final String categoryId, final ApiHttpCallback<ApiHttpResponse<Quiz>> callback) {
+        String url = quizUrl + "/" + quizId + "/category/" + categoryId;
+
+        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<Quiz>> request = new ApiHttpRequest<ApiHttpResponse<Quiz>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<Quiz>>()
+                {
+                    public void onResponse(ApiHttpResponse<Quiz> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("quizId", quizId);
+                params.put("categoryId", categoryId);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
 }

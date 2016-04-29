@@ -17,6 +17,9 @@
             android:id="@+id/nav_statistic"
             android:title="Statistik" />
         <item
+            android:id="@+id/nav_question"
+            android:title="Question" />
+        <item
             android:id="@+id/nav_logout"
             android:title="Abmelden" />
     </group>
