@@ -1,8 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true" >
+        <shape android:shape="oval">
+            <!--<stroke android:color="@color/colorPrimary" android:width="5dp" />-->
+            <gradient
+                android:type="radial"
+                android:centerX="50%"
+                android:centerY="50%"
+                android:startColor="#FFFF96B1"
+                android:centerColor="#FFFF96B1"
+                android:endColor="@color/colorAccent"
+                android:gradientRadius="160"/>
+            <size android:width="150dp" android:height="150dp"/>
+        </shape>
+    </item>
+    <item android:state_focused="true" >
+        <shape android:shape="oval">
+            <!--<stroke android:color="@color/colorPrimary" android:width="5dp" />-->
+            <gradient
+                android:type="radial"
+                android:centerX="50%"
+                android:centerY="50%"
+                android:startColor="#FFFF96B1"
+                android:centerColor="#FFFF96B1"
+                android:endColor="@color/colorAccent"
+                android:gradientRadius="160"/>
+            <size android:width="150dp" android:height="150dp"/>
+        </shape>
+    </item>
     <item>
         <shape android:shape="oval">
             <!--<stroke android:color="@color/colorPrimary" android:width="5dp" />-->
+
             <solid android:color="@color/colorAccent"/>
             <size android:width="150dp" android:height="150dp"/>
         </shape>
