@@ -11,31 +11,30 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Bitte wählen Sie eine Kategorie:"
+            android:text="Kategorie wählen"
             android:id="@+id/textView"
-            android:layout_gravity="center_horizontal|top" />
+            android:layout_gravity="center_horizontal|top"
+            android:textAlignment="center"
+            android:textSize="36dp" />
 
         <Button
             android:id ="@+id/btn_category1"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:text="Allgemein"
             android:textColor="@color/colorTabText"
             android:background="@drawable/button_bg_round"
             android:padding="15dp"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="130dp" />
 
         <Button
                 android:id ="@+id/btn_category3"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:text="Computernetzwerke 1"
                 android:textColor="@color/colorTabText"
                 android:background="@drawable/button_bg_round"
                 android:padding="15dp"
@@ -47,7 +46,6 @@
                 android:id ="@+id/btn_category2"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                android:text="Informationssicherheit 1"
                 android:textColor="@color/colorTabText"
                 android:background="@drawable/button_bg_round"
                 android:padding="15dp"

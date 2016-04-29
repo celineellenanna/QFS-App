@@ -12,6 +12,7 @@ import java.util.Map;
 
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Category;
+import ch.hsr.qfs.domain.Question;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpController;
 import ch.hsr.qfs.service.apiclient.ApiHttpRequest;
@@ -265,5 +266,75 @@ public class QuizService {
 
 
 
+    }
+
+    public void getQuestions(final ApiHttpCallback<ApiHttpResponse<ArrayList<Question>>> callback){
+        String url = quizUrl + "/category";
+
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<Question>>>() {}.getType();
+
+
+        ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<Question>>>()
+                {
+                    public void onResponse(ApiHttpResponse<ArrayList<Question>> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+
+
+
+    }
+
+    public void createRound(final String quizId, final String categoryId, final ApiHttpCallback<ApiHttpResponse<Quiz>> callback) {
+        String url = quizUrl + "/round/";
+
+        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<Quiz>> request = new ApiHttpRequest<ApiHttpResponse<Quiz>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<Quiz>>()
+                {
+                    public void onResponse(ApiHttpResponse<Quiz> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("quizId", quizId);
+                params.put("categoryId", categoryId);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 }

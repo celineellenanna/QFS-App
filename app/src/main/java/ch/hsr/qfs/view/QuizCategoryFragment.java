@@ -15,6 +15,7 @@ import com.hsr.qfs.R;
 import java.util.ArrayList;
 
 import ch.hsr.qfs.domain.Category;
+import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -25,9 +26,14 @@ import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 public class QuizCategoryFragment extends Fragment {
 
     private QuizService qs = QuizService.getInstance();
+    private String quizId;
+    private Category category1;
+    private Category category2;
+    private Category category3;
 
     public QuizCategoryFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -38,6 +44,9 @@ public class QuizCategoryFragment extends Fragment {
         View viewRoot =  inflater.inflate(R.layout.fragment_quiz_category, container, false);
 
         ((MainActivity) getActivity()).changeToolbarTitle("Quiz - Kategorie");
+
+        Bundle bundle = getArguments();
+        quizId = bundle.getString("quizId");
 
         final Button btn_category1 = (Button) viewRoot.findViewById(R.id.btn_category1);
         final Button btn_category2 = (Button) viewRoot.findViewById(R.id.btn_category2);
@@ -50,9 +59,14 @@ public class QuizCategoryFragment extends Fragment {
                 {
                     ArrayList<Category> categories = response.getData();
 
-                    btn_category1.setText(categories.get(0).getName());
-                    btn_category2.setText(categories.get(1).getName());
-                    btn_category3.setText(categories.get(2).getName());
+                    category1 = categories.get(0);
+                    category2 = categories.get(1);
+                    category3 = categories.get(2);
+
+                    btn_category1.setText(category1.getName());
+                    btn_category2.setText(category2.getName());
+                    btn_category3.setText(category3.getName());
+
                 } else {
                     Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -64,7 +78,80 @@ public class QuizCategoryFragment extends Fragment {
             }
         });
 
+        btn_category1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qs.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                    @Override
+                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                        if(response.getSuccess()){
+                            changetoQuestionFragment(quizId, category1.get_id());
+                        }else {
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+        btn_category2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qs.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                    @Override
+                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                        if(response.getSuccess()){
+                            changetoQuestionFragment(quizId, category2.get_id());
+                        }else {
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+        btn_category3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qs.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                    @Override
+                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                        if(response.getSuccess()){
+                            changetoQuestionFragment(quizId, category3.get_id());
+                        }else {
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
         return viewRoot;
+    }
+
+    private void changetoQuestionFragment(String quizId2, String id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("quizId", quizId2);
+        bundle.putString("categoryId", id);
+        QuizQuestionFragment f = new QuizQuestionFragment();
+        f.setArguments(bundle);
+        ((MainActivity) getActivity()).changeFragment(f);
     }
 
 }
