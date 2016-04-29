@@ -85,12 +85,7 @@ public class QuizCategoryFragment extends Fragment {
                     @Override
                     public void onCompletion(ApiHttpResponse<Quiz> response) {
                         if(response.getSuccess()){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("quizId", quizId);
-                            bundle.putString("categoryId", category1.get_id());
-                            QuizQuestionFragment f = new QuizQuestionFragment();
-                            f.setArguments(bundle);
-                            ((MainActivity) getActivity()).changeFragment(f);
+                            changetoQuestionFragment(quizId, category1.get_id());
                         }else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
                         }
@@ -111,12 +106,7 @@ public class QuizCategoryFragment extends Fragment {
                     @Override
                     public void onCompletion(ApiHttpResponse<Quiz> response) {
                         if(response.getSuccess()){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("quizId", quizId);
-                            bundle.putString("categoryId", category2.get_id());
-                            QuizQuestionFragment f = new QuizQuestionFragment();
-                            f.setArguments(bundle);
-                            ((MainActivity) getActivity()).changeFragment(f);
+                            changetoQuestionFragment(quizId, category2.get_id());
                         }else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
                         }
@@ -137,12 +127,7 @@ public class QuizCategoryFragment extends Fragment {
                     @Override
                     public void onCompletion(ApiHttpResponse<Quiz> response) {
                         if(response.getSuccess()){
-                            Bundle bundle = new Bundle();
-                            bundle.putString("quizId", quizId);
-                            bundle.putString("categoryId", category3.get_id());
-                            QuizQuestionFragment f = new QuizQuestionFragment();
-                            f.setArguments(bundle);
-                            ((MainActivity) getActivity()).changeFragment(f);
+                            changetoQuestionFragment(quizId, category3.get_id());
                         }else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
                         }
@@ -158,6 +143,15 @@ public class QuizCategoryFragment extends Fragment {
         });
 
         return viewRoot;
+    }
+
+    private void changetoQuestionFragment(String quizId2, String id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("quizId", quizId2);
+        bundle.putString("categoryId", id);
+        QuizQuestionFragment f = new QuizQuestionFragment();
+        f.setArguments(bundle);
+        ((MainActivity) getActivity()).changeFragment(f);
     }
 
 }
