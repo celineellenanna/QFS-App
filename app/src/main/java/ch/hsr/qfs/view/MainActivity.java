@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
-    private FloatingActionButton fab;
+    private FloatingActionButton fab;;
+    private Boolean fabState = false;
 
     private AuthService authService = AuthService.getInstance();
 
@@ -92,11 +93,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                if(fabState) {
+                    fab.show();
+                }
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                fabState = fab.isShown();
+                fab.hide();
             }
         };
 
@@ -107,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private class NavigationItemListener implements NavigationView.OnNavigationItemSelectedListener {
+
         @Override
         public boolean onNavigationItemSelected(MenuItem item) {
             if(item.isChecked()) item.setChecked(false);
