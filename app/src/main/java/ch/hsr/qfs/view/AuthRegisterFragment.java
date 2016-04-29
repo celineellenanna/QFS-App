@@ -3,6 +3,8 @@ package ch.hsr.qfs.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.hsr.qfs.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -29,27 +35,76 @@ public class AuthRegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         View viewRoot = inflater.inflate(R.layout.fragment_auth_register, container, false);
 
+        ((MainActivity) getActivity()).changeToolbarTitle("Registrieren");
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
-        final EditText tfFirstname = (EditText) viewRoot.findViewById(R.id.tfFirstname);
-        final EditText tfLastname = (EditText) viewRoot.findViewById(R.id.tfLastname);
-        final EditText tfEmail = (EditText) viewRoot.findViewById(R.id.tfEmail);
-        final EditText tfUsername = (EditText) viewRoot.findViewById(R.id.tfUsername);
-        final EditText tfPassword = (EditText) viewRoot.findViewById(R.id.tfPassword);
-        final EditText tfPasswordRepeat = (EditText) viewRoot.findViewById(R.id.tfPasswordRepeat);
+        final EditText etFirstname = (EditText) viewRoot.findViewById(R.id.etFirstname);
+        final EditText etLastname = (EditText) viewRoot.findViewById(R.id.etLastname);
+        final EditText etEmail = (EditText) viewRoot.findViewById(R.id.etEmail);
+        final EditText etUsername = (EditText) viewRoot.findViewById(R.id.etUsername);
+        final EditText etPassword = (EditText) viewRoot.findViewById(R.id.etPassword);
+        final EditText etPasswordRepeat = (EditText) viewRoot.findViewById(R.id.etPasswordRepeat);
         final Button btnRegister = (Button) viewRoot.findViewById(R.id.btnRegister);
+
+        etEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String email = etEmail.getText().toString();
+                    if (!isValidEmail(email)) {
+                        etEmail.setError("E-Mail ungültig");
+                    }
+                }
+            }
+        });
+
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    String password = etPassword.getText().toString();
+                    //Log.d("QFS", "Passwort: " + password);
+                    if (!isValidPassword(password)) {
+                        etPassword.setError("Passwort zu kurz (mind. 6 Zeichen)");
+                    }
+                }
+            }
+        });
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String firstname = tfFirstname.getText().toString();
-                String lastname = tfLastname.getText().toString();
-                String email = tfEmail.getText().toString();
-                String username = tfUsername.getText().toString();
-                String password = tfPassword.getText().toString();
-                String passwordRepeat = tfPasswordRepeat.getText().toString();
+                Boolean valid = true;
 
-                if (password.equals(passwordRepeat)) {
+                String firstname = etFirstname.getText().toString();
+                String lastname = etLastname.getText().toString();
+                String email = etEmail.getText().toString();
+                String username = etUsername.getText().toString();
+                String password = etPassword.getText().toString();
+                String passwordRepeat = etPasswordRepeat.getText().toString();
+
+                if (firstname.matches("")) {
+                    etFirstname.setError("Bitte Vorname eingeben");
+                    valid = false;
+                }
+                if (lastname.matches("")) {
+                    etLastname.setError("Bitte Nachname eingeben");
+                    valid = false;
+                }
+                if (email.matches("")) {
+                    etEmail.setError("Bitte E-Mail eingeben");
+                    valid = false;
+                }
+                if (username.matches("")) {
+                    etUsername.setError("Bitte Benutzername eingeben");
+                    valid = false;
+                }
+                if (password.matches("")) {
+                    etPassword.setError("Bitte Passwort eingeben");
+                    valid = false;
+                }
+
+                if (password.equals(passwordRepeat) && valid) {
                     AuthService authService = AuthService.getInstance();
                     authService.register(firstname, lastname, email, username, password, new ApiHttpCallback<ApiHttpResponse<User>>() {
                         @Override
@@ -76,4 +131,19 @@ public class AuthRegisterFragment extends Fragment {
         return viewRoot;
     }
 
+    private boolean isValidEmail(String email) {
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "hsr.ch";
+
+        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean isValidPassword(String pass) {
+        if (pass != null && pass.length() >= 6) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

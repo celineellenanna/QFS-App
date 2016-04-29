@@ -9,7 +9,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tfUsername"
+        android:id="@+id/etUsername"
         android:layout_weight="0"
         android:hint="Benutzername" />
 
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/tfPassword"
+        android:id="@+id/etPassword"
         android:layout_weight="0"
         android:hint="Passwort" />
 

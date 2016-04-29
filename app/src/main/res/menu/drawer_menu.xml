@@ -2,14 +2,14 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_login"
-            android:title="Einloggen" />
+            android:title="Anmelden" />
         <item
             android:id="@+id/nav_register"
             android:title="Registrieren" />
 
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />
+            android:title="Quiz Übersicht" />
         <item
             android:id="@+id/nav_category"
             android:title="Home" />

@@ -68,8 +68,138 @@ public class QuizService {
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
+    public void accept(final String quizId, final ApiHttpCallback<ApiHttpResponse> callback) {
+        String url = quizUrl + "/accept";
+
+        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse> request = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse>()
+                {
+                    public void onResponse(ApiHttpResponse response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("id", quizId);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void reject(final String quizId, final ApiHttpCallback<ApiHttpResponse> callback) {
+        String url = quizUrl + "/reject";
+
+        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse> request = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse>()
+                {
+                    public void onResponse(ApiHttpResponse response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("id", quizId);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
     public void getOpen(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
         String url = quizUrl + "/open/" + userId;
+
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<Quiz>>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<Quiz>>>()
+                {
+                    public void onResponse(ApiHttpResponse<ArrayList<Quiz>> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getRunning(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
+        String url = quizUrl + "/running/" + userId;
+
+        Type type = new TypeToken<ApiHttpResponse<ArrayList<Quiz>>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Quiz>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<Quiz>>>()
+                {
+                    public void onResponse(ApiHttpResponse<ArrayList<Quiz>> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getFinished(final String userId, final ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>> callback) {
+        String url = quizUrl + "/finished/" + userId;
 
         Type type = new TypeToken<ApiHttpResponse<ArrayList<Quiz>>>() {}.getType();
 

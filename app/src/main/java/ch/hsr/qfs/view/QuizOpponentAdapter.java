@@ -39,10 +39,10 @@ public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View v = layoutInflater.inflate(R.layout.quiz_opponent_row_layout, parent, false);
 
-        TextView username = (TextView) v.findViewById(R.id.tvUsername);
-        RelativeLayout listItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
+        TextView tvUsername = (TextView) v.findViewById(R.id.tvUsername);
+        RelativeLayout rlListItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
 
-        QuizOpponentViewHolder viewHolder = new QuizOpponentViewHolder(v, username, listItem);
+        QuizOpponentViewHolder viewHolder = new QuizOpponentViewHolder(v, tvUsername, rlListItem);
 
         return viewHolder;
     }
@@ -50,8 +50,8 @@ public class QuizOpponentAdapter extends RecyclerView.Adapter<QuizOpponentViewHo
     public void onBindViewHolder(final QuizOpponentViewHolder holder, final int position) {
 
         final User user = users.get(position);
-        holder.username.setText(user.getUsername());
-        holder.listItem.setOnClickListener(new View.OnClickListener() {
+        holder.tvUsername.setText(user.getUsername());
+        holder.rlListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             AuthService as = AuthService.getInstance();

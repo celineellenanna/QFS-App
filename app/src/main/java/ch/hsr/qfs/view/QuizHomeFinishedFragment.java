@@ -21,22 +21,22 @@ import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-public class QuizHomeOpenFragment extends Fragment {
+public class QuizHomeFinishedFragment extends Fragment {
 
     private QuizService qs = QuizService.getInstance();
     private AuthService as = AuthService.getInstance();
-
-    private View viewRoot;
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    public QuizHomeOpenFragment() {
+    private View viewRoot;
+
+    public QuizHomeFinishedFragment() {
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        viewRoot = inflater.inflate(R.layout.fragment_quiz_home_open, container, false);
+        viewRoot = inflater.inflate(R.layout.fragment_quiz_home_finished, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) viewRoot.findViewById(R.id.swipeRefreshLayout);
 
@@ -53,11 +53,11 @@ public class QuizHomeOpenFragment extends Fragment {
     }
 
     public void loadData() {
-        qs.getOpen(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
+        qs.getFinished(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<Quiz>> response) {
                 if (response.getSuccess()) {
-                    QuizHomeOpenAdapter adapter = new QuizHomeOpenAdapter(response.getData());
+                    QuizHomeFinishedAdapter adapter = new QuizHomeFinishedAdapter(response.getData());
                     RecyclerView recyclerView = (RecyclerView) viewRoot.findViewById(R.id.recyclerView);
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
                     recyclerView.setLayoutManager(linearLayoutManager);
@@ -72,5 +72,4 @@ public class QuizHomeOpenFragment extends Fragment {
             }
         });
     }
-
 }

@@ -25,6 +25,7 @@ public class QuizHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View viewRoot =  inflater.inflate(R.layout.quiz_tab_layout,null);
 
+        ((MainActivity) getActivity()).changeToolbarTitle("Quiz Übersicht");
         ((MainActivity) getActivity()).hideFloatingActionButton(false);
 
         tabLayout = (TabLayout) viewRoot.findViewById(R.id.tabs);
@@ -53,9 +54,9 @@ public class QuizHomeFragment extends Fragment {
         public Fragment getItem(int position)
         {
             switch (position){
-                case 0 : return new ClosedFragment();
+                case 0 : return new QuizHomeRunningFragment();
                 case 1 : return new QuizHomeOpenFragment();
-                case 2 : return new ClosedFragment();
+                case 2 : return new QuizHomeFinishedFragment();
             }
             return null;
         }
