@@ -59,12 +59,12 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
         if(quiz.get_challengerId().getId().equals(as.getUser().getId())) {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
             holder.tvUsername.setText(quiz.get_opponentId().getUsername());
-            holder.tvStatus.setText("Gesendet");
+            holder.tvStatus.setText("Gesendete Anfrage");
             holder.ivAccept.setVisibility(View.INVISIBLE);
         } else {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
             holder.tvUsername.setText(quiz.get_challengerId().getUsername());
-            holder.tvStatus.setText("Offen");
+            holder.tvStatus.setText("Offene Anfrage");
             holder.ivAccept.setVisibility(View.VISIBLE);
         }
 
