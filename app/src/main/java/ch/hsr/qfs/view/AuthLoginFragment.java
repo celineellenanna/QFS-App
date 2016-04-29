@@ -58,6 +58,7 @@ public class AuthLoginFragment extends Fragment {
                         @Override
                         public void onCompletion(ApiHttpResponse<User> response) {
                             if (response.getSuccess()) {
+                                ((MainActivity) getActivity()).setNavigationViewValues();
                                 ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
                                 ((MainActivity) getActivity()).updateNavigationList();
                             } else {

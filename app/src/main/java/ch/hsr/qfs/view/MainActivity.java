@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                     authService.logout(new ApiHttpCallback<ApiHttpResponse<User>>() {
                         @Override
                         public void onCompletion(ApiHttpResponse<User> response) {
+                            removeNavigationViewValues();
                             changeFragment(new AuthLoginFragment());
                             updateNavigationList();
                         }
@@ -166,6 +168,21 @@ public class MainActivity extends AppCompatActivity {
     public void changeToolbarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
+    public void setNavigationViewValues() {
+        TextView tvNavViewUsername = (TextView) findViewById(R.id.tvNavViewUsername);
+        TextView tvNavViewEmail = (TextView) findViewById(R.id.tvNavViewEmail);
+        tvNavViewUsername.setText(authService.getUser().getUsername());
+        tvNavViewEmail.setText(authService.getUser().getEmail());
+    }
+
+    public void removeNavigationViewValues() {
+        TextView tvNavViewUsername = (TextView) findViewById(R.id.tvNavViewUsername);
+        TextView tvNavViewEmail = (TextView) findViewById(R.id.tvNavViewEmail);
+        tvNavViewUsername.setText("");
+        tvNavViewEmail.setText("");
+    }
+
 
     public void changeFragment(Fragment f) {
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, f).addToBackStack(null).commit();
