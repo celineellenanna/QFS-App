@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorDrawerText">#000000</color>
-    <color name="colorDrawerTextSelected">#ffffff</color>
-    <color name="colorTabText">#ffffff</color>
+    <color name="colorDrawerTextSelected">#FFFFFFFF</color>
+    <color name="colorTabText">#FFFFFFFF</color>
+    <color name="colorBtnRed">#FFFF0000</color>
+    <color name="colorBtnGreen">#6eb729</color>
+    <color name="colorBtnWhite">#FFFFFFFF</color>
+    <color name="colorBtnBorder">#000000</color>
 </resources>
