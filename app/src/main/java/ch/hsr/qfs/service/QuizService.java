@@ -14,6 +14,7 @@ import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Question;
 import ch.hsr.qfs.domain.Round;
+import ch.hsr.qfs.domain.RoundQuestion;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpController;
 import ch.hsr.qfs.service.apiclient.ApiHttpRequest;
@@ -269,16 +270,16 @@ public class QuizService {
 
     }
 
-    public void getQuestions(final ApiHttpCallback<ApiHttpResponse<ArrayList<Question>>> callback){
-        String url = quizUrl + "/category";
+    public void getRoundQuestions(final String roundId, final ApiHttpCallback<ApiHttpResponse<ArrayList<RoundQuestion>>> callback){
+        String url = quizUrl + "/roundQuestions/" + roundId;
 
         Type type = new TypeToken<ApiHttpResponse<ArrayList<Question>>>() {}.getType();
 
 
-        ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ApiHttpResponse<ArrayList<Question>>>()
+        ApiHttpRequest<ApiHttpResponse<ArrayList<RoundQuestion>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<RoundQuestion>>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<ArrayList<RoundQuestion>>>()
                 {
-                    public void onResponse(ApiHttpResponse<ArrayList<Question>> response) {
+                    public void onResponse(ApiHttpResponse<ArrayList<RoundQuestion>> response) {
                         callback.onCompletion(response);
                     }
                 },

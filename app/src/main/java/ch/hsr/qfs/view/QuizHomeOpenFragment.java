@@ -23,8 +23,8 @@ import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
 public class QuizHomeOpenFragment extends Fragment {
 
-    private QuizService qs = QuizService.getInstance();
-    private AuthService as = AuthService.getInstance();
+    private QuizService quizService = QuizService.getInstance();
+    private AuthService authService = AuthService.getInstance();
 
     private View viewRoot;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -53,7 +53,7 @@ public class QuizHomeOpenFragment extends Fragment {
     }
 
     public void loadData() {
-        qs.getOpen(as.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
+        quizService.getOpen(authService.getUser().getId(), new ApiHttpCallback<ApiHttpResponse<ArrayList<Quiz>>>() {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<Quiz>> response) {
                 if (response.getSuccess()) {
