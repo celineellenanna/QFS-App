@@ -15,7 +15,7 @@ import com.hsr.qfs.R;
 import java.util.ArrayList;
 
 import ch.hsr.qfs.domain.Category;
-import ch.hsr.qfs.domain.Quiz;
+import ch.hsr.qfs.domain.Round;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -81,20 +81,20 @@ public class QuizCategoryFragment extends Fragment {
         btn_category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                qs.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
-                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                    public void onCompletion(ApiHttpResponse<Round> response) {
                         if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category1.get_id());
+                            changetoQuestionFragment(quizId, category1.get_id(), response.getData().get_id());
                         }else {
-                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
 
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt (onError)", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -102,20 +102,20 @@ public class QuizCategoryFragment extends Fragment {
         btn_category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                qs.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
-                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                    public void onCompletion(ApiHttpResponse<Round> response) {
                         if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category2.get_id());
+                            changetoQuestionFragment(quizId, category2.get_id(), response.getData().get_id());
                         }else {
-                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
 
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt (onError)", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -123,20 +123,20 @@ public class QuizCategoryFragment extends Fragment {
         btn_category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+                qs.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
-                    public void onCompletion(ApiHttpResponse<Quiz> response) {
+                    public void onCompletion(ApiHttpResponse<Round> response) {
                         if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category3.get_id());
+                            changetoQuestionFragment(quizId, category3.get_id(), response.getData().get_id());
                         }else {
-                            Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
 
                     }
 
                     @Override
                     public void onError(String message) {
-                        Toast.makeText(getContext(), "Kategorie nicht übermittelt", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), "Kategorie nicht übermittelt (onError)", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -145,10 +145,11 @@ public class QuizCategoryFragment extends Fragment {
         return viewRoot;
     }
 
-    private void changetoQuestionFragment(String quizId2, String id) {
+    private void changetoQuestionFragment(String quizId2, String id, String round) {
         Bundle bundle = new Bundle();
         bundle.putString("quizId", quizId2);
         bundle.putString("categoryId", id);
+        bundle.putString("roundId", round);
         QuizQuestionFragment f = new QuizQuestionFragment();
         f.setArguments(bundle);
         ((MainActivity) getActivity()).changeFragment(f);
