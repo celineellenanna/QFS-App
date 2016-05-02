@@ -44,6 +44,7 @@ public class QuizCategoryFragment extends Fragment {
         View viewRoot =  inflater.inflate(R.layout.fragment_quiz_category, container, false);
 
         ((MainActivity) getActivity()).changeToolbarTitle("Quiz - Kategorie");
+        ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         Bundle bundle = getArguments();
         quizId = bundle.getString("quizId");
