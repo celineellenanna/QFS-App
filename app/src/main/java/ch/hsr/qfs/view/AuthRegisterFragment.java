@@ -123,7 +123,7 @@ public class AuthRegisterFragment extends Fragment {
                         }
                     });
                 } else {
-                    Toast.makeText(getContext(), "Passwort stimmt nicht überein", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Registrierung ist fehlgeschlagen", Toast.LENGTH_LONG).show();
                 }
             }
         });
