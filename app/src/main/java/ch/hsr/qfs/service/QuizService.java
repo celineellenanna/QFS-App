@@ -270,16 +270,16 @@ public class QuizService {
 
     }
 
-    public void getRoundQuestions(final String roundId, final ApiHttpCallback<ApiHttpResponse<ArrayList<RoundQuestion>>> callback){
-        String url = quizUrl + "/roundQuestions/" + roundId;
+    public void getRound(final String roundId, final ApiHttpCallback<ApiHttpResponse<Round>> callback){
+        String url = quizUrl + "/round/" + roundId;
 
-        Type type = new TypeToken<ApiHttpResponse<ArrayList<Question>>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse<Round>>() {}.getType();
 
 
-        ApiHttpRequest<ApiHttpResponse<ArrayList<RoundQuestion>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<RoundQuestion>>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ApiHttpResponse<ArrayList<RoundQuestion>>>()
+        ApiHttpRequest<ApiHttpResponse<Round>> request = new ApiHttpRequest<ApiHttpResponse<Round>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<Round>>()
                 {
-                    public void onResponse(ApiHttpResponse<ArrayList<RoundQuestion>> response) {
+                    public void onResponse(ApiHttpResponse<Round> response) {
                         callback.onCompletion(response);
                     }
                 },

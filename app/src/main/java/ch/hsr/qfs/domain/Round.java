@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Round {
     private String _id;
-    private String _category;
-    private ArrayList<String> _roundQuestions;
+    private Category _category;
+    private ArrayList<RoundQuestion> _roundQuestions;
     private String createdAt;
     private String updatedAt;
 
@@ -17,19 +17,19 @@ public class Round {
         this._id = _id;
     }
 
-    public String get_category() {
+    public Category get_category() {
         return _category;
     }
 
-    public void set_category(String _category) {
+    public void set_category(Category _category) {
         this._category = _category;
     }
 
-    public ArrayList<String> get_roundQuestions() {
+    public ArrayList<RoundQuestion> get_roundQuestions() {
         return _roundQuestions;
     }
 
-    public void set_roundQuestions(ArrayList<String> _roundQuestions) {
+    public void set_roundQuestions(ArrayList<RoundQuestion> _roundQuestions) {
         this._roundQuestions = _roundQuestions;
     }
 

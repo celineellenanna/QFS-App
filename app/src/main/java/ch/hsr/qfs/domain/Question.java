@@ -1,11 +1,23 @@
 package ch.hsr.qfs.domain;
 
+import java.util.ArrayList;
+
 public class Question {
 
     private enum Status {Created, Approved, Rejected, Deleted};
 
     private String _id;
     private String name;
+    private ArrayList<Answer> answers;
+    private Status status;
+
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(ArrayList<Answer> answers) {
+        this.answers = answers;
+    }
 
     public Status getStatus() {
         return status;
@@ -14,8 +26,6 @@ public class Question {
     public void setStatus(Status status) {
         this.status = status;
     }
-
-    private Status status;
 
     public String get_id() {
         return _id;
