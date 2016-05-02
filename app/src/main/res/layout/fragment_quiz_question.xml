@@ -6,14 +6,6 @@
     android:orientation="vertical"
     android:layout_margin="25dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Category"
-        android:id="@+id/tvCategory"
-        android:gravity="center_horizontal"
-        android:textSize="36dp" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,7 +26,7 @@
         android:layout_column="0"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="25dp"
-        android:textSize="24dp" />
+        android:textSize="20dp" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

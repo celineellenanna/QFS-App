@@ -13,6 +13,8 @@ import java.util.Map;
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Question;
+import ch.hsr.qfs.domain.Round;
+import ch.hsr.qfs.domain.RoundQuestion;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpController;
 import ch.hsr.qfs.service.apiclient.ApiHttpRequest;
@@ -268,16 +270,16 @@ public class QuizService {
 
     }
 
-    public void getQuestions(final ApiHttpCallback<ApiHttpResponse<ArrayList<Question>>> callback){
-        String url = quizUrl + "/category";
+    public void getRound(final String roundId, final ApiHttpCallback<ApiHttpResponse<Round>> callback){
+        String url = quizUrl + "/round/" + roundId;
 
-        Type type = new TypeToken<ApiHttpResponse<ArrayList<Question>>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse<Round>>() {}.getType();
 
 
-        ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>> request = new ApiHttpRequest<ApiHttpResponse<ArrayList<Question>>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ApiHttpResponse<ArrayList<Question>>>()
+        ApiHttpRequest<ApiHttpResponse<Round>> request = new ApiHttpRequest<ApiHttpResponse<Round>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<Round>>()
                 {
-                    public void onResponse(ApiHttpResponse<ArrayList<Question>> response) {
+                    public void onResponse(ApiHttpResponse<Round> response) {
                         callback.onCompletion(response);
                     }
                 },
@@ -304,15 +306,15 @@ public class QuizService {
 
     }
 
-    public void createRound(final String quizId, final String categoryId, final ApiHttpCallback<ApiHttpResponse<Quiz>> callback) {
+    public void createRound(final String quizId, final String categoryId, final ApiHttpCallback<ApiHttpResponse<Round>> callback) {
         String url = quizUrl + "/round/";
 
-        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse<Round>>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<Quiz>> request = new ApiHttpRequest<ApiHttpResponse<Quiz>>(Request.Method.POST, url, type, null,
-                new Response.Listener<ApiHttpResponse<Quiz>>()
+        ApiHttpRequest<ApiHttpResponse<Round>> request = new ApiHttpRequest<ApiHttpResponse<Round>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<Round>>()
                 {
-                    public void onResponse(ApiHttpResponse<Quiz> response) {
+                    public void onResponse(ApiHttpResponse<Round> response) {
                         callback.onCompletion(response);
                     }
                 },
