@@ -33,6 +33,11 @@ public class QuizQuestionFragment extends Fragment {
     private String categoryId;
     private String roundId;
 
+    private Button btnQuestion1;
+    private Button btnQuestion2;
+    private Button btnQuestion3;
+    private Button btnQuestion4;
+
     private QuizService quizService = QuizService.getInstance();
 
     public QuizQuestionFragment() {
@@ -61,10 +66,10 @@ public class QuizQuestionFragment extends Fragment {
 
                     ((MainActivity) getActivity()).changeToolbarTitle("Quiz - " + round.get_category().getName());
 
-                    Button btnQuestion1 = (Button) viewRoot.findViewById(R.id.btnQuestion1);
-                    Button btnQuestion2 = (Button) viewRoot.findViewById(R.id.btnQuestion2);
-                    Button btnQuestion3 = (Button) viewRoot.findViewById(R.id.btnQuestion3);
-                    Button btnQuestion4 = (Button) viewRoot.findViewById(R.id.btnQuestion4);
+                    btnQuestion1 = (Button) viewRoot.findViewById(R.id.btnQuestion1);
+                    btnQuestion2 = (Button) viewRoot.findViewById(R.id.btnQuestion2);
+                    btnQuestion3 = (Button) viewRoot.findViewById(R.id.btnQuestion3);
+                    btnQuestion4 = (Button) viewRoot.findViewById(R.id.btnQuestion4);
 
                     TextView tvQuestion = (TextView) viewRoot.findViewById(R.id.tvQuestion);
 
@@ -110,7 +115,10 @@ public class QuizQuestionFragment extends Fragment {
                 }
 
                 if(progressBarStatus == progressBarStatusMax) {
-
+                    btnQuestion1.setEnabled(false);
+                    btnQuestion2.setEnabled(false);
+                    btnQuestion3.setEnabled(false);
+                    btnQuestion4.setEnabled(false);
                 }
             }
         }).start();
