@@ -72,7 +72,7 @@ public class QuizQuestionFragment extends Fragment {
                     round = response.getData();
 
                     long seed = System.nanoTime();
-                    ArrayList<Answer> allAnswers = round.get_roundQuestions().get(questionCount).get_question().getAnswers();
+                    ArrayList<Answer> allAnswers = round.get_roundQuestions().get(questionCount).get_question().get_answers();
                     Collections.shuffle(allAnswers, new Random(seed));
 
                     ((MainActivity) getActivity()).changeToolbarTitle("Quiz - " + round.get_category().getName());

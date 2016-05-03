@@ -23,7 +23,7 @@ import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
 public class QuizCategoryFragment extends Fragment {
 
-    private QuizService qs = QuizService.getInstance();
+    private QuizService quizService = QuizService.getInstance();
     private String quizId;
     private Category category1;
     private Category category2;
@@ -51,7 +51,7 @@ public class QuizCategoryFragment extends Fragment {
         final Button btn_category2 = (Button) viewRoot.findViewById(R.id.btn_category2);
         final Button btn_category3 = (Button) viewRoot.findViewById(R.id.btn_category3);
 
-        qs.getCategories(new ApiHttpCallback<ApiHttpResponse<ArrayList<Category>>>() {
+        quizService.getCategories(new ApiHttpCallback<ApiHttpResponse<ArrayList<Category>>>() {
             @Override
             public void onCompletion(ApiHttpResponse<ArrayList<Category>> response) {
                 if(response.getSuccess())
@@ -80,11 +80,11 @@ public class QuizCategoryFragment extends Fragment {
         btn_category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
+                quizService.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
                         if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category1.get_id(), response.getData().get_id());
+                            changeToQuestionFragment(quizId, category1.get_id(), response.getData().get_id());
                         }else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
@@ -101,11 +101,11 @@ public class QuizCategoryFragment extends Fragment {
         btn_category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
+                quizService.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
                         if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category2.get_id(), response.getData().get_id());
+                            changeToQuestionFragment(quizId, category2.get_id(), response.getData().get_id());
                         }else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
@@ -122,12 +122,12 @@ public class QuizCategoryFragment extends Fragment {
         btn_category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                qs.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
+                quizService.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
-                        if(response.getSuccess()){
-                            changetoQuestionFragment(quizId, category3.get_id(), response.getData().get_id());
-                        }else {
+                        if (response.getSuccess()) {
+                            changeToQuestionFragment(quizId, category3.get_id(), response.getData().get_id());
+                        } else {
                             Toast.makeText(getContext(), "Kategorie nicht übermittelt (onComplete)", Toast.LENGTH_LONG).show();
                         }
 
@@ -144,11 +144,11 @@ public class QuizCategoryFragment extends Fragment {
         return viewRoot;
     }
 
-    private void changetoQuestionFragment(String quizId2, String id, String round) {
+    private void changeToQuestionFragment(String quizId2, String categoryId2, String roundId2) {
         Bundle bundle = new Bundle();
         bundle.putString("quizId", quizId2);
-        bundle.putString("categoryId", id);
-        bundle.putString("roundId", round);
+        bundle.putString("categoryId", categoryId2);
+        bundle.putString("roundId", roundId2);
         QuizQuestionFragment f = new QuizQuestionFragment();
         f.setArguments(bundle);
         ((MainActivity) getActivity()).changeFragment(f);
