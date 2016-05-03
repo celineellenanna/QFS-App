@@ -1,5 +1,6 @@
 package ch.hsr.qfs.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import org.joda.time.*;
 import org.joda.time.format.*;
@@ -14,6 +15,11 @@ public class Quiz {
     private Status status;
     private String createdAt;
     private String updatedAt;
+    private ArrayList<Round> _rounds;
+
+    public ArrayList<Round> get_rounds() { return _rounds; }
+
+    public void set_rounds(ArrayList<Round> _rounds) { this._rounds = _rounds; }
 
     public String getId() {
         return this._id;
