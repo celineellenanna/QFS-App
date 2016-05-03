@@ -6,6 +6,7 @@ import com.android.volley.VolleyError;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -375,4 +376,40 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
 
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
+
+    public void createUserAnswer(final String roundId, final String answerId, final Time timeToAnswer, final ApiHttpCallback<ApiHttpResponse<Round>> callback) {
+        String url = quizUrl + "/round/answer";
+
+        Type type = new TypeToken<ApiHttpResponse<Round>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<Round>> request = new ApiHttpRequest<ApiHttpResponse<Round>>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse<Round>>()
+                {
+                    public void onResponse(ApiHttpResponse<Round> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put("round", roundId);
+                params.put("answer", answerId);
+                params.put("timeToAnswer", timeToAnswer.toString());
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
 }
