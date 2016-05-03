@@ -377,15 +377,15 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswer(final String roundId, final String answerId, final Time timeToAnswer, final ApiHttpCallback<ApiHttpResponse<Round>> callback) {
+    public void createUserAnswer(final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/answer";
 
-        Type type = new TypeToken<ApiHttpResponse<Round>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<Round>> request = new ApiHttpRequest<ApiHttpResponse<Round>>(Request.Method.POST, url, type, null,
-                new Response.Listener<ApiHttpResponse<Round>>()
+        ApiHttpRequest<ApiHttpResponse> request = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse>()
                 {
-                    public void onResponse(ApiHttpResponse<Round> response) {
+                    public void onResponse(ApiHttpResponse response) {
                         callback.onCompletion(response);
                     }
                 },
@@ -401,9 +401,10 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("round", roundId);
-                params.put("answer", answerId);
-                params.put("timeToAnswer", timeToAnswer.toString());
+                params.put("roundQuestionId", roundQuestionId);
+                params.put("answerId", answerId);
+                params.put("userId", userId);
+                params.put("timeToAnswer", "" + timeToAnswer + "");
 
                 return params;
             }

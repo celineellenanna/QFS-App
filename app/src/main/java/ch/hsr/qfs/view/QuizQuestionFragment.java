@@ -1,19 +1,24 @@
 package ch.hsr.qfs.view;
 
-
+import android.animation.ObjectAnimator;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hsr.qfs.R;
 
@@ -23,6 +28,7 @@ import java.util.Random;
 
 import ch.hsr.qfs.domain.Answer;
 import ch.hsr.qfs.domain.Round;
+import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
@@ -52,6 +58,7 @@ public class QuizQuestionFragment extends Fragment {
     private Button btnQuestion3;
     private Button btnQuestion4;
 
+    private AuthService authService = AuthService.getInstance();
     private QuizService quizService = QuizService.getInstance();
 
     public QuizQuestionFragment() {
@@ -166,13 +173,30 @@ public class QuizQuestionFragment extends Fragment {
         @Override
         public void onClick(View view) {
             progressBarInterrupted = true;
-            Answer answer = (Answer) ((Button) view).getTag();
+            Button button = (Button) view;
+            Answer answer = (Answer) button.getTag();
             if(answer.isCorrect()) {
-                //markPuttonCorrect
+                button.setBackgroundResource(R.drawable.button_bg_transition_green);
+                TransitionDrawable transition = (TransitionDrawable) button.getBackground();
+                transition.startTransition(1000);
             } else {
-                //markPuttonIncorrect
+                button.setBackgroundResource(R.drawable.button_bg_transition_red);
+                TransitionDrawable transition = (TransitionDrawable) button.getBackground();
+                transition.startTransition(1000);
             }
-            //quizService.putAnswer();
+            /*quizService.createUserAnswer(round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
+                @Override
+                public void onCompletion(ApiHttpResponse response) {
+                    if (response.getSuccess()) {
+
+                    }
+                }
+
+                @Override
+                public void onError(String message) {
+
+                }
+            });*/
         }
     }
 
