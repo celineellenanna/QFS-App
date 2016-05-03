@@ -4,6 +4,7 @@ package ch.hsr.qfs.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hsr.qfs.R;
 
@@ -27,11 +29,15 @@ import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
 public class QuizQuestionFragment extends Fragment {
 
+    private View viewRoot;
+
     private ProgressBar pgProgressBar;
-    private int progressBarStatus = 0;
-    private int progressBarSleep = 100;
-    private final int progressBarStatusMax = 10000;
-    private final int progressBarStatusIncrement = 100;
+    private Thread progressBarThread;
+    private volatile boolean progressBarInterrupted;
+    private int progressBarStatus;
+    private int progressBarSleep;
+    private int progressBarStatusMax;
+    private int progressBarStatusIncrement;
 
     private Handler mHandler = new Handler();
 
@@ -55,7 +61,9 @@ public class QuizQuestionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View viewRoot = inflater.inflate(R.layout.fragment_quiz_question, container, false);
+        viewRoot = inflater.inflate(R.layout.fragment_quiz_question, container, false);
+
+        viewRoot.setOnClickListener(new ViewOnClickListener());
 
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
@@ -101,10 +109,6 @@ public class QuizQuestionFragment extends Fragment {
                     btnQuestion3.setOnClickListener(new ButtonOnClickListener());
                     btnQuestion4.setOnClickListener(new ButtonOnClickListener());
 
-
-                    pgProgressBar = (ProgressBar) viewRoot.findViewById(R.id.pgProgressBar);
-                    pgProgressBar.setMax(progressBarStatusMax);
-
                     runProgressBar();
                 }
             }
@@ -119,9 +123,18 @@ public class QuizQuestionFragment extends Fragment {
     }
 
     private void runProgressBar() {
-        new Thread(new Runnable() {
+        progressBarInterrupted = false;
+        progressBarStatus = 0;
+        progressBarSleep = 100;
+        progressBarStatusMax = 10000;
+        progressBarStatusIncrement = 100;
+
+        pgProgressBar = (ProgressBar) viewRoot.findViewById(R.id.pgProgressBar);
+        pgProgressBar.setMax(progressBarStatusMax);
+
+        progressBarThread = new Thread(new Runnable() {
             public void run() {
-                while (progressBarStatus < progressBarStatusMax) {
+                while (progressBarStatus < progressBarStatusMax && !progressBarInterrupted) {
                     try {
                         Thread.sleep(progressBarSleep);
                     } catch (InterruptedException e) {
@@ -136,7 +149,8 @@ public class QuizQuestionFragment extends Fragment {
                     });
                 }
 
-                if(progressBarStatus == progressBarStatusMax) {
+                if(progressBarStatus == progressBarStatusMax || progressBarInterrupted) {
+                    Thread.currentThread().interrupt();
                     btnQuestion1.setOnClickListener(null);
                     btnQuestion2.setOnClickListener(null);
                     btnQuestion3.setOnClickListener(null);
@@ -144,18 +158,43 @@ public class QuizQuestionFragment extends Fragment {
 
                 }
             }
-        }).start();
+        });
+        progressBarThread.start();
     }
 
     private class ButtonOnClickListener implements Button.OnClickListener{
         @Override
         public void onClick(View view) {
-            Answer a = (Answer) ((Button) view).getTag();
-            Log.d("QFS", " "+ a.getText() + a.isCorrect());
+            progressBarInterrupted = true;
+            Answer answer = (Answer) ((Button) view).getTag();
+            if(answer.isCorrect()) {
+                //markPuttonCorrect
+            } else {
+                //markPuttonIncorrect
+            }
+            //quizService.putAnswer();
         }
-
-
     }
 
+    private class ViewOnClickListener implements View.OnClickListener {
 
+        @Override
+        public void onClick(View v) {
+            questionCount++;
+            if(progressBarInterrupted && questionCount <= 2) {
+                refreshFragment();
+            } else if(progressBarInterrupted && questionCount > 2) {
+                Bundle bundle = new Bundle();
+                bundle.putString("quizId", quizId);
+                QuizStatisticFragment f = new QuizStatisticFragment();
+                f.setArguments(bundle);
+                ((MainActivity) getActivity()).changeFragment(f);
+            }
+        }
+    }
+
+    private void refreshFragment() {
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
+    }
 }

@@ -19,8 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77c63568-a9e5-402f-94bb-57c211fbaa58" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="QFS-App.iws" />
@@ -66,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
+              <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="80" selection-end-column="65" />
               <folding>
                 <element signature="e#2197#2198#0" expanded="true" />
                 <element signature="e#2258#2259#0" expanded="true" />
@@ -106,16 +106,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Question.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Question.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/Question.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.80932206">
-              <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
               <folding>
                 <element signature="e#396#397#0" expanded="true" />
                 <element signature="e#435#436#0" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_quiz_statistic.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
         </entry>
       </file>
@@ -151,13 +164,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuizQuestionFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QuizQuestionFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.5868644">
+              <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#4825#5923#0" expanded="true" />
+                <element signature="e#5295#5477#0" expanded="true" />
+                <element signature="e#5476#5477#0" expanded="true" />
+                <element signature="e#5922#5923#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -178,16 +195,6 @@
                 <element signature="e#10953#10969#0" expanded="true" />
                 <element signature="e#12170#12186#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuizHomeFinishedViewHolder.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizHomeFinishedViewHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1857,7 +1864,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_opponent.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/drawer_menu_auth.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/drawer_list_selector.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/state_list.xml" />
@@ -1905,9 +1911,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizHomeFinishedAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/Category.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/service/QuizService.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" />
       </list>
     </option>
   </component>
@@ -2772,7 +2779,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462269488349</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update Model">
+      <created>1462271895591</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1462271895591</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2854,14 +2867,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.111111">
-          <caret line="11" column="56" selection-start-line="11" selection-start-column="56" selection-end-line="11" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3195,34 +3200,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="36" selection-start-line="32" selection-start-column="36" selection-end-line="32" selection-end-column="36" />
-          <folding>
-            <element signature="e#2197#2198#0" expanded="true" />
-            <element signature="e#2258#2259#0" expanded="true" />
-            <element signature="e#2373#2762#0" expanded="true" />
-            <element signature="e#2761#2762#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/Quiz.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="68" column="49" selection-start-line="68" selection-start-column="49" selection-end-line="68" selection-end-column="49" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="107" column="5" selection-start-line="107" selection-start-column="5" selection-end-line="107" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3288,11 +3270,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/Question.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.80932206">
-          <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="45" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
           <folding>
             <element signature="e#396#397#0" expanded="true" />
             <element signature="e#435#436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="78" column="0" selection-start-line="78" selection-start-column="0" selection-end-line="80" selection-end-column="65" />
+          <folding>
+            <element signature="e#2197#2198#0" expanded="true" />
+            <element signature="e#2258#2259#0" expanded="true" />
+            <element signature="e#2373#2762#0" expanded="true" />
+            <element signature="e#2761#2762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5868644">
+          <caret line="192" column="9" selection-start-line="192" selection-start-column="9" selection-end-line="192" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4825#5923#0" expanded="true" />
+            <element signature="e#5295#5477#0" expanded="true" />
+            <element signature="e#5476#5477#0" expanded="true" />
+            <element signature="e#5922#5923#0" expanded="true" />
           </folding>
         </state>
       </provider>
