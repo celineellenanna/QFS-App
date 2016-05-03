@@ -1,6 +1,8 @@
 package ch.hsr.qfs.domain;
 
 public class UserAnswer {
+
+    private User user;
     private Answer answer;
 
     public User getUser() {
@@ -19,5 +21,4 @@ public class UserAnswer {
         this.answer = answer;
     }
 
-    private User user;
 }

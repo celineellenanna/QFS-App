@@ -21,16 +21,16 @@ public class Round {
         return _category;
     }
 
-    public void set_category(Category _category) {
-        this._category = _category;
+    public void set_category(Category category) {
+        this._category = category;
     }
 
     public ArrayList<RoundQuestion> get_roundQuestions() {
         return _roundQuestions;
     }
 
-    public void set_roundQuestions(ArrayList<RoundQuestion> _roundQuestions) {
-        this._roundQuestions = _roundQuestions;
+    public void set_roundQuestions(ArrayList<RoundQuestion> roundQuestions) {
+        this._roundQuestions = roundQuestions;
     }
 
     public String getCreatedAt() {

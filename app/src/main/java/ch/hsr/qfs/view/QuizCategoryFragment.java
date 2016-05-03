@@ -20,9 +20,7 @@ import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class QuizCategoryFragment extends Fragment {
 
     private QuizService qs = QuizService.getInstance();

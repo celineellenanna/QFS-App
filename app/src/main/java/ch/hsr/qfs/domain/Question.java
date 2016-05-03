@@ -8,15 +8,15 @@ public class Question {
 
     private String _id;
     private String name;
-    private ArrayList<Answer> answers;
+    private ArrayList<Answer> _answers;
     private Status status;
 
-    public ArrayList<Answer> getAnswers() {
-        return answers;
+    public ArrayList<Answer> get_answers() {
+        return _answers;
     }
 
-    public void setAnswers(ArrayList<Answer> answers) {
-        this.answers = answers;
+    public void set_answers(ArrayList<Answer> answers) {
+        this._answers = answers;
     }
 
     public Status getStatus() {

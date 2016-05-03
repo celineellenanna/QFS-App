@@ -47,10 +47,10 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
 
         final Quiz quiz = quizzes.get(position);
 
-        if(quiz.get_challengerId().getId().equals(as.getUser().getId())) {
-            holder.tvUsername.setText(quiz.get_opponentId().getUsername());
+        if(quiz.get_challenger().getId().equals(as.getUser().getId())) {
+            holder.tvUsername.setText(quiz.get_opponent().getUsername());
         } else {
-            holder.tvUsername.setText(quiz.get_challengerId().getUsername());
+            holder.tvUsername.setText(quiz.get_challenger().getUsername());
         }
 
         holder.ivIcon.setImageResource(R.drawable.ic_reject);

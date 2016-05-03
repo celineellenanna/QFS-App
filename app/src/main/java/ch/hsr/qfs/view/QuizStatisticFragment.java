@@ -31,7 +31,6 @@ public class QuizStatisticFragment extends Fragment {
     TextView tvUsername2;
 
     public QuizStatisticFragment() {
-        // Required empty public constructor
     }
 
 
@@ -40,7 +39,6 @@ public class QuizStatisticFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View viewRoot = inflater.inflate(R.layout.fragment_quiz_statistic, container, false);
-        // Inflate the layout for this fragment
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         Bundle bundle = getArguments();
@@ -53,8 +51,8 @@ public class QuizStatisticFragment extends Fragment {
             public void onCompletion(ApiHttpResponse<Quiz> response) {
                 if (response.getSuccess()) {
                     Quiz quiz = response.getData();
-                    User challenger = quiz.get_challengerId();
-                    User opponent = quiz.get_opponentId();
+                    User challenger = quiz.get_challenger();
+                    User opponent = quiz.get_opponent();
                     tvUsername1.setText(challenger.getUsername());
                     tvUsername2.setText(opponent.getUsername());
                     Log.d("QFS", "QuizID: " + quizId);
