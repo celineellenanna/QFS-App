@@ -72,6 +72,42 @@ public class QuizService {
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
+public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>> callback){
+        String url = quizUrl + "/" + quizId;
+
+        Type type = new TypeToken<ApiHttpResponse<Quiz>>() {}.getType();
+
+
+        ApiHttpRequest<ApiHttpResponse<Quiz>> request = new ApiHttpRequest<ApiHttpResponse<Quiz>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<Quiz>>()
+                {
+                    public void onResponse(ApiHttpResponse<Quiz> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+
+
+
+    }
+
     public void accept(final String quizId, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/accept";
 

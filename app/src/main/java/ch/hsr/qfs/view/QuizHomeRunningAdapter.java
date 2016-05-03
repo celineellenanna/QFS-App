@@ -65,7 +65,7 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
                 public void onClick(View v) {
                     Bundle bundle = new Bundle();
                     bundle.putString("quizId", quiz.getId());
-                    QuizCategoryFragment f = new QuizCategoryFragment();
+                    QuizStatisticFragment f = new QuizStatisticFragment();
                     f.setArguments(bundle);
                     ((MainActivity) holder.parent.getContext()).changeFragment(f);
                 }

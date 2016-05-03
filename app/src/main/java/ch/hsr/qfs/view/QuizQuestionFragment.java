@@ -8,12 +8,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.hsr.qfs.R;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
+import ch.hsr.qfs.domain.Answer;
 import ch.hsr.qfs.domain.Round;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
@@ -32,6 +38,8 @@ public class QuizQuestionFragment extends Fragment {
     private String quizId;
     private String categoryId;
     private String roundId;
+    private Round round;
+    private int questionCount = 0;
 
     private Button btnQuestion1;
     private Button btnQuestion2;
@@ -61,8 +69,11 @@ public class QuizQuestionFragment extends Fragment {
             public void onCompletion(ApiHttpResponse<Round> response) {
                 if (response.getSuccess()) {
 
-                    Round round = response.getData();
+                    round = response.getData();
 
+                    long seed = System.nanoTime();
+                    ArrayList<Answer> allAnswers = round.get_roundQuestions().get(questionCount).get_question().getAnswers();
+                    Collections.shuffle(allAnswers, new Random(seed));
 
                     ((MainActivity) getActivity()).changeToolbarTitle("Quiz - " + round.get_category().getName());
 
@@ -73,12 +84,23 @@ public class QuizQuestionFragment extends Fragment {
 
                     TextView tvQuestion = (TextView) viewRoot.findViewById(R.id.tvQuestion);
 
-                    tvQuestion.setText(round.get_roundQuestions().get(0).get_question().getName());
+                    tvQuestion.setText(round.get_roundQuestions().get(questionCount).get_question().getName());
 
-                    btnQuestion1.setText(round.get_roundQuestions().get(0).get_question().getAnswers().get(0).getText());
-                    btnQuestion2.setText(round.get_roundQuestions().get(0).get_question().getAnswers().get(1).getText());
-                    btnQuestion3.setText(round.get_roundQuestions().get(0).get_question().getAnswers().get(2).getText());
-                    btnQuestion4.setText(round.get_roundQuestions().get(0).get_question().getAnswers().get(3).getText());
+                    btnQuestion1.setText(allAnswers.get(0).getText());
+                    btnQuestion2.setText(allAnswers.get(1).getText());
+                    btnQuestion3.setText(allAnswers.get(2).getText());
+                    btnQuestion4.setText(allAnswers.get(3).getText());
+
+                    btnQuestion1.setTag(allAnswers.get(0));
+                    btnQuestion2.setTag(allAnswers.get(1));
+                    btnQuestion3.setTag(allAnswers.get(2));
+                    btnQuestion4.setTag(allAnswers.get(3));
+
+                    btnQuestion1.setOnClickListener(new ButtonOnClickListener());
+                    btnQuestion2.setOnClickListener(new ButtonOnClickListener());
+                    btnQuestion3.setOnClickListener(new ButtonOnClickListener());
+                    btnQuestion4.setOnClickListener(new ButtonOnClickListener());
+
 
                     pgProgressBar = (ProgressBar) viewRoot.findViewById(R.id.pgProgressBar);
                     pgProgressBar.setMax(progressBarStatusMax);
@@ -115,12 +137,25 @@ public class QuizQuestionFragment extends Fragment {
                 }
 
                 if(progressBarStatus == progressBarStatusMax) {
-                    btnQuestion1.setEnabled(false);
-                    btnQuestion2.setEnabled(false);
-                    btnQuestion3.setEnabled(false);
-                    btnQuestion4.setEnabled(false);
+                    btnQuestion1.setOnClickListener(null);
+                    btnQuestion2.setOnClickListener(null);
+                    btnQuestion3.setOnClickListener(null);
+                    btnQuestion4.setOnClickListener(null);
+
                 }
             }
         }).start();
     }
+
+    private class ButtonOnClickListener implements Button.OnClickListener{
+        @Override
+        public void onClick(View view) {
+            Answer a = (Answer) ((Button) view).getTag();
+            Log.d("QFS", " "+ a.getText() + a.isCorrect());
+        }
+
+
+    }
+
+
 }
