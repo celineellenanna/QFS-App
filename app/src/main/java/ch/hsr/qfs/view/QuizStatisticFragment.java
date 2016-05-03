@@ -72,7 +72,7 @@ public class QuizStatisticFragment extends Fragment {
             }
         });
 
-        btnPlay = (Button) viewRoot.findViewById(R.id.btn_statisticPlay);
+        btnPlay = (Button) viewRoot.findViewById(R.id.btn_Play);
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

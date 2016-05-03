@@ -609,7 +609,7 @@
         android:layout_marginLeft="5dp" />
 
     <Button
-        android:id ="@+id/btn_statisticPlay"
+        android:id ="@+id/btn_Play"
         android:text="Runde spielen"
         android:layout_row="8"
         android:layout_column="0"
