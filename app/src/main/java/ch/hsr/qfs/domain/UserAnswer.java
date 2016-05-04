@@ -6,6 +6,15 @@ public class UserAnswer {
     private Answer _answer;
     private User _user;
     private int timeToAnswer;
+    private boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public String get_id() {
         return _id;

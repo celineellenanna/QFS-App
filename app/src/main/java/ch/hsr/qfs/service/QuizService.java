@@ -378,7 +378,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswer(final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void createUserAnswer(final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final Boolean status, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswer";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
@@ -402,10 +402,12 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
+
                 params.put("roundQuestionId", roundQuestionId);
                 params.put("answerId", answerId);
                 params.put("userId", userId);
-                params.put("timeToAnswer", "" + timeToAnswer + "");
+                params.put("timeToAnswer", "" + timeToAnswer);
+                params.put("status", "" + status);
 
                 return params;
             }
@@ -414,15 +416,15 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void getUserAnswers(final ApiHttpCallback<ApiHttpResponse<UserAnswer>> callback) {
-        String url = quizUrl + "/userAnswer";
+    public void createUserAnswerTimeElapsed(final String roundQuestionId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
+        String url = quizUrl + "/round/userAnswerTimeElapsed";
 
-        Type type = new TypeToken<ApiHttpResponse<UserAnswer>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<UserAnswer>> request = new ApiHttpRequest<ApiHttpResponse<UserAnswer>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ApiHttpResponse<UserAnswer>>()
+        ApiHttpRequest<ApiHttpResponse> request = new ApiHttpRequest<ApiHttpResponse>(Request.Method.POST, url, type, null,
+                new Response.Listener<ApiHttpResponse>()
                 {
-                    public void onResponse(ApiHttpResponse<UserAnswer> response) {
+                    public void onResponse(ApiHttpResponse response) {
                         callback.onCompletion(response);
                     }
                 },
@@ -439,11 +441,14 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             {
                 Map<String, String>  params = new HashMap<String, String>();
 
+                params.put("roundQuestionId", roundQuestionId);
+                params.put("userId", userId);
+                params.put("timeToAnswer", "" + timeToAnswer);
+
                 return params;
             }
         };
 
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
-
 }

@@ -1,17 +1,10 @@
 package ch.hsr.qfs.view;
 
-import android.animation.ObjectAnimator;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -158,12 +151,26 @@ public class QuizQuestionFragment extends Fragment {
                 }
 
                 if(progressBarStatus == progressBarStatusMax || progressBarInterrupted) {
+                    progressBarInterrupted = true;
                     Thread.currentThread().interrupt();
+
                     btnQuestion1.setOnClickListener(null);
                     btnQuestion2.setOnClickListener(null);
                     btnQuestion3.setOnClickListener(null);
                     btnQuestion4.setOnClickListener(null);
 
+                    if(progressBarStatus == progressBarStatusMax) {
+                        quizService.createUserAnswerTimeElapsed(round.get_roundQuestions().get(questionCount).get_id(), authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
+                            @Override
+                            public void onCompletion(ApiHttpResponse response) {
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                Log.d("QFS", message);
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -176,6 +183,7 @@ public class QuizQuestionFragment extends Fragment {
             progressBarInterrupted = true;
             Button button = (Button) view;
             Answer answer = (Answer) button.getTag();
+
             if(answer.isCorrect()) {
                 button.setBackgroundResource(R.drawable.button_bg_transition_green);
                 TransitionDrawable transition = (TransitionDrawable) button.getBackground();
@@ -185,19 +193,15 @@ public class QuizQuestionFragment extends Fragment {
                 TransitionDrawable transition = (TransitionDrawable) button.getBackground();
                 transition.startTransition(1000);
             }
-            quizService.createUserAnswer(round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
+
+            quizService.createUserAnswer(round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
                 @Override
                 public void onCompletion(ApiHttpResponse response) {
-                    if (response.getSuccess()) {
-                        Log.d("QFS", "CreateUserAnswer success");
-                    } else {
-                        Log.d("QFS", "NO SUCCESS");
-                    }
                 }
 
                 @Override
                 public void onError(String message) {
-                    Log.d("QFS", "Failed");
+                    Log.d("QFS", message);
                 }
             });
         }
@@ -207,10 +211,10 @@ public class QuizQuestionFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-            questionCount++;
-            if(progressBarInterrupted && questionCount <= 2) {
+            if(progressBarInterrupted && questionCount < 2) {
+                questionCount++;
                 refreshFragment();
-            } else if(progressBarInterrupted && questionCount > 2) {
+            } else if(progressBarInterrupted && questionCount == 2) {
                 Bundle bundle = new Bundle();
                 bundle.putString("quizId", quizId);
                 QuizStatisticFragment f = new QuizStatisticFragment();
