@@ -3,6 +3,7 @@ package ch.hsr.qfs.domain;
 import java.util.ArrayList;
 
 public class Round {
+
     private String _id;
     private Category _category;
     private ArrayList<RoundQuestion> _roundQuestions;

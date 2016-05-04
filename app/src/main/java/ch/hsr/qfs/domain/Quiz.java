@@ -7,7 +7,7 @@ import org.joda.time.format.*;
 
 public class Quiz {
 
-    private enum Status {Open, Finished, Canceled, WaitingForChallenger, WaitingForOpponent}
+    private enum Status {Open, Finished, Canceled, WaitingForChallenger, WaitingForOpponent};
 
     private String _id;
     private User _challenger;

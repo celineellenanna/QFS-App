@@ -16,6 +16,7 @@ import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Question;
 import ch.hsr.qfs.domain.Round;
 import ch.hsr.qfs.domain.RoundQuestion;
+import ch.hsr.qfs.domain.UserAnswer;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpController;
 import ch.hsr.qfs.service.apiclient.ApiHttpRequest;
@@ -378,7 +379,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
     }
 
     public void createUserAnswer(final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
-        String url = quizUrl + "/round/answer";
+        String url = quizUrl + "/round/userAnswer";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
 
@@ -405,6 +406,38 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
                 params.put("answerId", answerId);
                 params.put("userId", userId);
                 params.put("timeToAnswer", "" + timeToAnswer + "");
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getUserAnswers(final ApiHttpCallback<ApiHttpResponse<UserAnswer>> callback) {
+        String url = quizUrl + "/userAnswer";
+
+        Type type = new TypeToken<ApiHttpResponse<UserAnswer>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<UserAnswer>> request = new ApiHttpRequest<ApiHttpResponse<UserAnswer>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<UserAnswer>>()
+                {
+                    public void onResponse(ApiHttpResponse<UserAnswer> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
 
                 return params;
             }

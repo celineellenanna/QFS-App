@@ -1,6 +1,7 @@
 package ch.hsr.qfs.domain;
 
 public class Answer {
+
     private String _id;
     private String text;
     private boolean correct;

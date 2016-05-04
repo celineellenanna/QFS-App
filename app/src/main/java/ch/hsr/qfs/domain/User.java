@@ -2,18 +2,18 @@ package ch.hsr.qfs.domain;
 
 public class User {
 
-    private enum Role {Administrator, Moderator, Player}
+    private enum Role {Administrator, Moderator, Player};
 
-    private enum Status {Registered, Activated, Deleted}
+    private enum Status {Registered, Activated, Deleted};
 
-    private String _id = null;
-    private String firstname = null;
-    private String lastname = null;
-    private String email = null;
-    private String username = null;
-    private String password = null;
-    private Role role = null;
-    private Status status = null;
+    private String _id;
+    private String firstname;
+    private String lastname;
+    private String email;
+    private String username;
+    private String password;
+    private Role role;
+    private Status status;
 
     public String getId() {
         return this._id;
