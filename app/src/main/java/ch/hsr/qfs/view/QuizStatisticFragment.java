@@ -18,30 +18,39 @@ import java.util.ArrayList;
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.User;
+import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
 import ch.hsr.qfs.service.apiclient.ApiHttpResponse;
 
 public class QuizStatisticFragment extends Fragment {
 
-    private QuizService qs = QuizService.getInstance();
-    private String quizId;
-    Button btnPlay;
-    TextView tvUsername1;
-    TextView tvUsername2;
+    private QuizService quizService = QuizService.getInstance();
+    private AuthService authService = AuthService.getInstance();
 
-    Button btn_statisticQ1;
-    Button btn_statisticQ2;
-    Button btn_statisticQ3;
-    Button btn_statisticQ4;
-    Button btn_statisticQ5;
-    Button btn_statisticQ6;
-    Button btn_statisticQ7;
-    Button btn_statisticQ8;
-    Button btn_statisticQ9;
-    Button btn_statisticQ10;
-    Button btn_statisticQ11;
-    Button btn_statisticQ12;
+    private View viewRoot;
+
+    private Quiz quiz;
+    private User challenger;
+    private User opponent;
+    private String quizId;
+
+    private Button btnPlay;
+    private TextView tvUsername1;
+    private TextView tvUsername2;
+
+    private Button btn_statisticQ1;
+    private Button btn_statisticQ2;
+    private Button btn_statisticQ3;
+    private Button btn_statisticQ4;
+    private Button btn_statisticQ5;
+    private Button btn_statisticQ6;
+    private Button btn_statisticQ7;
+    private Button btn_statisticQ8;
+    private Button btn_statisticQ9;
+    private Button btn_statisticQ10;
+    private Button btn_statisticQ11;
+    private Button btn_statisticQ12;
 
     public QuizStatisticFragment() {
     }
@@ -50,7 +59,7 @@ public class QuizStatisticFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View viewRoot = inflater.inflate(R.layout.fragment_quiz_statistic, container, false);
+        viewRoot = inflater.inflate(R.layout.fragment_quiz_statistic, container, false);
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
 
         Bundle bundle = getArguments();
@@ -74,32 +83,22 @@ public class QuizStatisticFragment extends Fragment {
 
         loadData();
 
-        btnPlay = (Button) viewRoot.findViewById(R.id.btn_Play);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("quizId", quizId);
-                QuizCategoryFragment f = new QuizCategoryFragment();
-                f.setArguments(bundle);
-                ((MainActivity) getActivity()).changeFragment(f);
-            }
-        });
-
         return viewRoot;
     }
 
     public void loadData() {
-        qs.get(quizId, new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
+        quizService.get(quizId, new ApiHttpCallback<ApiHttpResponse<Quiz>>() {
             @Override
             public void onCompletion(ApiHttpResponse<Quiz> response) {
                 if (response.getSuccess()) {
-                    Quiz quiz = response.getData();
-                    User challenger = quiz.get_challenger();
-                    User opponent = quiz.get_opponent();
+                    quiz = response.getData();
+                    challenger = quiz.get_challenger();
+                    opponent = quiz.get_opponent();
 
-                    updateUsernames(challenger, opponent);
+                    updateUsernames();
+                    updatePlayButton();
                     updateStatisticButtons();
+
                 } else {
                     Toast.makeText(getContext(), response.getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -112,9 +111,32 @@ public class QuizStatisticFragment extends Fragment {
         });
     }
 
-    public void updateUsernames(User challenger, User opponent) {
+    public void updateUsernames() {
         tvUsername1.setText(challenger.getUsername());
         tvUsername2.setText(opponent.getUsername());
+    }
+
+    public void updatePlayButton() {
+
+        btnPlay = (Button) viewRoot.findViewById(R.id.btn_Play);
+        btnPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("quizId", quizId);
+                QuizCategoryFragment f = new QuizCategoryFragment();
+                f.setArguments(bundle);
+                ((MainActivity) getActivity()).changeFragment(f);
+            }
+        });
+
+        if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
+            (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
+            btnPlay.setVisibility(View.INVISIBLE);
+        } else if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
+            quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
+            btnPlay.setVisibility(View.VISIBLE);
+        }
     }
 
     public void updateStatisticButtons() {

@@ -60,17 +60,18 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
             holder.ivIcon.setImageResource(R.drawable.ic_start);
             holder.tvUsername.setText(quiz.get_opponent().getUsername());
             holder.tvStatus.setText("Spielbereit");
-            holder.rlListItem.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("quizId", quiz.getId());
-                    QuizStatisticFragment f = new QuizStatisticFragment();
-                    f.setArguments(bundle);
-                    ((MainActivity) holder.parent.getContext()).changeFragment(f);
-                }
-            });
         }
+
+        holder.rlListItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putString("quizId", quiz.getId());
+                QuizStatisticFragment f = new QuizStatisticFragment();
+                f.setArguments(bundle);
+                ((MainActivity) holder.parent.getContext()).changeFragment(f);
+            }
+        });
     }
 
     @Override

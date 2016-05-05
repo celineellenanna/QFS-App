@@ -378,7 +378,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswer(final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final Boolean status, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void createUserAnswer(final String quizId, final String roundId, final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final Boolean status, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswer";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
@@ -403,6 +403,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             {
                 Map<String, String>  params = new HashMap<String, String>();
 
+                params.put("quizId", quizId);
+                params.put("roundId", roundId);
                 params.put("roundQuestionId", roundQuestionId);
                 params.put("answerId", answerId);
                 params.put("userId", userId);
@@ -416,7 +418,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswerTimeElapsed(final String roundQuestionId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void createUserAnswerTimeElapsed(final String quizId, final String roundId, final String roundQuestionId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswerTimeElapsed";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
@@ -441,6 +443,9 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             {
                 Map<String, String>  params = new HashMap<String, String>();
 
+
+                params.put("quizId", quizId);
+                params.put("roundId", roundId);
                 params.put("roundQuestionId", roundQuestionId);
                 params.put("userId", userId);
                 params.put("timeToAnswer", "" + timeToAnswer);
