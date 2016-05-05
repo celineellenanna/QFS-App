@@ -1,5 +1,6 @@
 package ch.hsr.qfs.service;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -303,9 +304,6 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         };
 
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
-
-
-
     }
 
     public void getRound(final String roundId, final ApiHttpCallback<ApiHttpResponse<Round>> callback){
@@ -339,9 +337,6 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         };
 
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
-
-
-
     }
 
     public void createRound(final String quizId, final String categoryId, final ApiHttpCallback<ApiHttpResponse<Round>> callback) {
@@ -449,6 +444,38 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
                 params.put("roundQuestionId", roundQuestionId);
                 params.put("userId", userId);
                 params.put("timeToAnswer", "" + timeToAnswer);
+
+                return params;
+            }
+        };
+
+        ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
+    }
+
+    public void getFinishedAnswerCount(final String quizId, final ApiHttpCallback<ApiHttpResponse<Integer>> callback) {
+        String url = quizUrl + "/round/getFinishedAnswerCount/" + quizId;
+
+        Type type = new TypeToken<ApiHttpResponse<Integer>>() {}.getType();
+
+        ApiHttpRequest<ApiHttpResponse<Integer>> request = new ApiHttpRequest<ApiHttpResponse<Integer>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<Integer>>()
+                {
+                    public void onResponse(ApiHttpResponse<Integer> response) {
+                        callback.onCompletion(response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        callback.onError(error.toString());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
 
                 return params;
             }

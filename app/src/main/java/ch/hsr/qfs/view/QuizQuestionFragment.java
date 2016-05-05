@@ -195,7 +195,6 @@ public class QuizQuestionFragment extends Fragment {
                 transition.startTransition(1000);
             }
 
-            Log.d("createUserAnswer", "success");
             quizService.createUserAnswer(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
                 @Override
                 public void onCompletion(ApiHttpResponse response) {

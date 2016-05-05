@@ -13,10 +13,9 @@ import android.widget.Toast;
 
 import com.hsr.qfs.R;
 
-import java.util.ArrayList;
-
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Quiz;
+import ch.hsr.qfs.domain.Round;
 import ch.hsr.qfs.domain.User;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
@@ -31,6 +30,8 @@ public class QuizStatisticFragment extends Fragment {
     private View viewRoot;
 
     private Quiz quiz;
+    private Round round;
+    private Category category;
     private User challenger;
     private User opponent;
     private String quizId;
@@ -117,26 +118,55 @@ public class QuizStatisticFragment extends Fragment {
     }
 
     public void updatePlayButton() {
-
         btnPlay = (Button) viewRoot.findViewById(R.id.btn_Play);
-        btnPlay.setOnClickListener(new View.OnClickListener() {
+
+        quizService.getFinishedAnswerCount(quizId, new ApiHttpCallback<ApiHttpResponse<Integer>>() {
             @Override
-            public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("quizId", quizId);
-                QuizCategoryFragment f = new QuizCategoryFragment();
-                f.setArguments(bundle);
-                ((MainActivity) getActivity()).changeFragment(f);
+            public void onCompletion(ApiHttpResponse<Integer> response) {
+                if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
+                        (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
+                    btnPlay.setVisibility(View.INVISIBLE);
+                } else if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
+                        quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
+                    btnPlay.setVisibility(View.VISIBLE);
+                }
+
+                if(response.getSuccess() && response.getData() != 0 && response.getData() < 36 && response.getData() % 3 == 0 && response.getData() % 6 != 0) {
+                    round = quiz.get_rounds().get(quiz.get_rounds().size() - 1);
+                    category = quiz.get_rounds().get(quiz.get_rounds().size() - 1).get_category();
+                    btnPlay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("quizId", quizId);
+                            bundle.putString("roundId", round.get_id());
+                            bundle.putString("categoryId", category.get_id());
+                            QuizQuestionFragment f = new QuizQuestionFragment();
+                            f.setArguments(bundle);
+                            ((MainActivity) getActivity()).changeFragment(f);
+                        }
+                    });
+                } else if(response.getSuccess() && (response.getData() == 0 || response.getData() < 36) && response.getData() % 6 == 0) {
+                    btnPlay.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("quizId", quizId);
+                            QuizCategoryFragment f = new QuizCategoryFragment();
+                            f.setArguments(bundle);
+                            ((MainActivity) getActivity()).changeFragment(f);
+                        }
+                    });
+                } else if(response.getData() == 36) {
+                    ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
             }
         });
-
-        if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
-            (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
-            btnPlay.setVisibility(View.INVISIBLE);
-        } else if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
-            quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
-            btnPlay.setVisibility(View.VISIBLE);
-        }
     }
 
     public void updateStatisticButtons() {
