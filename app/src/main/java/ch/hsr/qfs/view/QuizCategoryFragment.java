@@ -28,6 +28,9 @@ public class QuizCategoryFragment extends Fragment {
     private Category category1;
     private Category category2;
     private Category category3;
+    private Button btn_category1;
+    private Button btn_category2;
+    private Button btn_category3;
 
     public QuizCategoryFragment() {
         // Required empty public constructor
@@ -47,9 +50,9 @@ public class QuizCategoryFragment extends Fragment {
         Bundle bundle = getArguments();
         quizId = bundle.getString("quizId");
 
-        final Button btn_category1 = (Button) viewRoot.findViewById(R.id.btn_category1);
-        final Button btn_category2 = (Button) viewRoot.findViewById(R.id.btn_category2);
-        final Button btn_category3 = (Button) viewRoot.findViewById(R.id.btn_category3);
+        btn_category1 = (Button) viewRoot.findViewById(R.id.btn_category1);
+        btn_category2 = (Button) viewRoot.findViewById(R.id.btn_category2);
+        btn_category3 = (Button) viewRoot.findViewById(R.id.btn_category3);
 
         quizService.getCategories(new ApiHttpCallback<ApiHttpResponse<ArrayList<Category>>>() {
             @Override
@@ -80,6 +83,7 @@ public class QuizCategoryFragment extends Fragment {
         btn_category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                disableButtons();
                 quizService.createRound(quizId, category1.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
@@ -101,6 +105,7 @@ public class QuizCategoryFragment extends Fragment {
         btn_category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                disableButtons();
                 quizService.createRound(quizId, category2.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
@@ -122,6 +127,7 @@ public class QuizCategoryFragment extends Fragment {
         btn_category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                disableButtons();
                 quizService.createRound(quizId, category3.get_id(), new ApiHttpCallback<ApiHttpResponse<Round>>() {
                     @Override
                     public void onCompletion(ApiHttpResponse<Round> response) {
@@ -152,6 +158,12 @@ public class QuizCategoryFragment extends Fragment {
         QuizQuestionFragment f = new QuizQuestionFragment();
         f.setArguments(bundle);
         ((MainActivity) getActivity()).changeFragment(f);
+    }
+
+    private void disableButtons(){
+        btn_category1.setOnClickListener(null);
+        btn_category2.setOnClickListener(null);
+        btn_category3.setOnClickListener(null);
     }
 
 }

@@ -20,27 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="77c63568-a9e5-402f-94bb-57c211fbaa58" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/circleimageview_1_3_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/circleimageview_1_3_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/design_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_contrib_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_contrib_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_core_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_idling_resource_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/espresso_intents_2_2_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/espresso_intents_2_2_2.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/exposed_instrumentation_api_publish_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/library_aar_1_0_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/library_aar_1_0_0.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/recyclerview_v7_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/rules_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" afterPath="$PROJECT_DIR$/.idea/libraries/runner_0_5.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_annotations_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/UserAnswer.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/UserAnswer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizQuestionFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" />
     </list>
     <ignored path="QFS-App.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -127,10 +108,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuizStatisticFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="QuizStatisticFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7938808">
+            <state vertical-scroll-proportion="0.0">
               <caret line="195" column="193" selection-start-line="195" selection-start-column="193" selection-end-line="195" selection-end-column="193" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -181,11 +162,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QuizCategoryFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QuizCategoryFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
+            <state vertical-scroll-proportion="0.25120774">
+              <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -1767,7 +1748,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizHomeOpenAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizHomeFinishedAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/Category.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_quiz_statistic.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/button_bg_animate_flash.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/anim/animate_button_flash.xml" />
@@ -1795,6 +1775,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/CountAnswers.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/domain/UserAnswer.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java" />
       </list>
     </option>
   </component>
@@ -2705,7 +2686,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462445146977</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="QuizStatisticFragment added ButtonsUpdate">
+      <created>1462803004933</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1462803004933</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2783,7 +2770,8 @@
     <MESSAGE value="BugFix Population" />
     <MESSAGE value="CreateUserAnswers" />
     <MESSAGE value="CreateUserAnswers updated&#10;RoundFinished created" />
-    <option name="LAST_COMMIT_MESSAGE" value="CreateUserAnswers updated&#10;RoundFinished created" />
+    <MESSAGE value="QuizStatisticFragment added ButtonsUpdate" />
+    <option name="LAST_COMMIT_MESSAGE" value="QuizStatisticFragment added ButtonsUpdate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3084,14 +3072,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/service/apiclient/ApiHttpRequest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3190,11 +3170,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizStatisticFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7938808">
+        <state vertical-scroll-proportion="0.0">
           <caret line="195" column="193" selection-start-line="195" selection-start-column="193" selection-end-line="195" selection-end-column="193" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/ch/hsr/qfs/view/QuizCategoryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25120774">
+          <caret line="80" column="11" selection-start-line="80" selection-start-column="11" selection-end-line="80" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
