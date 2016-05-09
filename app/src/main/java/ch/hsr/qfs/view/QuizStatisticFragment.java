@@ -228,9 +228,9 @@ public class QuizStatisticFragment extends Fragment {
     public void updateStatisticButtons() {
         for (Round round:quiz.get_rounds()) {
             Log.d("QFS-Round", round.get_id());
+
+
         }
 
     }
-
-
 }

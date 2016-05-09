@@ -169,6 +169,23 @@ public class MainActivityTest {
 
     }
 
+    @Test
+    public void quizIsOpen() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_login));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user0"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass0"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withText("Laufend")).check(matches(isDisplayed()));
+        onView(withText("Offen")).check(matches(isDisplayed()));
+        onView(withText("Beendet")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.fab)).perform(click());
+    }
+
     public class ToastMatcher extends TypeSafeMatcher<Root> {
 
         @Override

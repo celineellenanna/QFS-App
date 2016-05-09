@@ -215,4 +215,8 @@ public class MainActivity extends AppCompatActivity {
             fab.show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

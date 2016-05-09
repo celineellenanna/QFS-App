@@ -36,6 +36,7 @@ public class QuizHomeRunningFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         viewRoot = inflater.inflate(R.layout.fragment_quiz_home_running, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout) viewRoot.findViewById(R.id.swipeRefreshLayout);
