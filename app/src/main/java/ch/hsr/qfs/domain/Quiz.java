@@ -16,6 +16,32 @@ public class Quiz {
     private String createdAt;
     private String updatedAt;
     private ArrayList<Round> _rounds;
+    private int challengerPoints;
+    private int opponentPoints;
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    public int getChallengerPoints() {
+        return challengerPoints;
+    }
+
+    public void setChallengerPoints(int challengerPoints) {
+        this.challengerPoints = challengerPoints;
+    }
+
+    public int getOpponentPoints() {
+        return opponentPoints;
+    }
+
+    public void setOpponentPoints(int opponentPoints) {
+        this.opponentPoints = opponentPoints;
+    }
 
     public ArrayList<Round> get_rounds() { return _rounds; }
 

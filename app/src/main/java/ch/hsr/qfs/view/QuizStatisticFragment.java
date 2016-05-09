@@ -45,6 +45,7 @@ public class QuizStatisticFragment extends Fragment {
     private Button btnPlay;
     private TextView tvUsername1;
     private TextView tvUsername2;
+    private TextView tvScore;
 
     private Button btn_statisticQ1;
     private Button btn_statisticQ2;
@@ -104,6 +105,8 @@ public class QuizStatisticFragment extends Fragment {
         tvUsername1 = (TextView) viewRoot.findViewById(R.id.tvUsername1);
         tvUsername2 = (TextView) viewRoot.findViewById(R.id.tvUsername2);
 
+        tvScore = (TextView) viewRoot.findViewById(R.id.tvScore);
+
         btn_statisticQ1 = (Button) viewRoot.findViewById(R.id.btn_statisticQ1);
         btn_statisticQ2 = (Button) viewRoot.findViewById(R.id.btn_statisticQ2);
         btn_statisticQ3 = (Button) viewRoot.findViewById(R.id.btn_statisticQ3);
@@ -159,6 +162,7 @@ public class QuizStatisticFragment extends Fragment {
                     opponent = quiz.get_opponent();
 
                     updateUsernames();
+                    updateScore();
                     updatePlayButton();
                     updateStatisticButtons();
 
@@ -185,15 +189,15 @@ public class QuizStatisticFragment extends Fragment {
         quizService.getFinishedAnswerCount(quizId, new ApiHttpCallback<ApiHttpResponse<CountAnswers>>() {
             @Override
             public void onCompletion(ApiHttpResponse<CountAnswers> response) {
-                if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
+                if ((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
                         (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
                     btnPlay.setVisibility(View.INVISIBLE);
-                } else if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
+                } else if ((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
                         quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
                     btnPlay.setVisibility(View.VISIBLE);
                 }
 
-                if(response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 && response.getData().getCountActualRoundAnswers() < 6) {
+                if (response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 && response.getData().getCountActualRoundAnswers() < 6) {
                     round = quiz.get_rounds().get(quiz.get_rounds().size() - 1);
                     category = quiz.get_rounds().get(quiz.get_rounds().size() - 1).get_category();
                     btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -208,8 +212,7 @@ public class QuizStatisticFragment extends Fragment {
                             ((MainActivity) getActivity()).changeFragment(f);
                         }
                     });
-                } else if(response.getSuccess() && response.getData().getCountUserAnswer() < 36 && (response.getData().getCountUserAnswer() == 0 || response.getData().getCountActualRoundAnswers() == 6)) {
-                    Log.d("QFS", "2");
+                } else if (response.getSuccess() && response.getData().getCountUserAnswer() < 36 && (response.getData().getCountUserAnswer() == 0 || response.getData().getCountActualRoundAnswers() == 6)) {
                     btnPlay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -220,7 +223,7 @@ public class QuizStatisticFragment extends Fragment {
                             ((MainActivity) getActivity()).changeFragment(f);
                         }
                     });
-                } else if(response.getData().getCountUserAnswer() == 36) {
+                } else if (response.getData().getCountUserAnswer() == 36) {
                     ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
                 }
             }
@@ -261,5 +264,9 @@ public class QuizStatisticFragment extends Fragment {
                 }
             }
         }
+    }
+
+    public void updateScore() {
+        tvScore.setText(quiz.getOpponentPoints() + " : " + quiz.getChallengerPoints());
     }
 }

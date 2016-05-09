@@ -21,8 +21,7 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
 
     private ArrayList<Quiz> quizzes;
 
-    private AuthService as = AuthService.getInstance();
-    private QuizService qs = QuizService.getInstance();
+    private AuthService authService = AuthService.getInstance();
 
     public QuizHomeRunningAdapter(ArrayList<Quiz> quizzes) {
         this.quizzes = quizzes;
@@ -50,13 +49,13 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
 
         final Quiz quiz = quizzes.get(position);
 
-        if((quiz.get_challenger().getId().equals(as.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
-            (quiz.get_opponent().getId().equals(as.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
+        if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
+            (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
             holder.tvUsername.setText(quiz.get_opponent().getUsername());
             holder.tvStatus.setText("Warten auf Gegner");
-        } else if((quiz.get_challenger().getId().equals(as.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
-            quiz.get_opponent().getId().equals(as.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
+        } else if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger") ||
+            quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent"))) {
             holder.ivIcon.setImageResource(R.drawable.ic_start);
             holder.tvUsername.setText(quiz.get_opponent().getUsername());
             holder.tvStatus.setText("Spielbereit");

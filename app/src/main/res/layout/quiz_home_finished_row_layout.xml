@@ -35,13 +35,21 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="username"
-                    android:id="@+id/tvUsername" />
+                    android:text="status"
+                    android:id="@+id/tvStatus"
+                    android:singleLine="false" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="status"
-                    android:id="@+id/tvStatus"
+                    android:text="username"
+                    android:id="@+id/tvUsername" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="score"
+                    android:id="@+id/tvScore"
                     android:singleLine="false" />
             </LinearLayout>
         </LinearLayout>

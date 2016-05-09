@@ -154,10 +154,7 @@ public class QuizQuestionFragment extends Fragment {
                     progressBarInterrupted = true;
                     Thread.currentThread().interrupt();
 
-                    btnQuestion1.setOnClickListener(null);
-                    btnQuestion2.setOnClickListener(null);
-                    btnQuestion3.setOnClickListener(null);
-                    btnQuestion4.setOnClickListener(null);
+                    removeOnClickListener();
 
                     if(progressBarStatus == progressBarStatusMax) {
                         Log.d("TimeElapsed", "success");
@@ -222,7 +219,15 @@ public class QuizQuestionFragment extends Fragment {
                 f.setArguments(bundle);
                 ((MainActivity) getActivity()).changeFragment(f);
             }
+            removeOnClickListener();
         }
+    }
+
+    private void removeOnClickListener() {
+        btnQuestion1.setOnClickListener(null);
+        btnQuestion2.setOnClickListener(null);
+        btnQuestion3.setOnClickListener(null);
+        btnQuestion4.setOnClickListener(null);
     }
 
     private void refreshFragment() {

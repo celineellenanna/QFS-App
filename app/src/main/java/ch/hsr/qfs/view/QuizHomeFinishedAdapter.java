@@ -20,8 +20,7 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
 
     private ArrayList<Quiz> quizzes;
 
-    private AuthService as = AuthService.getInstance();
-    private QuizService qs = QuizService.getInstance();
+    private AuthService authService = AuthService.getInstance();
 
     public QuizHomeFinishedAdapter(ArrayList<Quiz> quizzes) {
         this.quizzes = quizzes;
@@ -36,9 +35,10 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
         ImageView ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
         TextView tvUsername = (TextView) v.findViewById(R.id.tvUsername);
         TextView tvStatus = (TextView) v.findViewById(R.id.tvStatus);
+        TextView tvScore = (TextView) v.findViewById(R.id.tvScore);
         RelativeLayout rlListItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
 
-        QuizHomeFinishedViewHolder viewHolder = new QuizHomeFinishedViewHolder(v, ivIcon, tvUsername, tvStatus, rlListItem);
+        QuizHomeFinishedViewHolder viewHolder = new QuizHomeFinishedViewHolder(v, ivIcon, tvUsername, tvStatus, tvScore, rlListItem);
 
         return viewHolder;
     }
@@ -47,14 +47,33 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
 
         final Quiz quiz = quizzes.get(position);
 
-        if(quiz.get_challenger().getId().equals(as.getUser().getId())) {
+        if(quiz.get_challenger().getId().equals(authService.getUser().getId())) {
             holder.tvUsername.setText(quiz.get_opponent().getUsername());
+            if(quiz.getStatus() == "Finished" && quiz.getChallengerPoints() > quiz.getOpponentPoints()) {
+                holder.ivIcon.setImageResource(R.drawable.ic_win);
+                holder.tvStatus.setText("Gewonnen");
+                holder.tvScore.setText(quiz.getChallengerPoints() + " : " + quiz.getOpponentPoints());
+            } else if(quiz.getStatus() == "Finished" && quiz.getChallengerPoints() < quiz.getOpponentPoints()) {
+                holder.ivIcon.setImageResource(R.drawable.ic_lose);
+                holder.tvStatus.setText("Verloren");
+                holder.tvScore.setText(quiz.getChallengerPoints() + " : " + quiz.getOpponentPoints());
+            } else {
+                holder.ivIcon.setImageResource(R.drawable.ic_reject);
+            }
         } else {
             holder.tvUsername.setText(quiz.get_challenger().getUsername());
+            if(quiz.getStatus() == "Finished" && quiz.getOpponentPoints() > quiz.getChallengerPoints()) {
+                holder.ivIcon.setImageResource(R.drawable.ic_win);
+                holder.tvStatus.setText("Gewonnen");
+                holder.tvScore.setText(quiz.getOpponentPoints() + " : " + quiz.getChallengerPoints());
+            } else if(quiz.getStatus() == "Finished" && quiz.getOpponentPoints() < quiz.getChallengerPoints()) {
+                holder.ivIcon.setImageResource(R.drawable.ic_lose);
+                holder.tvStatus.setText("Verloren");
+                holder.tvScore.setText(quiz.getOpponentPoints() + " : " + quiz.getChallengerPoints());
+            } else {
+                holder.ivIcon.setImageResource(R.drawable.ic_reject);
+            }
         }
-
-        holder.ivIcon.setImageResource(R.drawable.ic_reject);
-        holder.tvStatus.setText(quiz.getStatus());
     }
 
     @Override

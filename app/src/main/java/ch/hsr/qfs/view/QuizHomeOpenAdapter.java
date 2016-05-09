@@ -26,8 +26,8 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
 
     private ArrayList<Quiz> quizzes;
 
-    private AuthService as = AuthService.getInstance();
-    private QuizService qs = QuizService.getInstance();
+    private AuthService authService = AuthService.getInstance();
+    private QuizService quizService = QuizService.getInstance();
 
     public QuizHomeOpenAdapter(ArrayList<Quiz> quizzes) {
         this.quizzes = quizzes;
@@ -56,7 +56,7 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
 
         final Quiz quiz = quizzes.get(position);
 
-        if(quiz.get_challenger().getId().equals(as.getUser().getId())) {
+        if(quiz.get_challenger().getId().equals(authService.getUser().getId())) {
             holder.ivIcon.setImageResource(R.drawable.ic_history);
             holder.tvUsername.setText(quiz.get_opponent().getUsername());
             holder.tvStatus.setText("Gesendete Anfrage");
@@ -73,7 +73,7 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
         holder.ivAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qs.accept(quiz.getId(), new ApiHttpCallback<ApiHttpResponse>() {
+                quizService.accept(quiz.getId(), new ApiHttpCallback<ApiHttpResponse>() {
                     @Override
                     public void onCompletion(ApiHttpResponse response) {
                         if(response.getSuccess()) {
@@ -93,7 +93,7 @@ public class QuizHomeOpenAdapter extends RecyclerView.Adapter<QuizHomeOpenViewHo
         holder.ivReject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                qs.reject(quiz.getId(), new ApiHttpCallback<ApiHttpResponse>() {
+                quizService.reject(quiz.getId(), new ApiHttpCallback<ApiHttpResponse>() {
                     @Override
                     public void onCompletion(ApiHttpResponse response) {
                         if(response.getSuccess()) {
