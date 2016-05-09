@@ -8,7 +8,7 @@ public class UserAnswer {
     private int timeToAnswer;
     private boolean status;
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
     }
 

@@ -229,4 +229,6 @@ public class QuizQuestionFragment extends Fragment {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.detach(this).attach(this).commit();
     }
+
+
 }

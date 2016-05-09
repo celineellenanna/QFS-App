@@ -13,11 +13,16 @@ import android.widget.Toast;
 
 import com.hsr.qfs.R;
 
+import java.util.ArrayList;
+
+import ch.hsr.qfs.domain.Answer;
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.CountAnswers;
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Round;
+import ch.hsr.qfs.domain.RoundQuestion;
 import ch.hsr.qfs.domain.User;
+import ch.hsr.qfs.domain.UserAnswer;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
@@ -78,6 +83,11 @@ public class QuizStatisticFragment extends Fragment {
     private Button btn_statisticQ35;
     private Button btn_statisticQ36;
 
+    private Button[] btn_array;
+
+    //private Button[] btn_challenger = { btn_statisticQ4, btn_statisticQ5, btn_statisticQ6, btn_statisticQ10, btn_statisticQ11, btn_statisticQ12, btn_statisticQ16, btn_statisticQ17, btn_statisticQ18, btn_statisticQ22, btn_statisticQ23, btn_statisticQ24, btn_statisticQ28, btn_statisticQ29, btn_statisticQ30, btn_statisticQ34, btn_statisticQ35, btn_statisticQ36};
+    //private Button[] btn_opponent = { btn_statisticQ1, btn_statisticQ2, btn_statisticQ3, btn_statisticQ7, btn_statisticQ8, btn_statisticQ9, btn_statisticQ13, btn_statisticQ14, btn_statisticQ15, btn_statisticQ19, btn_statisticQ20, btn_statisticQ21, btn_statisticQ25, btn_statisticQ26, btn_statisticQ27, btn_statisticQ31, btn_statisticQ32, btn_statisticQ33};
+
     public QuizStatisticFragment() {
     }
 
@@ -131,6 +141,8 @@ public class QuizStatisticFragment extends Fragment {
         btn_statisticQ35 = (Button) viewRoot.findViewById(R.id.btn_statisticQ35);
         btn_statisticQ36 = (Button) viewRoot.findViewById(R.id.btn_statisticQ36);
 
+        Button[] btn_array_temp = {btn_statisticQ1, btn_statisticQ4, btn_statisticQ2, btn_statisticQ5, btn_statisticQ3, btn_statisticQ6, btn_statisticQ10, btn_statisticQ7, btn_statisticQ11, btn_statisticQ8,btn_statisticQ12, btn_statisticQ9, btn_statisticQ13, btn_statisticQ16, btn_statisticQ14, btn_statisticQ17, btn_statisticQ15, btn_statisticQ18, btn_statisticQ22, btn_statisticQ19, btn_statisticQ23, btn_statisticQ20, btn_statisticQ24, btn_statisticQ21, btn_statisticQ25, btn_statisticQ28, btn_statisticQ26, btn_statisticQ29, btn_statisticQ27, btn_statisticQ30, btn_statisticQ34, btn_statisticQ31, btn_statisticQ35, btn_statisticQ32, btn_statisticQ36, btn_statisticQ33 };
+        btn_array = btn_array_temp;
 
         loadData();
 
@@ -163,8 +175,8 @@ public class QuizStatisticFragment extends Fragment {
     }
 
     public void updateUsernames() {
-        tvUsername1.setText(challenger.getUsername());
-        tvUsername2.setText(opponent.getUsername());
+        tvUsername1.setText(opponent.getUsername());
+        tvUsername2.setText(challenger.getUsername());
     }
 
     public void updatePlayButton() {
@@ -182,8 +194,6 @@ public class QuizStatisticFragment extends Fragment {
                 }
 
                 if(response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 && response.getData().getCountActualRoundAnswers() < 6) {
-                    //status == success, getCountAnswer() < 36, getCountUserAnswer > 0
-                    Log.d("QFS", "1");
                     round = quiz.get_rounds().get(quiz.get_rounds().size() - 1);
                     category = quiz.get_rounds().get(quiz.get_rounds().size() - 1).get_category();
                     btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -211,10 +221,7 @@ public class QuizStatisticFragment extends Fragment {
                         }
                     });
                 } else if(response.getData().getCountUserAnswer() == 36) {
-                    Log.d("QFS", "3");
                     ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
-                } else {
-                    Log.d("QFS", "4");
                 }
             }
 
@@ -226,11 +233,33 @@ public class QuizStatisticFragment extends Fragment {
     }
 
     public void updateStatisticButtons() {
+
+        int buttonIndex = 0;
         for (Round round:quiz.get_rounds()) {
-            Log.d("QFS-Round", round.get_id());
+            for(RoundQuestion roundQuestion: round.get_roundQuestions())
+            {
+                if(roundQuestion.get_userAnswers().size() == 2) {
+                    for(UserAnswer userAnswer:roundQuestion.get_userAnswers())
+                    {
+                        if(userAnswer.getStatus()) {
+                            btn_array[buttonIndex].setBackgroundResource(R.drawable.button_bg_round_green);
+                        } else {
+                            btn_array[buttonIndex].setBackgroundResource(R.drawable.button_bg_round_red);
+                        }
+                        buttonIndex++;
+                    }
+                } else {
+                    for(UserAnswer userAnswer:roundQuestion.get_userAnswers())
+                    {
+                        if(userAnswer.getStatus()) {
+                            btn_array[buttonIndex].setBackgroundResource(R.drawable.button_bg_round_green);
+                        } else {
+                            btn_array[buttonIndex].setBackgroundResource(R.drawable.button_bg_round_red);
+                        }
+                        buttonIndex = buttonIndex + 2;
+                    }
+                }
+            }
         }
-
     }
-
-
 }
