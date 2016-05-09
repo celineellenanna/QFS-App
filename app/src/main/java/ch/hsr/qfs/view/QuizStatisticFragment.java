@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.hsr.qfs.R;
 
 import ch.hsr.qfs.domain.Category;
+import ch.hsr.qfs.domain.CountAnswers;
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Round;
 import ch.hsr.qfs.domain.User;
@@ -52,6 +53,30 @@ public class QuizStatisticFragment extends Fragment {
     private Button btn_statisticQ10;
     private Button btn_statisticQ11;
     private Button btn_statisticQ12;
+    private Button btn_statisticQ13;
+    private Button btn_statisticQ14;
+    private Button btn_statisticQ15;
+    private Button btn_statisticQ16;
+    private Button btn_statisticQ17;
+    private Button btn_statisticQ18;
+    private Button btn_statisticQ19;
+    private Button btn_statisticQ20;
+    private Button btn_statisticQ21;
+    private Button btn_statisticQ22;
+    private Button btn_statisticQ23;
+    private Button btn_statisticQ24;
+    private Button btn_statisticQ25;
+    private Button btn_statisticQ26;
+    private Button btn_statisticQ27;
+    private Button btn_statisticQ28;
+    private Button btn_statisticQ29;
+    private Button btn_statisticQ30;
+    private Button btn_statisticQ31;
+    private Button btn_statisticQ32;
+    private Button btn_statisticQ33;
+    private Button btn_statisticQ34;
+    private Button btn_statisticQ35;
+    private Button btn_statisticQ36;
 
     public QuizStatisticFragment() {
     }
@@ -81,6 +106,31 @@ public class QuizStatisticFragment extends Fragment {
         btn_statisticQ10 = (Button) viewRoot.findViewById(R.id.btn_statisticQ10);
         btn_statisticQ11 = (Button) viewRoot.findViewById(R.id.btn_statisticQ11);
         btn_statisticQ12 = (Button) viewRoot.findViewById(R.id.btn_statisticQ12);
+        btn_statisticQ13 = (Button) viewRoot.findViewById(R.id.btn_statisticQ13);
+        btn_statisticQ14 = (Button) viewRoot.findViewById(R.id.btn_statisticQ14);
+        btn_statisticQ15 = (Button) viewRoot.findViewById(R.id.btn_statisticQ15);
+        btn_statisticQ16 = (Button) viewRoot.findViewById(R.id.btn_statisticQ16);
+        btn_statisticQ17 = (Button) viewRoot.findViewById(R.id.btn_statisticQ17);
+        btn_statisticQ18 = (Button) viewRoot.findViewById(R.id.btn_statisticQ18);
+        btn_statisticQ19 = (Button) viewRoot.findViewById(R.id.btn_statisticQ19);
+        btn_statisticQ20 = (Button) viewRoot.findViewById(R.id.btn_statisticQ20);
+        btn_statisticQ21 = (Button) viewRoot.findViewById(R.id.btn_statisticQ21);
+        btn_statisticQ22 = (Button) viewRoot.findViewById(R.id.btn_statisticQ22);
+        btn_statisticQ23 = (Button) viewRoot.findViewById(R.id.btn_statisticQ23);
+        btn_statisticQ24 = (Button) viewRoot.findViewById(R.id.btn_statisticQ24);
+        btn_statisticQ25 = (Button) viewRoot.findViewById(R.id.btn_statisticQ25);
+        btn_statisticQ26 = (Button) viewRoot.findViewById(R.id.btn_statisticQ26);
+        btn_statisticQ27 = (Button) viewRoot.findViewById(R.id.btn_statisticQ27);
+        btn_statisticQ28 = (Button) viewRoot.findViewById(R.id.btn_statisticQ28);
+        btn_statisticQ29 = (Button) viewRoot.findViewById(R.id.btn_statisticQ29);
+        btn_statisticQ30 = (Button) viewRoot.findViewById(R.id.btn_statisticQ30);
+        btn_statisticQ31 = (Button) viewRoot.findViewById(R.id.btn_statisticQ31);
+        btn_statisticQ32 = (Button) viewRoot.findViewById(R.id.btn_statisticQ32);
+        btn_statisticQ33 = (Button) viewRoot.findViewById(R.id.btn_statisticQ33);
+        btn_statisticQ34 = (Button) viewRoot.findViewById(R.id.btn_statisticQ34);
+        btn_statisticQ35 = (Button) viewRoot.findViewById(R.id.btn_statisticQ35);
+        btn_statisticQ36 = (Button) viewRoot.findViewById(R.id.btn_statisticQ36);
+
 
         loadData();
 
@@ -120,9 +170,9 @@ public class QuizStatisticFragment extends Fragment {
     public void updatePlayButton() {
         btnPlay = (Button) viewRoot.findViewById(R.id.btn_Play);
 
-        quizService.getFinishedAnswerCount(quizId, new ApiHttpCallback<ApiHttpResponse<Integer>>() {
+        quizService.getFinishedAnswerCount(quizId, new ApiHttpCallback<ApiHttpResponse<CountAnswers>>() {
             @Override
-            public void onCompletion(ApiHttpResponse<Integer> response) {
+            public void onCompletion(ApiHttpResponse<CountAnswers> response) {
                 if((quiz.get_challenger().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForOpponent")) ||
                         (quiz.get_opponent().getId().equals(authService.getUser().getId()) && quiz.getStatus().equals("WaitingForChallenger"))) {
                     btnPlay.setVisibility(View.INVISIBLE);
@@ -131,7 +181,9 @@ public class QuizStatisticFragment extends Fragment {
                     btnPlay.setVisibility(View.VISIBLE);
                 }
 
-                if(response.getSuccess() && response.getData() != 0 && response.getData() < 36 && response.getData() % 3 == 0 && response.getData() % 6 != 0) {
+                if(response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 && response.getData().getCountActualRoundAnswers() < 6) {
+                    //status == success, getCountAnswer() < 36, getCountUserAnswer > 0
+                    Log.d("QFS", "1");
                     round = quiz.get_rounds().get(quiz.get_rounds().size() - 1);
                     category = quiz.get_rounds().get(quiz.get_rounds().size() - 1).get_category();
                     btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +198,8 @@ public class QuizStatisticFragment extends Fragment {
                             ((MainActivity) getActivity()).changeFragment(f);
                         }
                     });
-                } else if(response.getSuccess() && (response.getData() == 0 || response.getData() < 36) && response.getData() % 6 == 0) {
+                } else if(response.getSuccess() && response.getData().getCountUserAnswer() < 36 && (response.getData().getCountUserAnswer() == 0 || response.getData().getCountActualRoundAnswers() == 6)) {
+                    Log.d("QFS", "2");
                     btnPlay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -157,8 +210,11 @@ public class QuizStatisticFragment extends Fragment {
                             ((MainActivity) getActivity()).changeFragment(f);
                         }
                     });
-                } else if(response.getData() == 36) {
+                } else if(response.getData().getCountUserAnswer() == 36) {
+                    Log.d("QFS", "3");
                     ((MainActivity) getActivity()).changeFragment(new QuizHomeFragment());
+                } else {
+                    Log.d("QFS", "4");
                 }
             }
 
@@ -170,6 +226,9 @@ public class QuizStatisticFragment extends Fragment {
     }
 
     public void updateStatisticButtons() {
+        for (Round round:quiz.get_rounds()) {
+            Log.d("QFS-Round", round.get_id());
+        }
 
     }
 

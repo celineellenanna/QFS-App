@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import ch.hsr.qfs.domain.CountAnswers;
 import ch.hsr.qfs.domain.Quiz;
 import ch.hsr.qfs.domain.Category;
 import ch.hsr.qfs.domain.Question;
@@ -452,15 +453,15 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void getFinishedAnswerCount(final String quizId, final ApiHttpCallback<ApiHttpResponse<Integer>> callback) {
+    public void getFinishedAnswerCount(final String quizId, final ApiHttpCallback<ApiHttpResponse<CountAnswers>> callback) {
         String url = quizUrl + "/round/getFinishedAnswerCount/" + quizId;
 
-        Type type = new TypeToken<ApiHttpResponse<Integer>>() {}.getType();
+        Type type = new TypeToken<ApiHttpResponse<CountAnswers>>() {}.getType();
 
-        ApiHttpRequest<ApiHttpResponse<Integer>> request = new ApiHttpRequest<ApiHttpResponse<Integer>>(Request.Method.GET, url, type, null,
-                new Response.Listener<ApiHttpResponse<Integer>>()
+        ApiHttpRequest<ApiHttpResponse<CountAnswers>> request = new ApiHttpRequest<ApiHttpResponse<CountAnswers>>(Request.Method.GET, url, type, null,
+                new Response.Listener<ApiHttpResponse<CountAnswers>>()
                 {
-                    public void onResponse(ApiHttpResponse<Integer> response) {
+                    public void onResponse(ApiHttpResponse<CountAnswers> response) {
                         callback.onCompletion(response);
                     }
                 },
