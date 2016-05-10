@@ -97,8 +97,8 @@ public class Quiz {
 
     public String getTimeElapsed() {
         DateTimeFormatter parser = ISODateTimeFormat.dateTime();
-        LocalDateTime dtUpdateAt = parser.parseLocalDateTime(updatedAt);
-        LocalDateTime dtNow = new LocalDateTime();
+        DateTime dtUpdateAt = parser.parseDateTime(updatedAt);
+        DateTime dtNow = new DateTime();
 
         Period period = new Period(dtUpdateAt, dtNow);
 
