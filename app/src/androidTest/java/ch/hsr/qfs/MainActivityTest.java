@@ -6,6 +6,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import static org.hamcrest.Matchers.allOf;
 
 import android.os.IBinder;
 import android.provider.ContactsContract;
@@ -15,6 +16,7 @@ import android.support.test.espresso.Root;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.contrib.DrawerActions;
 import android.support.test.espresso.contrib.NavigationViewActions;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -24,6 +26,9 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeDown;
+import static android.support.test.espresso.action.ViewActions.swipeLeft;
+import static android.support.test.espresso.action.ViewActions.swipeRight;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -32,6 +37,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 
@@ -166,7 +172,6 @@ public class MainActivityTest {
         onView(withText("E-Mail ungültig")).check(matches(withHint("E-Mail ungültig")));
         */
         onView(withId(R.id.btnLogin)).check(doesNotExist());
-
     }
 
     @Test
@@ -184,8 +189,109 @@ public class MainActivityTest {
         onView(withText("Beendet")).check(matches(isDisplayed()));
 
         onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user1")).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void quizIsOpenAtOpponent() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_login));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user2"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass2"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withText("Laufend")).check(matches(isDisplayed()));
+        onView(withText("Offen")).check(matches(isDisplayed()));
+        onView(withText("Beendet")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user0")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_logout));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user0"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass0"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user2")).check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void quizIsRunning() {
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_login));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user3"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass3"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withText("Laufend")).check(matches(isDisplayed()));
+        onView(withText("Offen")).check(matches(isDisplayed()));
+        onView(withText("Beendet")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.fab)).perform(click());
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user0")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_logout));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user0"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass0"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user3")).check(matches(isDisplayed()));
+/*
+        onView(withId(R.id.ivAccept)).perform(click());
+        onView(withId(R.id.viewpager)).perform(swipeRight());
+        onView(withId(R.id.viewpager)).perform(swipeDown());
+
+        onView(withText("Spielbereit")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.recyclerView)).perform(RecyclerViewActions.actionOnItem(hasDescendant(withText("user3")), click()));
+*/
+    }
+
+/*
+    @Test
+    public void quizIsRunning() {
+
+        onView(withId(R.id.drawer_layout)).perform(DrawerActions.open());
+        onView(withId(R.id.left_drawer)).perform(NavigationViewActions.navigateTo(R.id.nav_logout));
+
+        onView(withId(R.id.etUsername)).perform(click());
+        onView(withId(R.id.etUsername)).perform(typeText("user1"));
+        onView(withId(R.id.etPassword)).perform(typeText("pass1"));
+        onView(withId(R.id.btnLogin)).perform(click());
+
+        onView(withId(R.id.viewpager)).perform(swipeLeft());
+        onView(withText("user1")).check(matches(isDisplayed()));
+
+        onView(withId(R.id.ivAccept)).perform(click());
+        onView(withId(R.id.viewpager)).perform(swipeRight());
+        onView(withId(R.id.viewpager)).perform(swipeDown());
+
+        onView(withText("Spielbereit")).check(matches(isDisplayed()));
+
+    }
+*/
     public class ToastMatcher extends TypeSafeMatcher<Root> {
 
         @Override
