@@ -409,8 +409,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswerTimeElapsed(final String quizId, final String roundId, final String roundQuestionId,
-                                            final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void saveEmptyUserAnswerTimeElapsed(final String quizId, final String roundId, final String roundQuestionId,
+                                               final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswerTimeElapsed";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();

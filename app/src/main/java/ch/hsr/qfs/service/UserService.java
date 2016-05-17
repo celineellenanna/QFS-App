@@ -33,7 +33,7 @@ public class UserService {
         return userService;
     }
 
-    public void index(final ApiHttpCallback<ApiHttpResponse<ArrayList<User>>> callback) {
+    public void getAll(final ApiHttpCallback<ApiHttpResponse<ArrayList<User>>> callback) {
         String url = userUrl + "/";
 
         Type type = new TypeToken<ApiHttpResponse<ArrayList<User>>>() {}.getType();
