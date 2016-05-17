@@ -47,47 +47,7 @@ public class QuizStatisticFragment extends Fragment {
     private TextView tvUsername2;
     private TextView tvScore;
 
-    private Button btn_statisticQ1;
-    private Button btn_statisticQ2;
-    private Button btn_statisticQ3;
-    private Button btn_statisticQ4;
-    private Button btn_statisticQ5;
-    private Button btn_statisticQ6;
-    private Button btn_statisticQ7;
-    private Button btn_statisticQ8;
-    private Button btn_statisticQ9;
-    private Button btn_statisticQ10;
-    private Button btn_statisticQ11;
-    private Button btn_statisticQ12;
-    private Button btn_statisticQ13;
-    private Button btn_statisticQ14;
-    private Button btn_statisticQ15;
-    private Button btn_statisticQ16;
-    private Button btn_statisticQ17;
-    private Button btn_statisticQ18;
-    private Button btn_statisticQ19;
-    private Button btn_statisticQ20;
-    private Button btn_statisticQ21;
-    private Button btn_statisticQ22;
-    private Button btn_statisticQ23;
-    private Button btn_statisticQ24;
-    private Button btn_statisticQ25;
-    private Button btn_statisticQ26;
-    private Button btn_statisticQ27;
-    private Button btn_statisticQ28;
-    private Button btn_statisticQ29;
-    private Button btn_statisticQ30;
-    private Button btn_statisticQ31;
-    private Button btn_statisticQ32;
-    private Button btn_statisticQ33;
-    private Button btn_statisticQ34;
-    private Button btn_statisticQ35;
-    private Button btn_statisticQ36;
-
     private Button[] btn_array;
-
-    //private Button[] btn_challenger = { btn_statisticQ4, btn_statisticQ5, btn_statisticQ6, btn_statisticQ10, btn_statisticQ11, btn_statisticQ12, btn_statisticQ16, btn_statisticQ17, btn_statisticQ18, btn_statisticQ22, btn_statisticQ23, btn_statisticQ24, btn_statisticQ28, btn_statisticQ29, btn_statisticQ30, btn_statisticQ34, btn_statisticQ35, btn_statisticQ36};
-    //private Button[] btn_opponent = { btn_statisticQ1, btn_statisticQ2, btn_statisticQ3, btn_statisticQ7, btn_statisticQ8, btn_statisticQ9, btn_statisticQ13, btn_statisticQ14, btn_statisticQ15, btn_statisticQ19, btn_statisticQ20, btn_statisticQ21, btn_statisticQ25, btn_statisticQ26, btn_statisticQ27, btn_statisticQ31, btn_statisticQ32, btn_statisticQ33};
 
     public QuizStatisticFragment() {
     }
@@ -107,44 +67,50 @@ public class QuizStatisticFragment extends Fragment {
 
         tvScore = (TextView) viewRoot.findViewById(R.id.tvScore);
 
-        btn_statisticQ1 = (Button) viewRoot.findViewById(R.id.btn_statisticQ1);
-        btn_statisticQ2 = (Button) viewRoot.findViewById(R.id.btn_statisticQ2);
-        btn_statisticQ3 = (Button) viewRoot.findViewById(R.id.btn_statisticQ3);
-        btn_statisticQ4 = (Button) viewRoot.findViewById(R.id.btn_statisticQ4);
-        btn_statisticQ5 = (Button) viewRoot.findViewById(R.id.btn_statisticQ5);
-        btn_statisticQ6 = (Button) viewRoot.findViewById(R.id.btn_statisticQ6);
-        btn_statisticQ7 = (Button) viewRoot.findViewById(R.id.btn_statisticQ7);
-        btn_statisticQ8 = (Button) viewRoot.findViewById(R.id.btn_statisticQ8);
-        btn_statisticQ9 = (Button) viewRoot.findViewById(R.id.btn_statisticQ9);
-        btn_statisticQ10 = (Button) viewRoot.findViewById(R.id.btn_statisticQ10);
-        btn_statisticQ11 = (Button) viewRoot.findViewById(R.id.btn_statisticQ11);
-        btn_statisticQ12 = (Button) viewRoot.findViewById(R.id.btn_statisticQ12);
-        btn_statisticQ13 = (Button) viewRoot.findViewById(R.id.btn_statisticQ13);
-        btn_statisticQ14 = (Button) viewRoot.findViewById(R.id.btn_statisticQ14);
-        btn_statisticQ15 = (Button) viewRoot.findViewById(R.id.btn_statisticQ15);
-        btn_statisticQ16 = (Button) viewRoot.findViewById(R.id.btn_statisticQ16);
-        btn_statisticQ17 = (Button) viewRoot.findViewById(R.id.btn_statisticQ17);
-        btn_statisticQ18 = (Button) viewRoot.findViewById(R.id.btn_statisticQ18);
-        btn_statisticQ19 = (Button) viewRoot.findViewById(R.id.btn_statisticQ19);
-        btn_statisticQ20 = (Button) viewRoot.findViewById(R.id.btn_statisticQ20);
-        btn_statisticQ21 = (Button) viewRoot.findViewById(R.id.btn_statisticQ21);
-        btn_statisticQ22 = (Button) viewRoot.findViewById(R.id.btn_statisticQ22);
-        btn_statisticQ23 = (Button) viewRoot.findViewById(R.id.btn_statisticQ23);
-        btn_statisticQ24 = (Button) viewRoot.findViewById(R.id.btn_statisticQ24);
-        btn_statisticQ25 = (Button) viewRoot.findViewById(R.id.btn_statisticQ25);
-        btn_statisticQ26 = (Button) viewRoot.findViewById(R.id.btn_statisticQ26);
-        btn_statisticQ27 = (Button) viewRoot.findViewById(R.id.btn_statisticQ27);
-        btn_statisticQ28 = (Button) viewRoot.findViewById(R.id.btn_statisticQ28);
-        btn_statisticQ29 = (Button) viewRoot.findViewById(R.id.btn_statisticQ29);
-        btn_statisticQ30 = (Button) viewRoot.findViewById(R.id.btn_statisticQ30);
-        btn_statisticQ31 = (Button) viewRoot.findViewById(R.id.btn_statisticQ31);
-        btn_statisticQ32 = (Button) viewRoot.findViewById(R.id.btn_statisticQ32);
-        btn_statisticQ33 = (Button) viewRoot.findViewById(R.id.btn_statisticQ33);
-        btn_statisticQ34 = (Button) viewRoot.findViewById(R.id.btn_statisticQ34);
-        btn_statisticQ35 = (Button) viewRoot.findViewById(R.id.btn_statisticQ35);
-        btn_statisticQ36 = (Button) viewRoot.findViewById(R.id.btn_statisticQ36);
+        Button btn_statisticQ1 = (Button) viewRoot.findViewById(R.id.btn_statisticQ1);
+        Button btn_statisticQ2 = (Button) viewRoot.findViewById(R.id.btn_statisticQ2);
+        Button btn_statisticQ3 = (Button) viewRoot.findViewById(R.id.btn_statisticQ3);
+        Button btn_statisticQ4 = (Button) viewRoot.findViewById(R.id.btn_statisticQ4);
+        Button btn_statisticQ5 = (Button) viewRoot.findViewById(R.id.btn_statisticQ5);
+        Button btn_statisticQ6 = (Button) viewRoot.findViewById(R.id.btn_statisticQ6);
+        Button btn_statisticQ7 = (Button) viewRoot.findViewById(R.id.btn_statisticQ7);
+        Button btn_statisticQ8 = (Button) viewRoot.findViewById(R.id.btn_statisticQ8);
+        Button btn_statisticQ9 = (Button) viewRoot.findViewById(R.id.btn_statisticQ9);
+        Button btn_statisticQ10 = (Button) viewRoot.findViewById(R.id.btn_statisticQ10);
+        Button btn_statisticQ11 = (Button) viewRoot.findViewById(R.id.btn_statisticQ11);
+        Button btn_statisticQ12 = (Button) viewRoot.findViewById(R.id.btn_statisticQ12);
+        Button btn_statisticQ13 = (Button) viewRoot.findViewById(R.id.btn_statisticQ13);
+        Button btn_statisticQ14 = (Button) viewRoot.findViewById(R.id.btn_statisticQ14);
+        Button btn_statisticQ15 = (Button) viewRoot.findViewById(R.id.btn_statisticQ15);
+        Button btn_statisticQ16 = (Button) viewRoot.findViewById(R.id.btn_statisticQ16);
+        Button btn_statisticQ17 = (Button) viewRoot.findViewById(R.id.btn_statisticQ17);
+        Button btn_statisticQ18 = (Button) viewRoot.findViewById(R.id.btn_statisticQ18);
+        Button btn_statisticQ19 = (Button) viewRoot.findViewById(R.id.btn_statisticQ19);
+        Button btn_statisticQ20 = (Button) viewRoot.findViewById(R.id.btn_statisticQ20);
+        Button btn_statisticQ21 = (Button) viewRoot.findViewById(R.id.btn_statisticQ21);
+        Button btn_statisticQ22 = (Button) viewRoot.findViewById(R.id.btn_statisticQ22);
+        Button btn_statisticQ23 = (Button) viewRoot.findViewById(R.id.btn_statisticQ23);
+        Button btn_statisticQ24 = (Button) viewRoot.findViewById(R.id.btn_statisticQ24);
+        Button btn_statisticQ25 = (Button) viewRoot.findViewById(R.id.btn_statisticQ25);
+        Button btn_statisticQ26 = (Button) viewRoot.findViewById(R.id.btn_statisticQ26);
+        Button btn_statisticQ27 = (Button) viewRoot.findViewById(R.id.btn_statisticQ27);
+        Button btn_statisticQ28 = (Button) viewRoot.findViewById(R.id.btn_statisticQ28);
+        Button btn_statisticQ29 = (Button) viewRoot.findViewById(R.id.btn_statisticQ29);
+        Button btn_statisticQ30 = (Button) viewRoot.findViewById(R.id.btn_statisticQ30);
+        Button btn_statisticQ31 = (Button) viewRoot.findViewById(R.id.btn_statisticQ31);
+        Button btn_statisticQ32 = (Button) viewRoot.findViewById(R.id.btn_statisticQ32);
+        Button btn_statisticQ33 = (Button) viewRoot.findViewById(R.id.btn_statisticQ33);
+        Button btn_statisticQ34 = (Button) viewRoot.findViewById(R.id.btn_statisticQ34);
+        Button btn_statisticQ35 = (Button) viewRoot.findViewById(R.id.btn_statisticQ35);
+        Button btn_statisticQ36 = (Button) viewRoot.findViewById(R.id.btn_statisticQ36);
 
-        Button[] btn_array_temp = {btn_statisticQ1, btn_statisticQ4, btn_statisticQ2, btn_statisticQ5, btn_statisticQ3, btn_statisticQ6, btn_statisticQ10, btn_statisticQ7, btn_statisticQ11, btn_statisticQ8,btn_statisticQ12, btn_statisticQ9, btn_statisticQ13, btn_statisticQ16, btn_statisticQ14, btn_statisticQ17, btn_statisticQ15, btn_statisticQ18, btn_statisticQ22, btn_statisticQ19, btn_statisticQ23, btn_statisticQ20, btn_statisticQ24, btn_statisticQ21, btn_statisticQ25, btn_statisticQ28, btn_statisticQ26, btn_statisticQ29, btn_statisticQ27, btn_statisticQ30, btn_statisticQ34, btn_statisticQ31, btn_statisticQ35, btn_statisticQ32, btn_statisticQ36, btn_statisticQ33 };
+        Button[] btn_array_temp = {btn_statisticQ1, btn_statisticQ4, btn_statisticQ2, btn_statisticQ5, btn_statisticQ3, btn_statisticQ6,
+                btn_statisticQ10, btn_statisticQ7, btn_statisticQ11, btn_statisticQ8, btn_statisticQ12, btn_statisticQ9, btn_statisticQ13,
+                btn_statisticQ16, btn_statisticQ14, btn_statisticQ17, btn_statisticQ15, btn_statisticQ18, btn_statisticQ22, btn_statisticQ19,
+                btn_statisticQ23, btn_statisticQ20, btn_statisticQ24, btn_statisticQ21, btn_statisticQ25, btn_statisticQ28, btn_statisticQ26,
+                btn_statisticQ29, btn_statisticQ27, btn_statisticQ30, btn_statisticQ34, btn_statisticQ31, btn_statisticQ35, btn_statisticQ32,
+                btn_statisticQ36, btn_statisticQ33};
+
         btn_array = btn_array_temp;
 
         loadData();
@@ -197,7 +163,9 @@ public class QuizStatisticFragment extends Fragment {
                     btnPlay.setVisibility(View.VISIBLE);
                 }
 
-                if (response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 && response.getData().getCountActualRoundAnswers() < 6) {
+                if (response.getSuccess() && response.getData().getCountUserAnswer() > 0 && response.getData().getCountUserAnswer() < 36 &&
+                        response.getData().getCountActualRoundAnswers() < 6) {
+
                     round = quiz.get_rounds().get(quiz.get_rounds().size() - 1);
                     category = quiz.get_rounds().get(quiz.get_rounds().size() - 1).get_category();
                     btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +180,9 @@ public class QuizStatisticFragment extends Fragment {
                             ((MainActivity) getActivity()).changeFragment(f);
                         }
                     });
-                } else if (response.getSuccess() && response.getData().getCountUserAnswer() < 36 && (response.getData().getCountUserAnswer() == 0 || response.getData().getCountActualRoundAnswers() == 6)) {
+                } else if (response.getSuccess() && response.getData().getCountUserAnswer() < 36 &&
+                        (response.getData().getCountUserAnswer() == 0 || response.getData().getCountActualRoundAnswers() == 6)) {
+
                     btnPlay.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -267,6 +237,6 @@ public class QuizStatisticFragment extends Fragment {
     }
 
     public void updateScore() {
-        tvScore.setText(quiz.getOpponentPoints() + " : " + quiz.getChallengerPoints());
+        tvScore.setText(String.format("%d : %d", quiz.getOpponentPoints(), quiz.getChallengerPoints()));
     }
 }

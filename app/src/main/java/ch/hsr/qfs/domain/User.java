@@ -2,9 +2,9 @@ package ch.hsr.qfs.domain;
 
 public class User {
 
-    private enum Role {Administrator, Moderator, Player};
+    private enum Role {Administrator, Moderator, Player}
 
-    private enum Status {Registered, Activated, Deleted};
+    private enum Status {Registered, Activated, Deleted}
 
     private String _id;
     private String firstname;

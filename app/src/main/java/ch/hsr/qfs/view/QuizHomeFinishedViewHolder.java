@@ -15,7 +15,9 @@ public class QuizHomeFinishedViewHolder extends RecyclerView.ViewHolder {
     public TextView tvScore;
     public RelativeLayout rlListItem;
 
-    public QuizHomeFinishedViewHolder(View parent, ImageView ivIcon, TextView tvUsername, TextView tvStatus, TextView tvScore, RelativeLayout rlListItem) {
+    public QuizHomeFinishedViewHolder(View parent, ImageView ivIcon, TextView tvUsername, TextView tvStatus,
+                                      TextView tvScore, RelativeLayout rlListItem) {
+
         super(parent);
         this.parent = parent;
         this.ivIcon = ivIcon;

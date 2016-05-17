@@ -40,9 +40,7 @@ public class QuizHomeRunningAdapter extends RecyclerView.Adapter<QuizHomeRunning
         ImageView ivAccept = (ImageView) v.findViewById(R.id.ivAccept);
         ImageView ivReject = (ImageView) v.findViewById(R.id.ivReject);
 
-        QuizHomeRunningViewHolder viewHolder = new QuizHomeRunningViewHolder(v, ivIcon, tvUsername, tvStatus, rlListItem, ivAccept, ivReject);
-
-        return viewHolder;
+        return new QuizHomeRunningViewHolder(v, ivIcon, tvUsername, tvStatus, rlListItem, ivAccept, ivReject);
     }
 
     public void onBindViewHolder(final QuizHomeRunningViewHolder holder, final int position) {

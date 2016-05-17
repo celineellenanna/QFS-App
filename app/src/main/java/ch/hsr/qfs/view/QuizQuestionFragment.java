@@ -158,7 +158,8 @@ public class QuizQuestionFragment extends Fragment {
 
                     if(progressBarStatus == progressBarStatusMax) {
                         Log.d("TimeElapsed", "success");
-                        quizService.createUserAnswerTimeElapsed(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
+                        quizService.createUserAnswerTimeElapsed(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(),
+                                                                 authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
                             @Override
                             public void onCompletion(ApiHttpResponse response) {
                             }
@@ -192,7 +193,8 @@ public class QuizQuestionFragment extends Fragment {
                 transition.startTransition(1000);
             }
 
-            quizService.createUserAnswer(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
+            quizService.createUserAnswer(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(),
+                                            authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
                 @Override
                 public void onCompletion(ApiHttpResponse response) {
                 }

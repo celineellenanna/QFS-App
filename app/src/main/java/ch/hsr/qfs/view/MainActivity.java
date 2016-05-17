@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
-    private FloatingActionButton fab;;
+    private FloatingActionButton fab;
     private Boolean fabState = false;
 
     private AuthService authService = AuthService.getInstance();
