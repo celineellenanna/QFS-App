@@ -65,7 +65,7 @@ public class QuizService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("challengerId", challengerId);
                 params.put("opponentId", opponentId);
 
@@ -100,9 +100,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -135,7 +134,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("id", quizId);
 
                 return params;
@@ -168,7 +167,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("id", quizId);
 
                 return params;
@@ -201,9 +200,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -233,9 +231,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -265,9 +262,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -298,9 +294,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -331,9 +326,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 
@@ -363,7 +357,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("quizId", quizId);
                 params.put("categoryId", categoryId);
 
@@ -374,7 +368,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswer(final String quizId, final String roundId, final String roundQuestionId, final String answerId, final String userId, final int timeToAnswer, final Boolean status, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void createUserAnswer(final String quizId, final String roundId, final String roundQuestionId, final String answerId,
+                                 final String userId, final int timeToAnswer, final Boolean status, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswer";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
@@ -397,7 +392,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
 
                 params.put("quizId", quizId);
                 params.put("roundId", roundId);
@@ -414,7 +409,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void createUserAnswerTimeElapsed(final String quizId, final String roundId, final String roundQuestionId, final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
+    public void saveEmptyUserAnswerTimeElapsed(final String quizId, final String roundId, final String roundQuestionId,
+                                               final String userId, final int timeToAnswer, final ApiHttpCallback<ApiHttpResponse> callback) {
         String url = quizUrl + "/round/userAnswerTimeElapsed";
 
         Type type = new TypeToken<ApiHttpResponse>() {}.getType();
@@ -437,7 +433,7 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
 
 
                 params.put("quizId", quizId);
@@ -476,9 +472,8 @@ public void get(final String quizId, final ApiHttpCallback<ApiHttpResponse<Quiz>
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 

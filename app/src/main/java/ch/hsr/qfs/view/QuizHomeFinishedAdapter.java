@@ -38,9 +38,7 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
         TextView tvScore = (TextView) v.findViewById(R.id.tvScore);
         RelativeLayout rlListItem = (RelativeLayout) v.findViewById(R.id.rlListItem);
 
-        QuizHomeFinishedViewHolder viewHolder = new QuizHomeFinishedViewHolder(v, ivIcon, tvUsername, tvStatus, tvScore, rlListItem);
-
-        return viewHolder;
+        return new QuizHomeFinishedViewHolder(v, ivIcon, tvUsername, tvStatus, tvScore, rlListItem);
     }
 
     public void onBindViewHolder(final QuizHomeFinishedViewHolder holder, final int position) {

@@ -140,10 +140,6 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private boolean isValidPassword(String pass) {
-        if (pass != null && pass.length() >= 6) {
-            return true;
-        } else {
-            return false;
-        }
+        return pass != null && pass.length() >= 6;
     }
 }

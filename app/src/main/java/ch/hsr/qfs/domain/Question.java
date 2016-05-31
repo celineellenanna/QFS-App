@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Question {
 
-    private enum Status {Created, Approved, Rejected, Deleted};
+    private enum Status {Created, Approved, Rejected, Deleted}
 
     private String _id;
     private String name;

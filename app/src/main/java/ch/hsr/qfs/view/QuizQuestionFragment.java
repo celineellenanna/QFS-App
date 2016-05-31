@@ -21,7 +21,6 @@ import java.util.Random;
 
 import ch.hsr.qfs.domain.Answer;
 import ch.hsr.qfs.domain.Round;
-import ch.hsr.qfs.domain.UserAnswer;
 import ch.hsr.qfs.service.AuthService;
 import ch.hsr.qfs.service.QuizService;
 import ch.hsr.qfs.service.apiclient.ApiHttpCallback;
@@ -158,7 +157,8 @@ public class QuizQuestionFragment extends Fragment {
 
                     if(progressBarStatus == progressBarStatusMax) {
                         Log.d("TimeElapsed", "success");
-                        quizService.createUserAnswerTimeElapsed(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
+                        quizService.saveEmptyUserAnswerTimeElapsed(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(),
+                                                                 authService.getUser().getId(), progressBarStatus, new ApiHttpCallback<ApiHttpResponse>() {
                             @Override
                             public void onCompletion(ApiHttpResponse response) {
                             }
@@ -192,7 +192,8 @@ public class QuizQuestionFragment extends Fragment {
                 transition.startTransition(1000);
             }
 
-            quizService.createUserAnswer(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(), authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
+            quizService.createUserAnswer(quizId, roundId, round.get_roundQuestions().get(questionCount).get_id(), answer.get_id(),
+                                            authService.getUser().getId(), progressBarStatus, answer.isCorrect(), new ApiHttpCallback<ApiHttpResponse>() {
                 @Override
                 public void onCompletion(ApiHttpResponse response) {
                 }

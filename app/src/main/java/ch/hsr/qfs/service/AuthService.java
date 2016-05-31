@@ -60,7 +60,7 @@ public class AuthService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("username", username);
                 params.put("password", password);
 
@@ -71,7 +71,8 @@ public class AuthService {
         ApiHttpController.getInstance().addToRequestQueue(request, tagJsonObj);
     }
 
-    public void register(final String firstname, final String lastname, final String email, final String username, final String password, final ApiHttpCallback<ApiHttpResponse<User>> callback) {
+    public void register(final String firstname, final String lastname, final String email, final String username,
+                         final String password, final ApiHttpCallback<ApiHttpResponse<User>> callback) {
         String url = authUrl + "/register";
 
         Type type = new TypeToken<ApiHttpResponse<User>>() {}.getType();
@@ -94,7 +95,7 @@ public class AuthService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
+                Map<String, String>  params = new HashMap<>();
                 params.put("firstname", firstname);
                 params.put("lastname", lastname);
                 params.put("email", email);
@@ -109,7 +110,7 @@ public class AuthService {
     }
 
     public Boolean isAuthenticated() {
-        return this.currUser != null;
+        return currUser != null;
     }
 
     public void logout(final ApiHttpCallback<ApiHttpResponse<User>> callback) {
@@ -136,9 +137,8 @@ public class AuthService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<>();
             }
         };
 

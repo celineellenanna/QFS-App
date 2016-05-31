@@ -33,7 +33,7 @@ public class UserService {
         return userService;
     }
 
-    public void index(final ApiHttpCallback<ApiHttpResponse<ArrayList<User>>> callback) {
+    public void getAll(final ApiHttpCallback<ApiHttpResponse<ArrayList<User>>> callback) {
         String url = userUrl + "/";
 
         Type type = new TypeToken<ApiHttpResponse<ArrayList<User>>>() {}.getType();
@@ -56,9 +56,8 @@ public class UserService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
 
-                return params;
+                return new HashMap<String, String>();
             }
         };
 
@@ -88,8 +87,7 @@ public class UserService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
-                return params;
+                return new HashMap<String, String>();
             }
         };
 
@@ -119,8 +117,7 @@ public class UserService {
             @Override
             protected Map<String, String> getParams()
             {
-                Map<String, String>  params = new HashMap<String, String>();
-                return params;
+                return new HashMap<String, String>();
             }
         };
 
