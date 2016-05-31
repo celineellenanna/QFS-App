@@ -5,18 +5,29 @@
     android:background="@color/colorAccent"
     android:orientation="vertical" >
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <!--<de.hdodenhof.circleimageview.CircleImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profile_image"
-        android:layout_width="76dp"
+        android:layout_width="match_parent"
         android:layout_height="76dp"
-        android:src="@drawable/ic_logo"
+        android:src="@drawable/ic_logo_full"
         app:border_color="#FF000000"
-        android:layout_marginLeft="24dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="24dp" />
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp" />-->
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logo_full"
+        android:layout_marginRight="24dp"
+        android:baselineAlignBottom="false"
+        android:scaleType="fitStart"
+        android:layout_above="@+id/tvNavViewUsername"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +40,8 @@
         android:id="@+id/tvNavViewUsername"
         android:layout_above="@+id/tvNavViewEmail"
         android:layout_alignLeft="@+id/profile_image"
-        android:layout_alignStart="@+id/profile_image" />
+        android:layout_alignStart="@+id/profile_image"
+        android:layout_marginLeft="24dp" />
 
     <TextView
         android:layout_width="wrap_content"
