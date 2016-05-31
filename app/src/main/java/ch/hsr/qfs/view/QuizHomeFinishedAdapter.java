@@ -57,6 +57,8 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
                 holder.tvScore.setText(quiz.getChallengerPoints() + " : " + quiz.getOpponentPoints());
             } else {
                 holder.ivIcon.setImageResource(R.drawable.ic_reject);
+                holder.tvStatus.setText("Abbruch");
+                holder.tvScore.setText("0 : 0");
             }
         } else {
             holder.tvUsername.setText(quiz.get_challenger().getUsername());
@@ -70,6 +72,8 @@ public class QuizHomeFinishedAdapter extends RecyclerView.Adapter<QuizHomeFinish
                 holder.tvScore.setText(quiz.getOpponentPoints() + " : " + quiz.getChallengerPoints());
             } else {
                 holder.ivIcon.setImageResource(R.drawable.ic_reject);
+                holder.tvStatus.setText("Abbruch");
+                holder.tvScore.setText("0 : 0");
             }
         }
     }
