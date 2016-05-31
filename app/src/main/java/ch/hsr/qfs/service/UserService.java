@@ -19,7 +19,7 @@ public class UserService {
 
     private static UserService userService;
     private String tagJsonObj = "json_obj_req";
-    private String userUrl = "http://10.0.2.2:3000/api/users";
+    private String userUrl = "http://sinv-56084.edu.hsr.ch:443/api/users";
 
     public UserService() {
     }
