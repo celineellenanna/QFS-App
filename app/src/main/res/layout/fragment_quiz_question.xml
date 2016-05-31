@@ -20,7 +20,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Question"
         android:id="@+id/tvQuestion"
         android:layout_row="2"
         android:layout_column="0"
@@ -50,7 +49,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Frage1"
                 android:id="@+id/btnQuestion1"
                 android:background="@drawable/button_bg_transition_green"
                 android:layout_margin="5dp"
@@ -63,7 +61,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Frage2"
                 android:id="@+id/btnQuestion2"
                 android:background="@drawable/button_bg_transition_green"
                 android:layout_margin="5dp"
@@ -85,7 +82,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Frage3"
                 android:id="@+id/btnQuestion3"
                 android:background="@drawable/button_bg_transition_green"
                 android:layout_margin="5dp"
@@ -99,7 +95,6 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Frage4"
                 android:id="@+id/btnQuestion4"
                 android:background="@drawable/button_bg_transition_green"
                 android:layout_margin="5dp"
