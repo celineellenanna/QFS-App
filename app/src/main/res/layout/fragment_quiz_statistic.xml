@@ -14,24 +14,21 @@
         android:id="@+id/ivUserIcon1"
         android:src="@drawable/ic_person"
         android:layout_row="0"
-        android:layout_column="0"
-        android:layout_width="wrap_content"
+        android:layout_column="1"
+        android:layout_width="50dp"
         android:layout_height="100dp"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center_vertical"
-        android:layout_columnWeight="1" />
+        android:layout_gravity="center_vertical" />
 
     <TextView
         android:id="@+id/tvUsername1"
         android:layout_row="1"
         android:layout_column="0"
         android:layout_width="wrap_content"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center_vertical"
-        android:layout_columnWeight="1"
+        android:layout_gravity="center"
         android:text="User1"
         android:textAlignment="center"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_columnSpan="3" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,24 +43,21 @@
         android:id="@+id/ivUserIcon2"
         android:src="@drawable/ic_person"
         android:layout_row="0"
-        android:layout_column="4"
-        android:layout_width="wrap_content"
+        android:layout_column="5"
+        android:layout_width="50dp"
         android:layout_height="100dp"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center_vertical"
-        android:layout_columnWeight="1" />
+        android:layout_gravity="center_vertical" />
 
     <TextView
         android:id="@+id/tvUsername2"
         android:layout_row="1"
         android:layout_column="4"
         android:layout_width="wrap_content"
-        android:layout_columnSpan="3"
-        android:layout_gravity="center_vertical"
-        android:layout_columnWeight="1"
+        android:layout_gravity="center"
         android:text="User2"
         android:textAlignment="center"
-        android:layout_marginBottom="15dp" />
+        android:layout_marginBottom="20dp"
+        android:layout_columnSpan="3" />
 
     <Button
         android:id ="@+id/btn_statisticQ1"
@@ -72,11 +66,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ2"
@@ -85,12 +77,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ3"
@@ -99,12 +87,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR1"
@@ -113,7 +102,6 @@
         android:layout_column="3"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content"
         android:layout_gravity="center" />
 
@@ -125,10 +113,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
+        android:layout_marginBottom="5dp"
         android:clickable="true"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ5"
@@ -137,12 +127,8 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ6"
@@ -151,11 +137,8 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ7"
@@ -164,11 +147,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ8"
@@ -177,12 +158,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ9"
@@ -191,12 +168,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR2"
@@ -206,7 +184,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content" />
 
     <Button
@@ -217,10 +194,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ11"
@@ -229,12 +208,8 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ12"
@@ -243,11 +218,8 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ13"
@@ -256,11 +228,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ14"
@@ -269,12 +239,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ15"
@@ -283,12 +249,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR3"
@@ -298,7 +265,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content" />
 
     <Button
@@ -309,10 +275,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ17"
@@ -321,12 +289,8 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ18"
@@ -335,11 +299,8 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ19"
@@ -348,11 +309,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ20"
@@ -361,12 +320,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ21"
@@ -375,12 +330,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR4"
@@ -390,7 +346,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content" />
 
     <Button
@@ -401,10 +356,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ23"
@@ -413,12 +370,8 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ24"
@@ -427,11 +380,8 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ25"
@@ -440,11 +390,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ26"
@@ -453,12 +401,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ27"
@@ -467,12 +411,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR5"
@@ -482,7 +427,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content" />
 
     <Button
@@ -493,10 +437,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ29"
@@ -505,12 +451,8 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ30"
@@ -519,11 +461,8 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ31"
@@ -532,11 +471,9 @@
         android:layout_column="0"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ32"
@@ -545,12 +482,8 @@
         android:layout_column="1"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ33"
@@ -559,12 +492,13 @@
         android:layout_column="2"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
         android:clickable="true"
-        android:layout_marginLeft="5dp" />
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <TextView
         android:id ="@+id/btn_statisticR6"
@@ -574,7 +508,6 @@
         android:layout_gravity="center"
         android:layout_marginBottom="15dp"
         android:layout_marginRight="5dp"
-        android:layout_columnWeight="1"
         android:layout_width="wrap_content" />
 
     <Button
@@ -585,10 +518,12 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true" />
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center_vertical"
+        android:clickable="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_margin="0dp" />
 
     <Button
         android:id ="@+id/btn_statisticQ35"
@@ -597,12 +532,9 @@
         android:layout_column="5"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
+
         android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="15dp" />
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_statisticQ36"
@@ -611,11 +543,9 @@
         android:layout_column="6"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="15dp"
-        android:layout_columnWeight="1"
-        android:layout_gravity="center"
-        android:clickable="true"
-        android:layout_marginLeft="5dp" />
+
+        android:layout_gravity="center_vertical"
+        android:clickable="true" />
 
     <Button
         android:id ="@+id/btn_Play"
