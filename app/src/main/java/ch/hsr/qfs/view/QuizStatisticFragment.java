@@ -58,6 +58,7 @@ public class QuizStatisticFragment extends Fragment {
 
         viewRoot = inflater.inflate(R.layout.fragment_quiz_statistic, container, false);
         ((MainActivity) getActivity()).hideFloatingActionButton(true);
+        ((MainActivity) getActivity()).changeToolbarTitle("Quiz - Statistik");
 
         Bundle bundle = getArguments();
         quizId = bundle.getString("quizId");
