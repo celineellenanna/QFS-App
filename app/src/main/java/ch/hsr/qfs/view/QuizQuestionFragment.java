@@ -213,14 +213,15 @@ public class QuizQuestionFragment extends Fragment {
             if(progressBarInterrupted && questionCount < 2) {
                 questionCount++;
                 refreshFragment();
+                removeOnClickListener();
             } else if(progressBarInterrupted && questionCount == 2) {
                 Bundle bundle = new Bundle();
                 bundle.putString("quizId", quizId);
                 QuizStatisticFragment f = new QuizStatisticFragment();
                 f.setArguments(bundle);
                 ((MainActivity) getActivity()).changeFragment(f);
+                removeOnClickListener();
             }
-            removeOnClickListener();
         }
     }
 
